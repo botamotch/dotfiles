@@ -33,51 +33,67 @@ imap [ []<LEFT>
 imap ( ()<LEFT>
 
 set backup
-set backupdir=$HOME/.backup
+set backupdir=~/.backup
 set noswapfile
 set nowrap
 
-" ============== 各プラグイン設定 ======================
-" TeX ファイルを開いたときの折りたたみを OFF
+" ============== Dein ======================
+if &compatible
+  set nocompatible
+endif
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+
+if dein#load_state(expand('~/.vim/dein'))
+  call dein#begin(expand('~/.vim/dein'))
+
+  call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+  call dein#add('Shougo/vimshell.vim')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('vim-latex/vim-latex')
+  call dein#add('rust-lang/rust.vim')
+  call dein#add('racer-rust/vim-racer')
+  call dein#add('scrooloose/nerdtree')
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
+
+filetype plugin indent on
+
+" ============== Key map ======================
+nnoremap <C-\> :NERDTreeToggle<CR>
+
+nnoremap [unite] <Nop>
+nmap <Space>u [unite]
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]h :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]f :<C-u>Unite file<CR>
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+
+" ============== Vim-LaTeX ======================
 let g:Tex_AutoFolding = 0
 
-" ============== NeoBundle 設定 ======================
-" viとの互換性をとらない（vimの独自拡張機能を使う為）
-set nocompatible
-" ファイル形式の検出を無効化
-filetype off
-if has('vim_starting')
-  " neobudle.vimの関数を呼ぶためにインストールしたディレクトリを指定
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-" NeoBundle 管理開始（プラグインインストールディレクトリを指定）
-call neobundle#begin(expand('~/.vim/bundle/'))
-" NeoBundle 自体を管理
-NeoBundleFetch 'Shougo/neobundle.vim'
-" 管理するプラグイン
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'vim-latex/vim-latex'
-NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'racer-rust/vim-racer'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'scrooloose/nerdtree'
-" NeoBundle 管理終了
-call neobundle#end()
-" ファイル形式検出、プラグイン、インデントを ON
-filetype plugin indent on
-" インストールチェック
-NeoBundleCheck
-
-" " ================ Setup for Merlin and ocp-indent ===================
+" " ================ Merlin and ocp-indent ===================
 " let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 " execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
 
-" " ================ Setup for raceer and rustfmt ======================
+" " ================ Racer and rustfmt ======================
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = "$HOME/.cargo/bin/rustfmt"
+let g:rustfmt_command = '~/.cargo/bin/rustfmt'
 set hidden
-let g:racer_command = "$HOME/.cargo/bin/racer"
-let $RUST_SRC_PATH = "$HOME/.cargo/registry/src/github.com-1ecc6299db9ec823/racer-2.0.6/src"
+let g:racer_command = '~/.cargo/bin/racer'
+let $RUST_SRC_PATH = '~/.cargo/registry/src/github.com-1ecc6299db9ec823/racer-2.0.6/src'
+
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
