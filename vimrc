@@ -27,13 +27,13 @@ set cmdheight=1
 set laststatus=2
 " コマンドをステータス行に表示
 set showcmd
-" 自動的に閉じ括弧を入力
-imap { {}<LEFT>
-imap [ []<LEFT>
-imap ( ()<LEFT>
+" " 自動的に閉じ括弧を入力
+" imap { {}<LEFT>
+" imap [ []<LEFT>
+" imap ( ()<LEFT>
 
 set backup
-set backupdir=~/.backup
+set backupdir=~/.vim/backup
 set noswapfile
 set nowrap
 
@@ -52,10 +52,13 @@ if dein#load_state(expand('~/.vim/dein'))
   call dein#add('Shougo/vimshell.vim')
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/neomru.vim')
-  call dein#add('vim-latex/vim-latex')
+  " call dein#add('vim-latex/vim-latex')
   call dein#add('rust-lang/rust.vim')
   call dein#add('racer-rust/vim-racer')
   call dein#add('scrooloose/nerdtree')
+  call dein#add('davidhalter/jedi-vim')
+  " call dein#add('jez/vim-better-sml')
+  call dein#add('scrooloose/syntastic')
 
   call dein#end()
   call dein#save_state()
@@ -72,25 +75,43 @@ nnoremap <C-\> :NERDTreeToggle<CR>
 
 nnoremap [unite] <Nop>
 nmap <Space>u [unite]
+nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]h :<C-u>Unite file_mru<CR>
-nnoremap <silent> [unite]f :<C-u>Unite file<CR>
+nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 
-" ============== Vim-LaTeX ======================
-let g:Tex_AutoFolding = 0
+" " ============== Vim-LaTeX ======================
+" let g:Tex_AutoFolding = 0
 
-" " ================ Merlin and ocp-indent ===================
-" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-" execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-" execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+" ================ Merlin and ocp-indent ===================
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+" runtime! opam-user-setup.vim
+
+execute 'helptags ' . g:opamshare . '/merlin/vim/doc'
+" .mlファイル保存時にエラーチェック（syntasticに依存）
+let g:syntastic_ocaml_chekers = ['merlin']
+" .mlファイル保存時にインデント設定
+function! s:ocaml_format()
+    let now_line = line('.')
+    exec ':%! ocp-indent'
+    exec ':' . now_line
+endfunction
+
+augroup ocaml_format
+    autocmd!
+    autocmd BufWrite,FileWritePre,FileAppendPre *.mli\= call s:ocaml_format()
+augroup END
 
 " " ================ Racer and rustfmt ======================
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = '~/.cargo/bin/rustfmt'
+" let g:rustfmt_command = '~/.cargo/bin/rustfmt'
 set hidden
-let g:racer_command = '~/.cargo/bin/racer'
-let $RUST_SRC_PATH = '~/.cargo/registry/src/github.com-1ecc6299db9ec823/racer-2.0.6/src'
+" let g:racer_command = '~/.cargo/bin/racer'
+" let $RUST_SRC_PATH = '~/.cargo/registry/src/github.com-1ecc6299db9ec823/racer-2.0.6/src'
 
 au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
