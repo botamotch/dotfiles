@@ -42,7 +42,7 @@ zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'b
 alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
 
-eval `opam config env`
+# eval `opam config env`
 # . /home/bmkazuya/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 export LD_LIBRARY_PATH=/usr/local/lib
 

@@ -27,15 +27,15 @@ set cmdheight=1
 set laststatus=2
 " コマンドをステータス行に表示
 set showcmd
-" " 自動的に閉じ括弧を入力
-" imap { {}<LEFT>
-" imap [ []<LEFT>
-" imap ( ()<LEFT>
 
 set backup
 set backupdir=~/.vim/backup
 set noswapfile
 set nowrap
+
+"" " ============== Fcitx =====================
+"" set rtp+=~/.vim/plugin
+"" set iminsert=0
 
 " ============== Dein ======================
 if &compatible
@@ -59,6 +59,10 @@ if dein#load_state(expand('~/.vim/dein'))
   call dein#add('davidhalter/jedi-vim')
   " call dein#add('jez/vim-better-sml')
   call dein#add('scrooloose/syntastic')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('vim-jp/vimdoc-ja')
+  " call dein#add('junegunn/goyo.vim')
+  call dein#add('suan/vim-instant-markdown')
 
   call dein#end()
   call dein#save_state()
@@ -70,8 +74,27 @@ endif
 
 filetype plugin indent on
 
-" ============== Key map ======================
+" ================ Key map ======================
+nnoremap j gj
+nnoremap k gk
+nnoremap $ g$
+nnoremap 0 g0
+inoremap <silent> jj <ESC>
+
+autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python %<CR>
+nnoremap <C-c> :lcd %:h<CR>
+nnoremap <C-o> :!omake
+
 nnoremap <C-\> :NERDTreeToggle<CR>
+
+nnoremap [fugitive]  <Nop>
+nmap <space>g [fugitive]
+nnoremap <silent> [fugitive]s :Gstatus<CR>
+nnoremap <silent> [fugitive]a :Gwrite<CR>
+nnoremap <silent> [fugitive]c :Gcommit-v<CR>
+nnoremap <silent> [fugitive]b :Gblame<CR>
+nnoremap <silent> [fugitive]d :Gdiff<CR>
+nnoremap <silent> [fugitive]m :Gmerge<CR>
 
 nnoremap [unite] <Nop>
 nmap <Space>u [unite]
@@ -106,15 +129,22 @@ augroup ocaml_format
     autocmd BufWrite,FileWritePre,FileAppendPre *.mli\= call s:ocaml_format()
 augroup END
 
-" " ================ Racer and rustfmt ======================
+" ================ Racer and rustfmt ======================
 let g:rustfmt_autosave = 1
-" let g:rustfmt_command = '~/.cargo/bin/rustfmt'
 set hidden
-" let g:racer_command = '~/.cargo/bin/racer'
-" let $RUST_SRC_PATH = '~/.cargo/registry/src/github.com-1ecc6299db9ec823/racer-2.0.6/src'
 
 au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+" ================ vim-instant-markdown ======================
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+
+" ================ jedi-vim ======================
+let g:jedi#popup_on_dot=0
+let g:jedi#popup_select_first=0
+" let g:jedi#show_call_signatures=1
+autocmd FileType python setlocal completeopt-=preview
 

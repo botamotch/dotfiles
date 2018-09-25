@@ -1,0 +1,18 @@
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+setxkbmap -option ctrl:swapcaps
+# setxkbmap -model jp106 -layout jp
+synclient TapButton1=1
+synclient TapButton2=3
+synclient TapButton3=2
+synclient RTCornerButton=2
+synclient RBCornerButton=3
+synclient MaxTapTime=90
+synclient MaxTapMove=120
+synclient MaxDoubleTapTime=90
+synclient RightEdge=2800
+synclient TopEdge=400
+# feh --bg-scale background.jpg
+# xsetwacom --set 16 Area 0 0 21600 12150
+# xsetwacom --set 16 MapToOutput eDP1
