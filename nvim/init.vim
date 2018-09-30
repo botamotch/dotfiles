@@ -19,6 +19,7 @@ set cmdheight=1
 set laststatus=2
 set showcmd
 set hlsearch
+set nowrap
 
 " ============== Dein ======================
 if &compatible
