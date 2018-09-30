@@ -32,6 +32,7 @@ set backup
 set backupdir=~/.vim/backup
 set noswapfile
 set nowrap
+set hlsearch
 
 "" " ============== Fcitx =====================
 "" set rtp+=~/.vim/plugin
@@ -80,6 +81,7 @@ nnoremap k gk
 nnoremap $ g$
 nnoremap 0 g0
 inoremap <silent> jj <ESC>
+nnoremap <silent> <ESC><ESC> :noh<CR>
 
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python %<CR>
 nnoremap <C-c> :lcd %:h<CR>

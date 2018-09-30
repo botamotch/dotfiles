@@ -18,6 +18,7 @@ set wildmenu
 set cmdheight=1
 set laststatus=2
 set showcmd
+set hlsearch
 
 " ============== Dein ======================
 if &compatible
@@ -57,6 +58,8 @@ nnoremap k gk
 nnoremap $ g$
 nnoremap 0 g0
 nnoremap <C-\> :NERDTreeToggle<CR>
+nnoremap <C-c> :lcd %:h<CR>
+nnoremap <silent> <ESC><ESC> :noh<CR>
 
 " ============== deoplete ======================
 let g:deoplete#enable_at_startup = 1
