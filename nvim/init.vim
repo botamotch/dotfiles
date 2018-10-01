@@ -59,8 +59,9 @@ nnoremap k gk
 nnoremap $ g$
 nnoremap 0 g0
 nnoremap <C-\> :NERDTreeToggle<CR>
-nnoremap <C-c> :lcd %:h<CR>
+nnoremap <C-c> :cd %:h<CR>
 nnoremap <silent> <ESC><ESC> :noh<CR>
+tnoremap <silent> <ESC> <C-\><C-n>
 
 " ============== deoplete ======================
 let g:deoplete#enable_at_startup = 1
@@ -71,7 +72,17 @@ nmap <Space>u [denite]
 nnoremap <silent> [denite]u :<C-u>Denite buffer file_mru<CR>
 nnoremap <silent> [denite]b :<C-u>Denite buffer<CR>
 nnoremap <silent> [denite]h :<C-u>Denite file_mru<CR>
-" nnoremap <silent> [denite]f :<C-u>DeniteBufferDir -buffer-name=files file file/new<CR>
+nnoremap <silent> [denite]f :<C-u>DeniteBufferDir file<CR>
+
+" ============== fugitive ======================
+nnoremap [fugitive]  <Nop>
+nmap <space>g [fugitive]
+nnoremap <silent> [fugitive]s :Gstatus<CR>
+nnoremap <silent> [fugitive]a :Gwrite<CR>
+nnoremap <silent> [fugitive]c :Gcommit-v<CR>
+nnoremap <silent> [fugitive]b :Gblame<CR>
+nnoremap <silent> [fugitive]d :Gdiff<CR>
+nnoremap <silent> [fugitive]m :Gmerge<CR>
 
 " ================ Merlin and ocp-indent ===================
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
