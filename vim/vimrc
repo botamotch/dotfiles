@@ -82,6 +82,8 @@ nnoremap $ g$
 nnoremap 0 g0
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
+nnoremap <C-l> :<C-u>tabnext<CR>
+nnoremap <C-h> :<C-u>tabNext<CR>
 
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python %<CR>
 nnoremap <C-c> :lcd %:h<CR>
