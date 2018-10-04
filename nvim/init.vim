@@ -120,6 +120,7 @@ au FileType rust nmap <leader>gd <Plug>(rust-doc)
 " ================ jedi-vim ======================
 let g:jedi#popup_on_dot=0
 let g:jedi#popup_select_first=0
+let g:jedi#goto_assignments_command="<leader>a"
 " let g:jedi#show_call_signatures=2
 autocmd FileType python setlocal completeopt-=preview
 
