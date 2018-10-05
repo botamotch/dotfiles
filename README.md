@@ -1,2 +1,18 @@
 # 各種設定ファイル保存用リポジトリ
-各PCのvim, zsh等の設定ファイルを保存する
+
+## vim, nvim
+- vimrc / init.vim
+- gvimrc / ginit.vim
+
+## tmux
+- tmux.conf
+
+## zsh
+- zshrc
+- zshenv
+
+## xprofile
+- xprofile
+
+## fonts.conf
+
