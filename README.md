@@ -4,6 +4,11 @@
 - vimrc / init.vim
 - gvimrc / ginit.vim
 
+### キーマップ
+- Leaderキー `<Space>`
+- denite `<Space>-u`
+- fugitive `<Space>-g`
+
 ## tmux
 - tmux.conf
 
