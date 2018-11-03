@@ -4,6 +4,10 @@
 - vimrc / init.vim
 - gvimrc / ginit.vim
 
+### Neovimでクリップボードを使う
+- `init.vim`に`clipbooard+=unnamedplus`を追加
+- `xclip` or `xsel`をインストール
+
 ### キーマップ
 - Leaderキー `<Space>`
 - denite `<Space>-u`
