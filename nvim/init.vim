@@ -60,8 +60,6 @@ nnoremap <silent> <C-l> :<C-u>tabnext<CR>
 nnoremap <silent> <C-h> :<C-u>tabNext<CR>
 nnoremap j gj
 nnoremap k gk
-nnoremap $ g$
-nnoremap 0 g0
 nnoremap <C-\> :NERDTreeToggle<CR>
 nnoremap <silent> <C-c> :cd %:h<CR>
 nnoremap <silent> <ESC><ESC> :noh<CR>
