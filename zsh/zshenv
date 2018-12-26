@@ -1,1 +1,2 @@
 eval `opam config env`
+export PATH=~/.cargo/bin:$PATH
