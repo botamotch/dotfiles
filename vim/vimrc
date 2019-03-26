@@ -87,7 +87,7 @@ nnoremap <C-h> :<C-u>tabNext<CR>
 
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python %<CR>
 nnoremap <C-c> :lcd %:h<CR>
-nnoremap <C-o> :!omake
+" nnoremap <C-o> :!omake
 
 nnoremap <C-\> :NERDTreeToggle<CR>
 
