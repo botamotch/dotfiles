@@ -42,6 +42,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('w0rp/ale')
   call dein#add('davidhalter/jedi-vim')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('junegunn/goyo.vim')
 
   call dein#end()
   call dein#save_state()

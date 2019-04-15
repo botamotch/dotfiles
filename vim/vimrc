@@ -62,7 +62,7 @@ if dein#load_state(expand('~/.vim/dein'))
   call dein#add('scrooloose/syntastic')
   call dein#add('tpope/vim-fugitive')
   call dein#add('vim-jp/vimdoc-ja')
-  " call dein#add('junegunn/goyo.vim')
+  call dein#add('junegunn/goyo.vim')
   call dein#add('suan/vim-instant-markdown')
 
   call dein#end()
