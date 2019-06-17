@@ -1,4 +1,4 @@
-" ============== Common ======================
+" Common =======================================================================
 set number
 syntax on
 colorscheme desert
@@ -21,7 +21,7 @@ set showcmd
 set hlsearch
 set nowrap
 
-" ============== Dein ======================
+" Dein =========================================================================
 if &compatible
   set nocompatible
 endif
@@ -30,19 +30,7 @@ set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
-
-  call dein#add('~/.cache/dein')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('Shougo/denite.nvim')
-  call dein#add('Shougo/neomru.vim')
-  call dein#add('rust-lang/rust.vim')
-  call dein#add('racer-rust/vim-racer')
-  call dein#add('scrooloose/nerdtree')
-  " call dein#add('scrooloose/syntastic')
-  call dein#add('w0rp/ale')
-  call dein#add('davidhalter/jedi-vim')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('junegunn/goyo.vim')
+  call dein#load_toml('~/.config/nvim/dein.toml', {'lazy': 0})
 
   call dein#end()
   call dein#save_state()
@@ -55,41 +43,17 @@ endif
 filetype plugin indent on
 syntax enable
 
-" ================ Key map ======================
+" Key map ======================================================================
 let mapleader = "\<Space>"
 nnoremap <silent> <C-l> :<C-u>tabnext<CR>
 nnoremap <silent> <C-h> :<C-u>tabNext<CR>
 nnoremap j gj
 nnoremap k gk
-nnoremap <C-\> :NERDTreeToggle<CR>
-nnoremap <silent> <C-c> :cd %:h<CR>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <silent> <ESC> <C-\><C-n>
 nnoremap \r :!tmux send-keys -t 0:0.0 C-p C-j
 
-" ============== deoplete ======================
-let g:deoplete#enable_at_startup = 1
-
-" ============== Denite ======================
-nnoremap [denite] <Nop>
-nmap <Space>u [denite]
-nnoremap <silent> [denite]u :<C-u>Denite buffer file_mru<CR>
-nnoremap <silent> [denite]b :<C-u>Denite buffer<CR>
-nnoremap <silent> [denite]h :<C-u>Denite file_mru<CR>
-nnoremap <silent> [denite]g :<C-u>Denite file<CR>
-nnoremap <silent> [denite]f :<C-u>DeniteBufferDir file<CR>
-
-" ============== fugitive ======================
-nnoremap [fugitive]  <Nop>
-nmap <space>g [fugitive]
-nnoremap <silent> [fugitive]s :Gstatus<CR>
-nnoremap <silent> [fugitive]a :Gwrite<CR>
-nnoremap <silent> [fugitive]c :Gcommit-v<CR>
-nnoremap <silent> [fugitive]b :Gblame<CR>
-nnoremap <silent> [fugitive]d :Gdiff<CR>
-nnoremap <silent> [fugitive]m :Gmerge<CR>
-
-" ================ Merlin and ocp-indent ===================
+" Merlin and ocp-indent ========================================================
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
@@ -107,20 +71,3 @@ augroup ocaml_format
     autocmd!
     autocmd BufWrite,FileWritePre,FileAppendPre *.mli\= call s:ocaml_format()
 augroup END
-
-" ================ Racer and rustfmt ======================
-let g:rustfmt_autosave = 1
-set hidden
-
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
-
-" ================ jedi-vim ======================
-let g:jedi#popup_on_dot=0
-let g:jedi#popup_select_first=0
-let g:jedi#goto_assignments_command="<leader>a"
-" let g:jedi#show_call_signatures=2
-autocmd FileType python setlocal completeopt-=preview
-

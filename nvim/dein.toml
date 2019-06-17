@@ -1,15 +1,73 @@
 [[plugins]]
-repo = 'Shougo/denite.nvim'
+repo     = 'Shougo/deoplete.nvim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+[[plugins]]
+repo     = 'Shougo/denite.nvim'
+hook_add = '''
+nnoremap [denite] <Nop>
+nmap <Space>u [denite]
+nnoremap <silent> [denite]u :<C-u>Denite buffer file_mru<CR>
+nnoremap <silent> [denite]b :<C-u>Denite buffer<CR>
+nnoremap <silent> [denite]h :<C-u>Denite file_mru<CR>
+nnoremap <silent> [denite]g :<C-u>Denite file<CR>
+nnoremap <silent> [denite]f :<C-u>DeniteBufferDir file<CR>
+'''
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
+repo     = 'rust-lang/rust.vim'
+hook_add = '''
+let g:rustfmt_autosave = 1
+set hidden
+'''
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
+repo     = 'racer-rust/vim-racer'
+hook_add = '''
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+'''
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
+repo     = 'scrooloose/nerdtree'
+hook_add = 'nnoremap <C-\> :NERDTreeToggle<CR>'
 
+[[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
+repo     = 'davidhalter/jedi-vim'
+hook_add = '''
+let g:jedi#popup_on_dot=0
+let g:jedi#popup_select_first=0
+let g:jedi#goto_assignments_command="<leader>a"
+" let g:jedi#show_call_signatures=2
+autocmd FileType python setlocal completeopt-=preview
+'''
+
+[[plugins]]
+repo     = 'tpope/vim-fugitive'
+hook_add = '''
+nnoremap [fugitive]  <Nop>
+nmap <space>g [fugitive]
+nnoremap <silent> [fugitive]s :Gstatus<CR>
+nnoremap <silent> [fugitive]a :Gwrite<CR>
+nnoremap <silent> [fugitive]c :Gcommit-v<CR>
+nnoremap <silent> [fugitive]b :Gblame<CR>
+nnoremap <silent> [fugitive]d :Gdiff<CR>
+nnoremap <silent> [fugitive]m :Gmerge<CR>
+'''
+
+[[plugins]]
+repo = 'junegunn/goyo.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
