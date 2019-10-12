@@ -25,10 +25,6 @@ set noswapfile
 set nowrap
 set hlsearch
 
-"" " ============== Fcitx =====================
-"" set rtp+=~/.vim/plugin
-"" set iminsert=0
-
 " Dein =========================================================================
 if &compatible
   set nocompatible
@@ -50,26 +46,24 @@ endif
 filetype plugin indent on
 
 " Key map ======================================================================
-nnoremap j gj
-nnoremap k gk
-nnoremap $ g$
-nnoremap 0 g0
-inoremap <silent> jj <ESC>
-nnoremap <silent> <ESC><ESC> :noh<CR>
+let mapleader = "\<Space>"
 " nnoremap <C-l> :<C-u>tabnext<CR>
 " nnoremap <C-h> :<C-u>tabNext<CR>
+nnoremap j gj
+nnoremap k gk
+inoremap <silent> jj <ESC>
+nnoremap <silent> <ESC><ESC> :noh<CR>
+tnoremap <esc> <C-\><C-n>
+nnoremap \r :!tmux send-keys -t 0:0.0 C-p C-j
 
 " Merlin and ocp-indent ========================================================
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-" runtime! opam-user-setup.vim
 
 execute 'helptags ' . g:opamshare . '/merlin/vim/doc'
-" .mlファイル保存時にエラーチェック（syntasticに依存）
 let g:syntastic_ocaml_chekers = ['merlin']
-" .mlファイル保存時にインデント設定
 function! s:ocaml_format()
     let now_line = line('.')
     exec ':%! ocp-indent'

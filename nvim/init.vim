@@ -47,6 +47,7 @@ syntax enable
 let mapleader = "\<Space>"
 " nnoremap <silent> <C-l> :<C-u>tabnext<CR>
 " nnoremap <silent> <C-h> :<C-u>tabNext<CR>
+inoremap <silent> jj <ESC>
 nnoremap j gj
 nnoremap k gk
 nnoremap <silent> <ESC><ESC> :noh<CR>
