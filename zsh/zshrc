@@ -30,8 +30,11 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 alias ls="ls --color"
-alias ll="ls -lh"
-alias la="ls -a"
+# alias ll="ls -lh"
+# alias la="ls -a"
+alias ll="exa -lh"
+alias la="exa -lha"
+alias lt="exa -Tl"
 alias less='/usr/share/vim/vim81/macros/less.sh'
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
@@ -44,4 +47,5 @@ alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
 
 export LD_LIBRARY_PATH=/usr/local/lib
+export PATH="$HOME/neovim/bin:$PATH"
 

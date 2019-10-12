@@ -1,4 +1,4 @@
-" ============== 全体設定 ======================
+" Common =======================================================================
 set number
 syntax on
 colorscheme delek
@@ -8,24 +8,15 @@ set shiftwidth=4
 set autoindent
 set smartindent
 set scroll=2
-" クリップボードを共有
 set clipboard=unnamedplus,autoselect
-" 8進数を無効にする。<C-a>,<C-x>に影響する
 set nrformats-=octal
-" 日本語の行の連結時には空白を入力しない
 set formatoptions+=mM
-" カーソルキーで行末／行頭の移動可能に設定
 set whichwrap=b,s,[,],<,>
-" バックスペースでインデントや改行を削除できるようにする
 set backspace=indent,eol,start
-" □や○の文字があってもカーソル位置がずれないようにする
 set ambiwidth=double
-" コマンドライン補完するときに強化されたものを使う
 set wildmenu
-" コマンドラインの高さ (gvimはgvimrcで指定)
 set cmdheight=1
 set laststatus=2
-" コマンドをステータス行に表示
 set showcmd
 
 set backup
@@ -38,7 +29,7 @@ set hlsearch
 "" set rtp+=~/.vim/plugin
 "" set iminsert=0
 
-" ============== Dein ======================
+" Dein =========================================================================
 if &compatible
   set nocompatible
 endif
@@ -46,24 +37,7 @@ set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state(expand('~/.vim/dein'))
   call dein#begin(expand('~/.vim/dein'))
-
-  call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/neocomplete.vim')
-  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-  call dein#add('Shougo/vimshell.vim')
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/neomru.vim')
-  " call dein#add('vim-latex/vim-latex')
-  call dein#add('rust-lang/rust.vim')
-  call dein#add('racer-rust/vim-racer')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('davidhalter/jedi-vim')
-  " call dein#add('jez/vim-better-sml')
-  call dein#add('scrooloose/syntastic')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('vim-jp/vimdoc-ja')
-  call dein#add('junegunn/goyo.vim')
-  call dein#add('suan/vim-instant-markdown')
+  call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
 
   call dein#end()
   call dein#save_state()
@@ -75,43 +49,17 @@ endif
 
 filetype plugin indent on
 
-" ================ Key map ======================
+" Key map ======================================================================
 nnoremap j gj
 nnoremap k gk
 nnoremap $ g$
 nnoremap 0 g0
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
-nnoremap <C-l> :<C-u>tabnext<CR>
-nnoremap <C-h> :<C-u>tabNext<CR>
+" nnoremap <C-l> :<C-u>tabnext<CR>
+" nnoremap <C-h> :<C-u>tabNext<CR>
 
-autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python %<CR>
-nnoremap <C-c> :lcd %:h<CR>
-" nnoremap <C-o> :!omake
-
-nnoremap <C-\> :NERDTreeToggle<CR>
-
-nnoremap [fugitive]  <Nop>
-nmap <space>g [fugitive]
-nnoremap <silent> [fugitive]s :Gstatus<CR>
-nnoremap <silent> [fugitive]a :Gwrite<CR>
-nnoremap <silent> [fugitive]c :Gcommit-v<CR>
-nnoremap <silent> [fugitive]b :Gblame<CR>
-nnoremap <silent> [fugitive]d :Gdiff<CR>
-nnoremap <silent> [fugitive]m :Gmerge<CR>
-
-nnoremap [unite] <Nop>
-nmap <Space>u [unite]
-nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]h :<C-u>Unite file_mru<CR>
-nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-
-" " ============== Vim-LaTeX ======================
-" let g:Tex_AutoFolding = 0
-
-" ================ Merlin and ocp-indent ===================
+" Merlin and ocp-indent ========================================================
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
@@ -132,23 +80,3 @@ augroup ocaml_format
     autocmd!
     autocmd BufWrite,FileWritePre,FileAppendPre *.mli\= call s:ocaml_format()
 augroup END
-
-" ================ Racer and rustfmt ======================
-let g:rustfmt_autosave = 1
-set hidden
-
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
-
-" ================ vim-instant-markdown ======================
-let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-
-" ================ jedi-vim ======================
-let g:jedi#popup_on_dot=0
-let g:jedi#popup_select_first=0
-" let g:jedi#show_call_signatures=1
-autocmd FileType python setlocal completeopt-=preview
-

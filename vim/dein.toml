@@ -3,6 +3,12 @@ repo     = 'Shougo/deoplete.nvim'
 hook_add = 'let g:deoplete#enable_at_startup = 1'
 
 [[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+[[plugins]]
 repo     = 'Shougo/denite.nvim'
 hook_add = '''
 " Define mappings
@@ -104,3 +110,16 @@ hook_add = '''
 let g:airline_theme = 'molokai'
 " let g:airline_theme = 'papercolor'
 '''
+
+# [[plugins]]
+# repo     = 'vim-latex/vim-latex'
+# hook_add = '''
+# let g:Tex_AutoFolding = 0
+# '''
+# 
+# [[plugins]]
+# repo     = 'suan/vim-instant-markdown'
+# hook_add = '''
+# let g:instant_markdown_slow = 1
+# let g:instant_markdown_autostart = 0
+# '''
