@@ -45,6 +45,8 @@ syntax enable
 
 " Key map ======================================================================
 let mapleader = "\<Space>"
+nnoremap <leader><leader> V
+nnoremap <leader>w :<C-u>w<CR>
 " nnoremap <silent> <C-l> :<C-u>tabnext<CR>
 " nnoremap <silent> <C-h> :<C-u>tabNext<CR>
 inoremap <silent> jj <ESC>

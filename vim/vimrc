@@ -18,17 +18,18 @@ set wildmenu
 set cmdheight=1
 set laststatus=2
 set showcmd
+set hlsearch
+set nowrap
 
 set backup
 set backupdir=~/.vim/backup
 set noswapfile
-set nowrap
-set hlsearch
 
 " Dein =========================================================================
 if &compatible
   set nocompatible
 endif
+" Add the dein installation directory into runtimepath
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state(expand('~/.vim/dein'))
@@ -44,9 +45,12 @@ if dein#check_install()
 endif
 
 filetype plugin indent on
+syntax enable
 
 " Key map ======================================================================
 let mapleader = "\<Space>"
+nnoremap <leader><leader> V
+nnoremap <leader>w :<C-u>w<CR>
 " nnoremap <C-l> :<C-u>tabnext<CR>
 " nnoremap <C-h> :<C-u>tabNext<CR>
 nnoremap j gj
