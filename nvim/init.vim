@@ -47,14 +47,19 @@ syntax enable
 let mapleader = "\<Space>"
 nnoremap <leader><leader> V
 nnoremap <leader>w :<C-u>w<CR>
+nnoremap <leader>r :<C-u>call RepeatTerm()<CR>
 " nnoremap <silent> <C-l> :<C-u>tabnext<CR>
 " nnoremap <silent> <C-h> :<C-u>tabNext<CR>
 inoremap <silent> jj <ESC>
 nnoremap j gj
 nnoremap k gk
+" nnoremap ZZ :<C-u>wqa
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <silent> <ESC> <C-\><C-n>
-nnoremap \r :!tmux send-keys -t 0:0.0 C-p C-j
+" nnoremap \r :!tmux send-keys -t 0:0.0 C-p C-j
+function! RepeatTerm()
+    call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
+endfunction
 
 " Merlin and ocp-indent ========================================================
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
