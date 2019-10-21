@@ -42,10 +42,7 @@ repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo     = 'rust-lang/rust.vim'
-hook_add = '''
-let g:rustfmt_autosave = 1
-set hidden
-'''
+hook_add = 'let g:rustfmt_autosave = 1'
 
 [[plugins]]
 repo     = 'racer-rust/vim-racer'
@@ -68,8 +65,14 @@ repo     = 'davidhalter/jedi-vim'
 hook_add = '''
 let g:jedi#popup_on_dot=0
 let g:jedi#popup_select_first=0
-let g:jedi#goto_assignments_command="<leader>a"
 " let g:jedi#show_call_signatures=2
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>n"
 autocmd FileType python setlocal completeopt-=preview
 '''
 
@@ -98,8 +101,6 @@ repo = 'junegunn/fzf.vim'
 [[plugins]]
 repo     = 'vim-airline/vim-airline'
 hook_add = '''
-nnoremap <silent> <C-l> :<C-u>bnext<CR>
-nnoremap <silent> <C-h> :<C-u>bprevious<CR>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 '''
@@ -115,11 +116,4 @@ let g:airline_theme = 'molokai'
 # repo     = 'vim-latex/vim-latex'
 # hook_add = '''
 # let g:Tex_AutoFolding = 0
-# '''
-# 
-# [[plugins]]
-# repo     = 'suan/vim-instant-markdown'
-# hook_add = '''
-# let g:instant_markdown_slow = 1
-# let g:instant_markdown_autostart = 0
 # '''

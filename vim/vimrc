@@ -20,6 +20,7 @@ set laststatus=2
 set showcmd
 set hlsearch
 set nowrap
+set hidden
 
 set backup
 set backupdir=~/.vim/backup
@@ -51,18 +52,21 @@ syntax enable
 let mapleader = "\<Space>"
 nnoremap <leader><leader> V
 nnoremap <leader>w :<C-u>w<CR>
+nnoremap <leader>q :<C-u>bd<CR>
 nnoremap <leader>r :<C-u>call RepeatTerm()<CR>
 " nnoremap <C-l> :<C-u>tabnext<CR>
 " nnoremap <C-h> :<C-u>tabNext<CR>
+nnoremap <silent> <C-l> :<C-u>bnext<CR>
+nnoremap <silent> <C-h> :<C-u>bprevious<CR>
 nnoremap j gj
 nnoremap k gk
 " nnoremap ZZ :<C-u>wqa
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <esc> <C-\><C-n>
-" nnoremap \r :!tmux send-keys -t 0:0.0 C-p C-j
 function! RepeatTerm()
     call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
+    " :!tmux send-keys -t 0:0.0 C-p C-j
 endfunction
 
 " Merlin and ocp-indent ========================================================
