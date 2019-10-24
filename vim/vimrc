@@ -8,7 +8,11 @@ set shiftwidth=4
 set autoindent
 set smartindent
 set scroll=2
-set clipboard=unnamedplus,autoselect
+if !has('nvim')
+  set clipboard=unnamedplus,autoselect
+else
+  set clipboard=unnamedplus
+endif
 set nrformats-=octal
 set formatoptions+=mM
 set whichwrap=b,s,[,],<,>
@@ -31,11 +35,18 @@ if &compatible
   set nocompatible
 endif
 " Add the dein installation directory into runtimepath
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state(expand('~/.vim/dein'))
-  call dein#begin(expand('~/.vim/dein'))
-  call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
+if dein#load_state(expand('~/.cache/dein'))
+  call dein#begin(expand('~/.cache/dein'))
+
+  if !has('nvim')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+    call dein#add('roxma/nvim-yarp')
+    call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
+  else
+    call dein#load_toml('~/.config/nvim/dein.toml', {'lazy': 0})
+  endif
 
   call dein#end()
   call dein#save_state()
@@ -53,14 +64,14 @@ let mapleader = "\<Space>"
 nnoremap <leader><leader> V
 nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>q :<C-u>bd<CR>
-nnoremap <leader>r :<C-u>call RepeatTerm()<CR>
-" nnoremap <C-l> :<C-u>tabnext<CR>
-" nnoremap <C-h> :<C-u>tabNext<CR>
+nnoremap <silent> <leader>r :<C-u>call RepeatTerm()<CR>
+" nnoremap <silent> <C-l> :<C-u>tabnext<CR>
+" nnoremap <silent> <C-h> :<C-u>tabNext<CR>
 nnoremap <silent> <C-l> :<C-u>bnext<CR>
 nnoremap <silent> <C-h> :<C-u>bprevious<CR>
 nnoremap j gj
 nnoremap k gk
-" nnoremap ZZ :<C-u>wqa
+
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <esc> <C-\><C-n>
@@ -74,8 +85,8 @@ let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-
 execute 'helptags ' . g:opamshare . '/merlin/vim/doc'
+
 let g:syntastic_ocaml_chekers = ['merlin']
 function! s:ocaml_format()
     let now_line = line('.')

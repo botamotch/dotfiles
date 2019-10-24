@@ -4,6 +4,24 @@
 - vimrc / init.vim
 - gvimrc / ginit.vim
 
+### dein install
+```
+$ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+$ sh ./installer.sh ~/.cache/dein
+```
+
+### 共存
+- dein
+  - `~/.cache/dein/repos/github.com/Shougo/dein.vim`
+- Vim config
+  - `~/.vim/vimrc`
+  - `~/.vim/gvimrc`
+  - `~/.vim/dein.toml`
+- Neovim config
+  - `~/.config/nvim/init.vim` -> `~/.vim/vimrc`
+  - `~/.config/nvim/ginit.vim`
+  - `~/.config/nvim/dein.toml` -> `~/.vim/dein.toml`
+
 ### Neovimでクリップボードを使う
 - `init.vim`に`clipbooard+=unnamedplus`を追加
 - `xclip` or `xsel`をインストール

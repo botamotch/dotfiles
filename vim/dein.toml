@@ -3,12 +3,6 @@ repo     = 'Shougo/deoplete.nvim'
 hook_add = 'let g:deoplete#enable_at_startup = 1'
 
 [[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-
-[[plugins]]
 repo     = 'Shougo/denite.nvim'
 hook_add = '''
 " Define mappings
@@ -101,6 +95,7 @@ repo = 'junegunn/fzf.vim'
 [[plugins]]
 repo     = 'vim-airline/vim-airline'
 hook_add = '''
+let g:airline_symbols_ascii = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 '''
@@ -108,8 +103,9 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 [[plugins]]
 repo     = 'vim-airline/vim-airline-themes'
 hook_add = '''
-let g:airline_theme = 'molokai'
-" let g:airline_theme = 'papercolor'
+" let g:airline_theme = 'dark'
+" let g:airline_theme = 'molokai'
+let g:airline_theme = 'papercolor'
 '''
 
 # [[plugins]]
