@@ -76,8 +76,8 @@ inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <esc> <C-\><C-n>
 function! RepeatTerm()
-    call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
-    " :!tmux send-keys -t 0:0.0 C-p C-j
+    " call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
+    :!tmux send-keys -t 0:0.0 C-p C-j
 endfunction
 
 " Merlin and ocp-indent ========================================================
