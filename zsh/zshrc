@@ -13,8 +13,7 @@ autoload -U colors; colors
 bindkey -e
 # bindkey -v
 
-PROMPT="%{$fg[green]%}>> %D{%Y-%m-%d %K:%M} %n@%m [%~]%{$reset_color%}
-%{$fg_bold[green]%}$%{$reset_color%} "
+PROMPT="%{$fg[green]%}>> %D{%Y-%m-%d %K:%M} %n@%m %{$reset_color%}%{$fg_bold[green]%}$%{$reset_color%} "
 PROMPT2="%{$fg_bold[green]%}>%{$reset_color%} "
 
 HISTFILE=~/.zsh_history
@@ -40,12 +39,12 @@ export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30
 zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-alias R="R -q"
-alias python="python -q"
+# alias R="R -q"
+# alias python="python -q"
 # alias luajitlatex='luajittex --fmt=luajitlatex.fmt'
 alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
 
 export LD_LIBRARY_PATH=/usr/local/lib
-export PATH="$HOME/neovim/bin:$PATH"
+# export PATH="$HOME/neovim/bin:$PATH"
 

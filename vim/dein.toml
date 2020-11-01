@@ -84,6 +84,14 @@ nnoremap <silent> [fugitive]m :Gmerge<CR>
 '''
 
 [[plugins]]
+repo     = 'airblade/vim-gitgutter'
+hook_add = '''
+let g:gitgutter_sign_added = "∙"
+highlight GitGutterAdd ctermfg=green guifg=green
+highlight GitGutterDelete ctermfg=green guifg=green
+'''
+
+[[plugins]]
 repo = 'junegunn/goyo.vim'
 
 [[plugins]]
@@ -113,3 +121,9 @@ let g:airline_theme = 'papercolor'
 # hook_add = '''
 # let g:Tex_AutoFolding = 0
 # '''
+
+[[plugins]]
+repo = 'dart-lang/dart-vim-plugin'
+
+# [[plugins]]
+# repo = 'thosakwe/vim-flutter'
