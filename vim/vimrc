@@ -82,20 +82,20 @@ function! RepeatTerm()
 endfunction
 
 " Merlin and ocp-indent ========================================================
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 
-execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-execute 'helptags ' . g:opamshare . '/merlin/vim/doc'
+" execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+" execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+" execute 'helptags ' . g:opamshare . '/merlin/vim/doc'
 
-let g:syntastic_ocaml_chekers = ['merlin']
-function! s:ocaml_format()
-    let now_line = line('.')
-    exec ':%! ocp-indent'
-    exec ':' . now_line
-endfunction
+" let g:syntastic_ocaml_chekers = ['merlin']
+" function! s:ocaml_format()
+"     let now_line = line('.')
+"     exec ':%! ocp-indent'
+"     exec ':' . now_line
+" endfunction
 
-augroup ocaml_format
-    autocmd!
-    autocmd BufWrite,FileWritePre,FileAppendPre *.mli\= call s:ocaml_format()
-augroup END
+" augroup ocaml_format
+"     autocmd!
+"     autocmd BufWrite,FileWritePre,FileAppendPre *.mli\= call s:ocaml_format()
+" augroup END

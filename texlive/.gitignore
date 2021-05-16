@@ -1,0 +1,10 @@
+*.aux
+*.log
+*.toc
+*.dvi
+*.out
+*.omc
+.omakedb
+.omakedb.lock
+*.png
+
