@@ -8,12 +8,13 @@ setopt auto_param_slash
 setopt MARK_DIRS
 setopt IGNORE_EOF
 setopt CORRECT
+setopt noautoremoveslash
 export LANG=ja_JP.UTF-8
 autoload -U colors; colors
 bindkey -e
 # bindkey -v
 
-PROMPT="%{$fg[green]%}>> %D{%Y-%m-%d %K:%M} %n@%m %{$reset_color%}%{$fg_bold[green]%}$%{$reset_color%} "
+PROMPT="%{$fg[green]%}>> %D{%Y-%m-%d %K:%M} %n@%m [%~]%{$reset_color%}%{$fg_bold[green]%}$%{$reset_color%} "
 PROMPT2="%{$fg_bold[green]%}>%{$reset_color%} "
 
 HISTFILE=~/.zsh_history
@@ -45,6 +46,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
 
-export LD_LIBRARY_PATH=/usr/local/lib
+# export LD_LIBRARY_PATH=/usr/local/lib
 # export PATH="$HOME/neovim/bin:$PATH"
 

@@ -1,3 +1,5 @@
 eval `opam config env`
 export PATH=~/.cargo/bin:$PATH
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
+export PATH="$HOME/flutter/bin:$PATH"
+export PATH="$HOME/android-studio/bin:$PATH"
