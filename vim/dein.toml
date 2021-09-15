@@ -131,3 +131,13 @@ let g:dart_format_on_save = 1
 
 # [[plugins]]
 # repo = 'thosakwe/vim-flutter'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'lighttiger2505/deoplete-vim-lsp'
+
