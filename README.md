@@ -74,25 +74,49 @@ $ sh ./installer.sh ~/.cache/dein
 - merlin
   - completion: `<C-x><C-o>`
 
-### プラグイン
-- [Shougo/dein]()
-- [Shougo/deoplete.nvim]()
-- [roxma/vim-hug-neovim-rpc]() (Vim only)
-- [roxma/nvim-yarp]() (Vim only)
-- [Shougo/denite.nvim]()
-- [Shougo/neomru.vim]()
-- [rust-lang/rust.vim]()
-- [racer-rust/vim-racer]()
-- [scrooloose/nerdtree]()
+### プラグイン（管理用）
+- [Shougo/dein](https://github.com/Shougo/dein.vim)
+- [roxma/vim-hug-neovim-rpc](https://github.com/roxma/vim-hug-neovim-rpc) (Vim only)
+- [roxma/nvim-yarp](https://github.com/roxma/nvim-yarp) (Vim only)
+  - **Yet Another Remote Plugin Framework for Neovim**
+  - "This is my attempt on writing a remote plugin framework without"
+
+### プラグイン（有効）
+何が必要で何が不要か整理中。ややこしい
+- [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
+- [Shougo/denite.nvim](https://github.com/Shougo/denite.nvim)
+- [Shougo/neomru.vim](https://github.com/Shougo/neomru.vim)
+  - README.mdすらないんだけど使っていいやつなのかな？
+- [rust-lang/rust.vim](https://github.com/rust-lang/rust.vim)
+- [racer-rust/vim-racer](https://github.com/racer-rust/vim-racer)
+- [davidhalter/jedi-vim](https://github.com/davidhalter/jedi-vim)
+- [tpope/vim-fugitive](https://github.com/davidhalter/tpope/vim-fugitive)
+- [junegunn/goyo.vim](https://github.com/davidhalter/junegunn/goyo.vim)
+- [cespare/vim-toml](https://github.com/davidhalter/cespare/vim-toml)
+- [vim-airline/vim-airline](https://github.com/davidhalter/vim-airline/vim-airline)
+- [vim-airline/vim-airline-themes](https://github.com/davidhalter/vim-airline/vim-airline-themes)
+- [dart-lang/dart-vim-plugin](https://github.com/dart-lang/dart-vim-plugin)
+  - Dart/Flutterの文法エラーチェック、自動フォーマットをやってくれる
+  - LSPを適用させて編集中にもチェックしてくれるようにした。設定内容はコピペなのでわからん
+  - `export DART_SDK=~/flutter`してPATH通す必要あり
+- [prabirshrestha/vim-lsp](https://github.com/prabirshrestha/vim-lsp)
+  - いろいろうるさいのをなんとかして黙らせた。面倒くさい……
+  - `let g:lsp_diagnostics_signs_enabled = 0` 左側になんか出てくるやつ
+  - `let g:lsp_document_code_action_signs_enabled = 0` 左側になんか出てくるやつその２
+  - `let g:lsp_document_highlight_enabled = 0` 選択中の変数をハイライトで白くするやつ。見えないんだよ
+- [mattn/vim-lsp-settings](https://github.com/mattn/vim-lsp-settings)
+  - `prabirshrestha/vim-lsp`の設定をなんかしてくれるやつ
+- [lighttiger2505/deoplete-vim-lsp](https://github.com/lighttiger2505/deoplete-vim-lsp)
+
+### プラグイン（無効）
 - [w0rp/ale]()
-- [davidhalter/jedi-vim]()
-- [tpope/vim-fugitive]()
-- [junegunn/goyo.vim]()
-- [cespare/vim-toml]()
+  - linterのエラーを出力するプラグイン
+  - `vim-lsp`だけでもALEを代用できるらしい。
 - [junegunn/fzf.vim]()
-- [vim-airline/vim-airline]()
-- [vim-airline/vim-airline-themes]()
 - [Merlin and ocp-indent]()
+- [scrooloose/nerdtree]()
+- [thosakwe/vim-flutter]()
+  - コマンドラインだけで足りてるからまぁいいかなって
 
 ### フォント設定
 Neovim-Gtkは使用するPCでコンパイルしないとフォントが認識されない？要確認。

@@ -47,12 +47,12 @@ au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
 '''
 
-[[plugins]]
-repo     = 'scrooloose/nerdtree'
-hook_add = 'nnoremap <C-\> :NERDTreeToggle<CR>'
+# [[plugins]]
+# repo     = 'scrooloose/nerdtree'
+# hook_add = 'nnoremap <C-\> :NERDTreeToggle<CR>'
 
-[[plugins]]
-repo = 'w0rp/ale'
+# [[plugins]]
+# repo = 'w0rp/ale'
 
 [[plugins]]
 repo     = 'davidhalter/jedi-vim'
@@ -97,8 +97,8 @@ repo = 'junegunn/goyo.vim'
 [[plugins]]
 repo = 'cespare/vim-toml'
 
-[[plugins]]
-repo = 'junegunn/fzf.vim'
+# [[plugins]]
+# repo = 'junegunn/fzf.vim'
 
 [[plugins]]
 repo     = 'vim-airline/vim-airline'
@@ -127,6 +127,29 @@ repo = 'dart-lang/dart-vim-plugin'
 hook_add = '''
 let g:dart_style_guide = 2
 let g:dart_format_on_save = 1
+if executable('dart')
+  augroup LspDart
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+       \ 'name': 'analysis_server.dart.snapshot',
+       \ 'cmd': {server_info->[
+       \           $DART_SDK.'/bin/dart',
+       \           $DART_SDK.'/bin/snapshots/analysis_server.dart.snapshot',
+       \           '--lsp',
+       \           ]},
+       \ 'root_uri':{server_info->lsp#utils#path_to_uri(
+       \     lsp#utils#find_nearest_parent_file_directory(
+       \         lsp#utils#get_buffer_path(),
+       \         ['.git/', 'analysis_options.yaml']
+       \     ))},
+       \ 'allowlist': ['dart'],
+       \ 'initialization_options': v:null,
+       \ 'config': {},
+       \ 'workspace_config': {},
+       \ })
+    autocmd FileType dart setlocal omnifunc=lsp#complete
+  augroup END
+endif
 '''
 
 # [[plugins]]
@@ -136,8 +159,9 @@ let g:dart_format_on_save = 1
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
 let g:lsp_diagnostics_enabled = 1
-" let g:lsp_diagnostics_echo_cursor = 1
-" let g:lsp_text_edit_enabled = 1
+let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_document_highlight_enabled = 0
 '''
 
 [[plugins]]

@@ -5,3 +5,4 @@ export PATH="$HOME/flutter/bin:$PATH"
 export PATH="$HOME/android-studio/bin:$PATH"
 # export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 export CHROME_EXECUTABLE=/usr/bin/chromium
+export DART_SDK=~/flutter
