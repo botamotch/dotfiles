@@ -47,7 +47,13 @@ alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
 
 # export LD_LIBRARY_PATH=/usr/local/lib
-# export PATH="$HOME/neovim/bin:$PATH"
+
+export PATH=~/.cargo/bin:$PATH
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
+
+export CHROME_EXECUTABLE=/usr/bin/chromium
+export DART_SDK=$HOME/flutter
+
 export PATH="/usr/local/texlive/2021/bin/x86_64-linux:$PATH"
 export MANPATH="/usr/local/texlive/2021/texmf-dist/doc/:$MANPATH"
 export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:$IOPATH"
