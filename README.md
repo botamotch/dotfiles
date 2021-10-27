@@ -167,4 +167,5 @@ Neovim-Gtkは使用するPCでコンパイルしないとフォントが認識�
 - ちなみにzprofileとzloginを一緒に使うことはあまり想定されていないらしい。
 
 ## fonts.conf
+- `~/.config/fontconfig/fonts.conf` に置いて設定
 
