@@ -77,7 +77,7 @@ nnoremap [fugitive]  <Nop>
 nmap <space>g [fugitive]
 nnoremap <silent> [fugitive]s :Git status<CR>
 nnoremap <silent> [fugitive]a :Git write<CR>
-nnoremap <silent> [fugitive]c :Git commit-v<CR>
+nnoremap <silent> [fugitive]c :Git commit<CR>
 nnoremap <silent> [fugitive]b :Git blame<CR>
 nnoremap <silent> [fugitive]d :Git diff<CR>
 nnoremap <silent> [fugitive]m :Git merge<CR>
