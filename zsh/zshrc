@@ -61,3 +61,5 @@ export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:$IOPATH"
 eval `opam config env`
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(starship init zsh)"
