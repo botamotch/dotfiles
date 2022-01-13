@@ -1,8 +1,8 @@
 " set guifont=Migu\ 1M\ 11
-set guifont=M+\ 1M\ medium\ 11
+set guifont=M+\ 1M\ medium\ 12
 " set guifont=Noto\ Sans\ Mono\ CJK\ JP\ 12
 colorscheme desert
-set lines=40
+set lines=38
 " set columns=120
 set columns=180
 " 左右・水平スクロールバーを非表示にする

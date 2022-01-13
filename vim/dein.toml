@@ -1,12 +1,33 @@
 [[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_document_highlight_enabled = 0
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
 repo     = 'Shougo/deoplete.nvim'
 hook_add = '''
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
 \   'auto_complete_delay': 0,
-\   'min_pattern_length': 3,
+\   'min_pattern_length': 2,
 \ })
 '''
+
+[[plugins]]
+repo = 'lighttiger2505/deoplete-vim-lsp'
+
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete.vim'
+
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo     = 'Shougo/denite.nvim'
@@ -45,29 +66,6 @@ au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
-'''
-
-# [[plugins]]
-# repo     = 'scrooloose/nerdtree'
-# hook_add = 'nnoremap <C-\> :NERDTreeToggle<CR>'
-
-# [[plugins]]
-# repo = 'w0rp/ale'
-
-[[plugins]]
-repo     = 'davidhalter/jedi-vim'
-hook_add = '''
-let g:jedi#popup_on_dot=0
-let g:jedi#popup_select_first=0
-" let g:jedi#show_call_signatures=2
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>n"
-autocmd FileType python setlocal completeopt-=preview
 '''
 
 [[plugins]]
@@ -116,67 +114,13 @@ hook_add = '''
 let g:airline_theme = 'papercolor'
 '''
 
-# [[plugins]]
-# repo     = 'vim-latex/vim-latex'
-# hook_add = '''
-# let g:Tex_AutoFolding = 0
-# '''
-
 [[plugins]]
 repo = 'dart-lang/dart-vim-plugin'
 hook_add = '''
 let g:dart_style_guide = 2
 let g:dart_format_on_save = 1
-if executable('dart')
-  augroup LspDart
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-       \ 'name': 'analysis_server.dart.snapshot',
-       \ 'cmd': {server_info->[
-       \           $DART_SDK.'/bin/dart',
-       \           $DART_SDK.'/bin/snapshots/analysis_server.dart.snapshot',
-       \           '--lsp',
-       \           ]},
-       \ 'root_uri':{server_info->lsp#utils#path_to_uri(
-       \     lsp#utils#find_nearest_parent_file_directory(
-       \         lsp#utils#get_buffer_path(),
-       \         ['.git/', 'analysis_options.yaml']
-       \     ))},
-       \ 'allowlist': ['dart'],
-       \ 'initialization_options': v:null,
-       \ 'config': {},
-       \ 'workspace_config': {},
-       \ })
-    autocmd FileType dart setlocal omnifunc=lsp#complete
-  augroup END
-endif
 '''
 
 # [[plugins]]
 # repo = 'thosakwe/vim-flutter'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = '''
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_signs_enabled = 0
-let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_document_highlight_enabled = 0
-'''
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-hook_add = '''
-let g:lsp_settings = {
-\    'vim-language-server': {
-\        'disabled': 1,
-\    },
-\    'texlab': {
-\        'disabled': 1,
-\    },
-\}
-'''
-
-[[plugins]]
-repo = 'lighttiger2505/deoplete-vim-lsp'
 
