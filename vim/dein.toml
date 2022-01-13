@@ -9,25 +9,28 @@ let g:lsp_document_highlight_enabled = 0
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
-
-[[plugins]]
-repo     = 'Shougo/deoplete.nvim'
 hook_add = '''
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-\   'auto_complete_delay': 0,
-\   'min_pattern_length': 2,
-\ })
+let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
 '''
 
+# [[plugins]]
+# repo     = 'Shougo/deoplete.nvim'
+# hook_add = '''
+# let g:deoplete#enable_at_startup = 1
+# call deoplete#custom#option({
+# \   'auto_complete_delay': 0,
+# \   'min_pattern_length': 2,
+# \ })
+# '''
+
+# [[plugins]]
+# repo = 'lighttiger2505/deoplete-vim-lsp'
+
 [[plugins]]
-repo = 'lighttiger2505/deoplete-vim-lsp'
+repo = 'prabirshrestha/asyncomplete.vim'
 
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete.vim'
-
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete-lsp.vim'
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo     = 'Shougo/denite.nvim'
