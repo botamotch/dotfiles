@@ -1,10 +1,13 @@
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_signs_enabled = 0
+nnoremap <silent> <C-n> :<C-u>LspNextDiagnostic<CR>
+nnoremap <silent> <C-p> :<C-u>LspPreviousDiagnostic<CR>
+
 let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_document_highlight_enabled = 0
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+highlight lspReference ctermfg=white guifg=red ctermbg=blue guibg=green
 '''
 
 [[plugins]]
