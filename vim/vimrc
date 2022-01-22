@@ -72,13 +72,22 @@ nnoremap <silent> <C-l> :<C-u>bnext<CR>
 nnoremap <silent> <C-h> :<C-u>bprevious<CR>
 nnoremap j gj
 nnoremap k gk
-
+nnoremap <silent> K :<C-u>call <SID>show_documentation()<CR>
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <esc> <C-\><C-n>
+
 function! RepeatTerm()
     " call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
     :!tmux send-keys -t 0:0.0 C-p C-j
+endfunction
+
+function! s:show_documentation() abort
+  if index(['vim','help'], &filetype) >= 0
+    execute 'h ' . expand('<cword>')
+  else
+    :LspHover
+  endif
 endfunction
 
 " Merlin and ocp-indent ========================================================

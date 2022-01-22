@@ -12,28 +12,21 @@ highlight lspReference ctermfg=white guifg=red ctermbg=blue guibg=green
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
-hook_add = '''
-let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
-'''
-
-# [[plugins]]
-# repo     = 'Shougo/deoplete.nvim'
 # hook_add = '''
-# let g:deoplete#enable_at_startup = 1
-# call deoplete#custom#option({
-# \   'auto_complete_delay': 0,
-# \   'min_pattern_length': 2,
-# \ })
+# let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
 # '''
-
-# [[plugins]]
-# repo = 'lighttiger2505/deoplete-vim-lsp'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+# [[plugins]]
+# repo = 'Shougo/ddc.vim'
+
+# [[plugins]]
+# repo = 'vim-denops/denops.vim'
 
 [[plugins]]
 repo     = 'Shougo/denite.nvim'
@@ -101,8 +94,8 @@ repo = 'junegunn/goyo.vim'
 [[plugins]]
 repo = 'cespare/vim-toml'
 
-# [[plugins]]
-# repo = 'junegunn/fzf.vim'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
 
 [[plugins]]
 repo     = 'vim-airline/vim-airline'
