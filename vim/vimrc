@@ -61,14 +61,18 @@ syntax enable
 
 " Key map ======================================================================
 let mapleader = "\<Space>"
-nnoremap <leader><leader> V
+nnoremap <leader><leader> :<C-u>cd %:h<CR>
 nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>q :<C-u>bd<CR>
-nnoremap <leader>h :cd %:h<CR>
-nnoremap <leader>e :Files<CR>
-nnoremap <leader>g :GFiles<CR>
-nnoremap <leader>G :GFiles?<CR>
-nnoremap <leader>p :Rg<CR>
+" nnoremap <leader>h :cd %:h<CR>
+
+nnoremap <leader>e :<C-u>Files<CR>
+nnoremap <leader>g :<C-u>GFiles<CR>
+nnoremap <leader>G :<C-u>GFiles?<CR>
+nnoremap <leader>p :<C-u>Rg<CR>
+nnoremap <leader>h :<C-u>History<CR>
+nnoremap <leader>b :<C-u>Buffer<CR>
+
 nnoremap <silent> <leader>r :<C-u>call RepeatTerm()<CR>
 " nnoremap <silent> <C-l> :<C-u>tabnext<CR>
 " nnoremap <silent> <C-h> :<C-u>tabNext<CR>
