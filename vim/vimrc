@@ -66,12 +66,14 @@ nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>q :<C-u>bd<CR>
 " nnoremap <leader>h :cd %:h<CR>
 
+" 'junegunn/fzf.vim'
 nnoremap <leader>e :<C-u>Files<CR>
-nnoremap <leader>g :<C-u>GFiles<CR>
-nnoremap <leader>G :<C-u>GFiles?<CR>
+nnoremap <leader>g :<C-u>GFiles?<CR>
 nnoremap <leader>p :<C-u>Rg<CR>
 nnoremap <leader>h :<C-u>History<CR>
 nnoremap <leader>b :<C-u>Buffer<CR>
+" 'tpope/vim-fugitive'
+nnoremap <leader>G :<C-u>Git<CR>
 
 nnoremap <silent> <leader>r :<C-u>call RepeatTerm()<CR>
 " nnoremap <silent> <C-l> :<C-u>tabnext<CR>

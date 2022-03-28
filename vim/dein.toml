@@ -22,35 +22,6 @@ repo = 'prabirshrestha/asyncomplete.vim'
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
-# [[plugins]]
-# repo = 'Shougo/ddc.vim'
-
-# [[plugins]]
-# repo = 'vim-denops/denops.vim'
-
-# [[plugins]]
-# repo     = 'Shougo/denite.nvim'
-# hook_add = '''
-# " Define mappings
-# autocmd FileType denite call s:denite_my_settings()
-# function! s:denite_my_settings() abort
-#   nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-#   nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-#   nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-#   nnoremap <silent><buffer><expr> q denite#do_map('quit')
-#   nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-#   nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-# endfunction
-
-# nnoremap [denite] <Nop>
-# nmap <Space>u [denite]
-# nnoremap <silent> [denite]u :<C-u>Denite buffer file_mru<CR>
-# nnoremap <silent> [denite]b :<C-u>Denite buffer<CR>
-# nnoremap <silent> [denite]h :<C-u>Denite file_mru<CR>
-# nnoremap <silent> [denite]g :<C-u>Denite file<CR>
-# nnoremap <silent> [denite]f :<C-u>DeniteBufferDir file<CR>
-# '''
-
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 
@@ -69,16 +40,6 @@ au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 [[plugins]]
 repo     = 'tpope/vim-fugitive'
-hook_add = '''
-nnoremap [fugitive]  <Nop>
-nmap <space>g [fugitive]
-nnoremap <silent> [fugitive]s :Git status<CR>
-nnoremap <silent> [fugitive]a :Git write<CR>
-nnoremap <silent> [fugitive]c :Git commit<CR>
-nnoremap <silent> [fugitive]b :Git blame<CR>
-nnoremap <silent> [fugitive]d :Git diff<CR>
-nnoremap <silent> [fugitive]m :Git merge<CR>
-'''
 
 [[plugins]]
 repo     = 'airblade/vim-gitgutter'
