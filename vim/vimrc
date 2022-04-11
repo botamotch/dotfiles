@@ -85,7 +85,7 @@ nmap <silent> [g <Plug>(lsp-previous-diagnostic)
 nmap <silent> gs <plug>(lsp-document-symbol-search)
 nmap <silent> gS <plug>(lsp-workspace-symbol-search)
 nmap <silent> gr <plug>(lsp-references)
-nmap <silent> gg <plug>(lsp-document-diagnostics)
+nmap <silent> gl <plug>(lsp-document-diagnostics)
 nmap <silent> <leader>rn <plug>(lsp-rename)
 " 'racer-rust/vim-racer' -----------------------------------------------------
 " au FileType rust nmap gd <Plug>(rust-def)
