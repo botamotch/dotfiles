@@ -25,7 +25,6 @@ set showcmd
 set hlsearch
 set nowrap
 set hidden
-
 set backup
 set backupdir=~/.vim/backup
 set noswapfile
@@ -39,7 +38,6 @@ set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state(expand('~/.cache/dein'))
   call dein#begin(expand('~/.cache/dein'))
-
   if !has('nvim')
     call dein#add('roxma/vim-hug-neovim-rpc')
     call dein#add('roxma/nvim-yarp')
@@ -47,7 +45,6 @@ if dein#load_state(expand('~/.cache/dein'))
   else
     call dein#load_toml('~/.config/nvim/dein.toml', {'lazy': 0})
   endif
-
   call dein#end()
   call dein#save_state()
 endif
@@ -64,57 +61,40 @@ let mapleader = "\<Space>"
 nnoremap <leader><leader> :<C-u>cd %:h<CR>
 nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>q :<C-u>bd<CR>
-" nnoremap <leader>h :cd %:h<CR>
-
-" 'junegunn/fzf.vim'
+nnoremap <silent> <C-l> :<C-u>bnext<CR>
+nnoremap <silent> <C-h> :<C-u>bprevious<CR>
+nnoremap j gj
+nnoremap k gk
+inoremap <silent> jj <ESC>
+nnoremap <silent> <ESC><ESC> :noh<CR>
+tnoremap <esc> <C-\><C-n>
+" 'junegunn/fzf.vim' ---------------------------------------------------------
 nnoremap <leader>e :<C-u>Files<CR>
 nnoremap <leader>g :<C-u>GFiles?<CR>
 nnoremap <leader>p :<C-u>Rg<CR>
 nnoremap <leader>h :<C-u>History<CR>
 nnoremap <leader>b :<C-u>Buffer<CR>
-" 'tpope/vim-fugitive'
+" 'tpope/vim-fugitive' -------------------------------------------------------
 nnoremap <leader>G :<C-u>Git<CR>
-
+" 'prabirshrestha/vim-lsp' ---------------------------------------------------
+nmap <silent> K <plug>(lsp-hover)
+nmap <silent> <C-k> <plug>(lsp-peek-definition)
+nmap <silent> gd <plug>(lsp-definition)
+nmap <silent> ]g <Plug>(lsp-next-diagnostic)
+nmap <silent> [g <Plug>(lsp-previous-diagnostic)
+nmap <silent> gs <plug>(lsp-document-symbol-search)
+nmap <silent> gS <plug>(lsp-workspace-symbol-search)
+nmap <silent> gr <plug>(lsp-references)
+nmap <silent> gg <plug>(lsp-document-diagnostics)
+nmap <silent> <leader>rn <plug>(lsp-rename)
+" 'racer-rust/vim-racer' -----------------------------------------------------
+" au FileType rust nmap gd <Plug>(rust-def)
+" au FileType rust nmap gs <Plug>(rust-def-split)
+" au FileType rust nmap gx <Plug>(rust-def-vertical)
+" au FileType rust nmap <leader>gd <Plug>(rust-doc)
+" other function -------------------------------------------------------------
 nnoremap <silent> <leader>r :<C-u>call RepeatTerm()<CR>
-" nnoremap <silent> <C-l> :<C-u>tabnext<CR>
-" nnoremap <silent> <C-h> :<C-u>tabNext<CR>
-nnoremap <silent> <C-l> :<C-u>bnext<CR>
-nnoremap <silent> <C-h> :<C-u>bprevious<CR>
-nnoremap j gj
-nnoremap k gk
-nnoremap <silent> K :<C-u>call <SID>show_documentation()<CR>
-inoremap <silent> jj <ESC>
-nnoremap <silent> <ESC><ESC> :noh<CR>
-tnoremap <esc> <C-\><C-n>
-
 function! RepeatTerm()
     " call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
     :!tmux send-keys -t 0:0.0 C-p C-j
 endfunction
-
-function! s:show_documentation() abort
-  if index(['vim','help'], &filetype) >= 0
-    execute 'h ' . expand('<cword>')
-  else
-    :LspHover
-  endif
-endfunction
-
-" Merlin and ocp-indent ========================================================
-" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-
-" execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-" execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-" execute 'helptags ' . g:opamshare . '/merlin/vim/doc'
-
-" let g:syntastic_ocaml_chekers = ['merlin']
-" function! s:ocaml_format()
-"     let now_line = line('.')
-"     exec ':%! ocp-indent'
-"     exec ':' . now_line
-" endfunction
-
-" augroup ocaml_format
-"     autocmd!
-"     autocmd BufWrite,FileWritePre,FileAppendPre *.mli\= call s:ocaml_format()
-" augroup END
