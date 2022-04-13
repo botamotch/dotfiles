@@ -55,6 +55,7 @@ endif
 
 filetype plugin indent on
 syntax enable
+autocmd FileType vue syntax sync fromstart
 
 " Key map ======================================================================
 let mapleader = "\<Space>"
