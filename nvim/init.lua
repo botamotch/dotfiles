@@ -11,24 +11,28 @@ vim.o.showcmd = true
 vim.o.hlsearch = true
 vim.o.hidden = true
 vim.o.backup = true
-vim.o.backupdir = "~/.vim/backup"
+vim.o.backupdir = os.getenv("HOME") .. '/.vim/backup'
 -- vim.o.pumblend = 30
 -- vim.o.termguicolors = true
--- local to window
+-- local to window -------------------------------------------------------------
 vim.wo.number = true
 vim.wo.scroll = 2
 vim.wo.wrap = false
 -- vim.wo.winblend = 10
--- local to buffer
+-- local to buffer -------------------------------------------------------------
 vim.bo.tabstop = 4
 vim.bo.expandtab = true
 vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.bo.nrformats = "bin,hex"
 vim.bo.swapfile = false
--- vim.cmd
-vim.cmd 'set formatoptions-=tc'
-vim.cmd 'set formatoptions+=mM'
+-- vim.cmd ---------------------------------------------------------------------
+vim.cmd 'set formatoptions-=t'
+vim.cmd 'set formatoptions-=c'
+vim.cmd 'set formatoptions+=m'
+vim.cmd 'set formatoptions+=M'
+-- vim.opt.formatoptions:remove('tc')
+-- vim.opt.formatoptions:append('mM')
 vim.cmd 'colorscheme delek'
 
 -- Key map =====================================================================
@@ -51,9 +55,20 @@ vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
+-- lsp-client ------------------------------------------------------------------
+local opts = { noremap=true, silent=true }
+-- local on_attach = function(client, bufnr)
+--   -- Enable completion triggered by <c-x><c-o>
+--   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+--   -- Mappings.
+--   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+--   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+-- end
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
 -- packer ======================================================================
--- require("packer").sync()
+-- You must run `:PackerSync` whenever you make changes to your plugin configuration
 require("packer").startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
@@ -65,22 +80,23 @@ require("packer").startup(function(use)
   use 'airblade/vim-gitgutter'
 end)
 
--- nvim-lsp-installer
+-- 'nvim-lsp-installer' --------------------------------------------------------
 require("nvim-lsp-installer").on_server_ready(function(server)
-  opt = {}
+  local opt = {}
+  -- opts.on_attach = on_attach
   server:setup(opt)
 end)
--- 'vim-airline/vim-airline'
+-- 'vim-airline/vim-airline' ---------------------------------------------------
 vim.cmd 'let g:airline_symbols_ascii = 1'
 vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
 vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
 
--- 'vim-airline/vim-airline-themes'
+-- 'vim-airline/vim-airline-themes' --------------------------------------------
 -- vim.cmd 'let g:airline_theme = "dark"'
 -- vim.cmd 'let g:airline_theme = "molokai"'
 vim.cmd 'let g:airline_theme = "papercolor"'
 
--- 'airblade/vim-gitgutter'
+-- 'airblade/vim-gitgutter' ----------------------------------------------------
 vim.cmd 'let g:gitgutter_sign_added = "+"'
 vim.cmd 'let g:gitgutter_sign_modified = "^"'
 vim.cmd 'let g:gitgutter_sign_removed = "-"'
