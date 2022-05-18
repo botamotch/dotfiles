@@ -26,13 +26,10 @@ vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.bo.nrformats = "bin,hex"
 vim.bo.swapfile = false
+-- vim.opt ---------------------------------------------------------------------
+vim.opt.formatoptions:remove('t')
+vim.opt.formatoptions:append('mM')
 -- vim.cmd ---------------------------------------------------------------------
-vim.cmd 'set formatoptions-=t'
-vim.cmd 'set formatoptions-=c'
-vim.cmd 'set formatoptions+=m'
-vim.cmd 'set formatoptions+=M'
--- vim.opt.formatoptions:remove('tc')
--- vim.opt.formatoptions:append('mM')
 vim.cmd 'colorscheme delek'
 
 -- Key map =====================================================================
@@ -64,8 +61,9 @@ local opts = { noremap=true, silent=true }
 --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 -- end
-vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
 -- packer ======================================================================
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration
@@ -107,3 +105,8 @@ vim.cmd 'highlight GitGutterAddLine          ctermbg=2'
 vim.cmd 'highlight GitGutterChangeLine       ctermbg=3'
 vim.cmd 'highlight GitGutterDeleteLine       ctermbg=1'
 -- vim.cmd 'highlight GitGutterChangeDeleteLine ctermbg='
+
+-- vim-lsp =====================================================================
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+)
