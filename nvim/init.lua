@@ -45,13 +45,16 @@ vim.api.nvim_set_keymap('i',  'jj', '<ESC>', {silent=true})
 vim.api.nvim_set_keymap('n',  '<ESC><ESC>', ':nohlsearch<CR>', {silent=true})
 -- vim.api.nvim_set_keymap('t',  '<esc>', '<C-\><C-n>')
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles?<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files!<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles!?<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg!<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History!<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer!<CR>', {noremap = true})
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git log --oneline<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git commit<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git push<CR>', {noremap = true})
 -- lsp-client ------------------------------------------------------------------
 local opts = { noremap=true, silent=true }
 -- local on_attach = function(client, bufnr)
