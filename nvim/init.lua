@@ -30,7 +30,13 @@ vim.bo.swapfile = false
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 -- vim.cmd ---------------------------------------------------------------------
-vim.cmd 'colorscheme delek'
+-- vim.cmd 'colorscheme default'
+vim.cmd 'colorscheme iceberg'
+vim.cmd'highlight Normal ctermbg=none'
+vim.cmd'highlight NonText ctermbg=none'
+vim.cmd'highlight LineNr ctermbg=none'
+vim.cmd'highlight Folded ctermbg=none'
+vim.cmd'highlight EndOfBuffer ctermbg=none '
 
 -- Key map =====================================================================
 vim.g.mapleader = " "
@@ -67,6 +73,7 @@ require("packer").startup(function()
   use 'junegunn/fzf.vim'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
+  use 'cocopon/iceberg.vim'
   -- use 'ibhagwan/fzf-lua'
   -- nvim-cmp
   use "hrsh7th/nvim-cmp"
@@ -128,9 +135,10 @@ vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
 vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
--- vim.cmd 'let g:airline_theme = "dark"'
--- vim.cmd 'let g:airline_theme = "molokai"'
-vim.cmd 'let g:airline_theme = "papercolor"'
+-- vim.cmd 'let g:airline_theme = "luna"'
+vim.cmd 'let g:airline_theme = "raven"'
+-- vim.cmd 'let g:airline_theme = "minimalist"'
+-- vim.cmd 'let g:airline_theme = "papercolor"'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
 vim.cmd 'let g:gitgutter_sign_added = "+"'
