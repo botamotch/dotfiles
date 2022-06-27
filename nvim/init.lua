@@ -33,7 +33,7 @@ vim.opt.formatoptions:append('mM')
 vim.cmd 'colorscheme delek'
 
 -- Key map =====================================================================
-vim.cmd 'let mapleader = " "'
+vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<leader><leader>', ':<C-u>cd %:h<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>w', ':<C-u>w<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>q', ':<C-u>bd<CR>', {noremap = true})
@@ -58,7 +58,7 @@ vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
 
 -- packer ======================================================================
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration
-require("packer").startup(function(use)
+require("packer").startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
@@ -67,13 +67,20 @@ require("packer").startup(function(use)
   use 'junegunn/fzf.vim'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
+  -- use 'ibhagwan/fzf-lua'
+  -- nvim-cmp
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/cmp-nvim-lsp"
 end)
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
 require("nvim-lsp-installer").on_server_ready(function(server)
   local opt = {}
   opt.on_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     local opts = { noremap=true, silent=true }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -86,6 +93,34 @@ require("nvim-lsp-installer").on_server_ready(function(server)
   end
   server:setup(opt)
 end)
+
+-- 'hrsh7th/nvim-cmp' ----------------------------------------------------------
+local cmp = require("cmp")
+cmp.setup({
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "buffer" },
+    { name = "path" },
+    { name = "cmdline" },
+    { name = "snippy" },
+  },
+  mapping = {
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-l>"] = cmp.mapping.complete(),
+  },
+})
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = "path" },
+    { name = "cmdline" },
+  },
+})
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require('lspconfig')['tsserver'].setup {
+    capabilities = capabilities
+}
 
 -- 'vim-airline/vim-airline' ---------------------------------------------------
 vim.cmd 'let g:airline_symbols_ascii = 1'
