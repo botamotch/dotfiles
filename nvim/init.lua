@@ -32,11 +32,11 @@ vim.opt.formatoptions:append('mM')
 -- vim.cmd ---------------------------------------------------------------------
 -- vim.cmd 'colorscheme default'
 vim.cmd 'colorscheme iceberg'
-vim.cmd'highlight Normal ctermbg=none'
-vim.cmd'highlight NonText ctermbg=none'
-vim.cmd'highlight LineNr ctermbg=none'
-vim.cmd'highlight Folded ctermbg=none'
-vim.cmd'highlight EndOfBuffer ctermbg=none '
+vim.cmd 'highlight Normal ctermbg=none'
+vim.cmd 'highlight NonText ctermbg=none'
+vim.cmd 'highlight LineNr ctermbg=none'
+vim.cmd 'highlight Folded ctermbg=none'
+vim.cmd 'highlight EndOfBuffer ctermbg=none '
 
 -- Key map =====================================================================
 vim.g.mapleader = " "
@@ -51,11 +51,11 @@ vim.api.nvim_set_keymap('i',  'jj', '<ESC>', {silent=true})
 vim.api.nvim_set_keymap('n',  '<ESC><ESC>', ':nohlsearch<CR>', {silent=true})
 -- vim.api.nvim_set_keymap('t',  '<esc>', '<C-\><C-n>')
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files!<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles!?<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg!<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History!<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer!<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles?<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git log --oneline<CR>', {noremap = true})
@@ -125,9 +125,9 @@ cmp.setup.cmdline(":", {
   },
 })
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['tsserver'].setup {
-    capabilities = capabilities
-}
+require('lspconfig')['tsserver'].setup { capabilities = capabilities }
+require('lspconfig')['volar'].setup { capabilities = capabilities }
+require('lspconfig')['rust_analyzer'].setup { capabilities = capabilities }
 
 -- 'vim-airline/vim-airline' ---------------------------------------------------
 vim.cmd 'let g:airline_symbols_ascii = 1'
@@ -152,7 +152,15 @@ vim.cmd 'highlight GitGutterChangeLine       ctermbg=3'
 vim.cmd 'highlight GitGutterDeleteLine       ctermbg=1'
 -- vim.cmd 'highlight GitGutterChangeDeleteLine ctermbg='
 
+-- 'junegunn/fzf.vim' ----------------------------------------------------------
+vim.cmd "let g:fzf_preview_window = ['right:70%', 'ctrl-/']"
+
 -- vim-lsp =====================================================================
+-- :help lsp-method
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+  vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
 )
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, { separator = false }
+)
+-- vim.lsp.util.stylize_markdown()
