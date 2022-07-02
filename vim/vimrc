@@ -1,7 +1,7 @@
 " Common =======================================================================
 set number
 syntax on
-colorscheme default
+" colorscheme default
 set tabstop=4
 set expandtab
 set shiftwidth=4
@@ -17,7 +17,7 @@ set nrformats-=octal
 set formatoptions+=mM
 set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
-set ambiwidth=double
+set ambiwidth=single
 set wildmenu
 set cmdheight=1
 set laststatus=2
@@ -99,3 +99,10 @@ function! RepeatTerm()
     " call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
     :!tmux send-keys -t 0:0.0 C-p C-j
 endfunction
+
+autocmd ColorScheme * highlight Normal ctermbg=none
+autocmd ColorScheme * highlight NonText ctermbg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none
+autocmd ColorScheme * highlight Folded ctermbg=none
+autocmd ColorScheme * highlight EndOfBuffer ctermbg=none
+colorscheme iceberg

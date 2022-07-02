@@ -20,8 +20,8 @@ repo = 'prabirshrestha/asyncomplete.vim'
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
-[[plugins]]
-repo = 'Shougo/neomru.vim'
+# [[plugins]]
+# repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo     = 'rust-lang/rust.vim'
@@ -70,7 +70,8 @@ repo     = 'vim-airline/vim-airline-themes'
 hook_add = '''
 " let g:airline_theme = 'dark'
 " let g:airline_theme = 'molokai'
-let g:airline_theme = 'papercolor'
+" let g:airline_theme = 'papercolor'
+let g:airline_theme = "raven"
 '''
 
 [[plugins]]
@@ -85,3 +86,9 @@ let g:dart_format_on_save = 1
 
 # [[plugins]]
 # repo = 'posva/vim-vue'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'rbtnn/vim-ambiwidth'

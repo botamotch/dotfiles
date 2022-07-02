@@ -1,5 +1,4 @@
 -- Common ======================================================================
--- global
 vim.o.clipboard = "unnamedplus"
 vim.o.whichwrap = "b,s,[,],<,>"
 vim.o.backspace = "indent,eol,start"
@@ -14,16 +13,17 @@ vim.o.backup = true
 vim.o.backupdir = os.getenv("HOME") .. '/.vim/backup'
 -- vim.o.pumblend = 30
 -- vim.o.termguicolors = true
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.expandtab = true
+-- vim.bo.autoindent = true
+vim.o.smartindent = true
+vim.o.scroll = 2
 -- local to window -------------------------------------------------------------
 vim.wo.number = true
-vim.wo.scroll = 2
 vim.wo.wrap = false
 -- vim.wo.winblend = 10
 -- local to buffer -------------------------------------------------------------
-vim.bo.tabstop = 4
-vim.bo.expandtab = true
-vim.bo.autoindent = true
-vim.bo.smartindent = true
 vim.bo.nrformats = "bin,hex"
 vim.bo.swapfile = false
 -- vim.opt ---------------------------------------------------------------------
@@ -57,7 +57,7 @@ vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
 -- 'tpope/vim-fugitive' --------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>vert Git<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git log --oneline<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git commit<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git push<CR>', {noremap = true})
