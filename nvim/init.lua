@@ -2,7 +2,7 @@
 vim.o.clipboard = "unnamedplus"
 vim.o.whichwrap = "b,s,[,],<,>"
 vim.o.backspace = "indent,eol,start"
-vim.o.ambiwidth = "double"
+vim.o.ambiwidth = "single"
 vim.o.wildmenu = true
 vim.o.cmdheight = 1
 vim.o.laststatus = 2
@@ -11,45 +11,48 @@ vim.o.hlsearch = true
 vim.o.hidden = true
 vim.o.backup = true
 vim.o.backupdir = os.getenv("HOME") .. '/.vim/backup'
--- vim.o.pumblend = 30
+-- vim.o.winblend = 20
+-- vim.o.pumblend = 20
 -- vim.o.termguicolors = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.expandtab = true
--- vim.bo.autoindent = true
+vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.scroll = 2
--- local to window -------------------------------------------------------------
-vim.wo.number = true
-vim.wo.wrap = false
--- vim.wo.winblend = 10
--- local to buffer -------------------------------------------------------------
-vim.bo.nrformats = "bin,hex"
-vim.bo.swapfile = false
+vim.o.number = true
+vim.o.wrap = false
+vim.o.nrformats = "bin,hex"
+vim.o.swapfile = false
 -- vim.opt ---------------------------------------------------------------------
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 -- vim.cmd ---------------------------------------------------------------------
+vim.cmd 'autocmd TermOpen * startinsert'
 -- vim.cmd 'colorscheme default'
+vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight NonText ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight LineNr ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight Folded ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight EndOfBuffer ctermbg=none '
 vim.cmd 'colorscheme iceberg'
-vim.cmd 'highlight Normal ctermbg=none'
-vim.cmd 'highlight NonText ctermbg=none'
-vim.cmd 'highlight LineNr ctermbg=none'
-vim.cmd 'highlight Folded ctermbg=none'
-vim.cmd 'highlight EndOfBuffer ctermbg=none '
 
 -- Key map =====================================================================
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<leader><leader>', ':<C-u>cd %:h<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>w', ':<C-u>w<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>q', ':<C-u>bd<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n',  '<C-l>', ':<C-u>bnext<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n',  '<C-h>', ':<C-u>bprevious<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>bnext<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-h>', ':<C-u>bprevious<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true})
 vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true})
-vim.api.nvim_set_keymap('i',  'jj', '<ESC>', {silent=true})
-vim.api.nvim_set_keymap('n',  '<ESC><ESC>', ':nohlsearch<CR>', {silent=true})
--- vim.api.nvim_set_keymap('t',  '<esc>', '<C-\><C-n>')
+vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {silent=true})
+vim.api.nvim_set_keymap('n', '<ESC><ESC>', ':nohlsearch<CR>', {silent=true})
+vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', {silent=true})
+vim.api.nvim_set_keymap('t', '<C-W>j', '<CMD>wincmd j<CR>', {silent=true})
+vim.api.nvim_set_keymap('t', '<C-W>k', '<CMD>wincmd k<CR>', {silent=true})
+vim.api.nvim_set_keymap('t', '<C-W>h', '<CMD>wincmd h<CR>', {silent=true})
+vim.api.nvim_set_keymap('t', '<C-W>l', '<CMD>wincmd l<CR>', {silent=true})
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
 vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles?<CR>', {noremap = true})
@@ -57,7 +60,7 @@ vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
 -- 'tpope/vim-fugitive' --------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>vert Git<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git log --oneline<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git commit<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git push<CR>', {noremap = true})
@@ -74,6 +77,7 @@ require("packer").startup(function()
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
   use 'cocopon/iceberg.vim'
+  use 'Yggdroot/indentLine'
   -- use 'ibhagwan/fzf-lua'
   -- nvim-cmp
   use "hrsh7th/nvim-cmp"
@@ -81,6 +85,7 @@ require("packer").startup(function()
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/vim-vsnip"
 end)
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
@@ -104,15 +109,29 @@ require("nvim-lsp-installer").on_server_ready(function(server)
       vim.lsp.protocol.make_client_capabilities()
     )
   }
-  -- if server.name == 'tsserver' then
-  --   opt = {}
-  -- end
   server:setup(opt)
 end)
 
 -- 'hrsh7th/nvim-cmp' ----------------------------------------------------------
 local cmp = require("cmp")
 cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  window = {
+    -- documentation = {
+    --   border = "none",
+    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+    --   separator = false,
+    -- },
+    -- completion = {
+    --   border = "none",
+    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+    --   separator = false,
+    -- },
+  },
   sources = {
     { name = "nvim_lsp" },
     { name = "buffer" },
@@ -120,30 +139,18 @@ cmp.setup({
     { name = "cmdline" },
     { name = "snippy" },
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-l>"] = cmp.mapping.complete(),
-    ["<C-c>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
+    -- ["<C-c>"] = cmp.mapping {
+    --   i = cmp.mapping.abort(),
+    --   c = cmp.mapping.close(),
+    -- },
     ["<CR>"] = cmp.mapping.confirm { select = true },
-  },
-  window = {
-    documentation = {
-      border = "none",
-      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-      separator = false,
-    },
-    completion = {
-      border = "none",
-      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-      separator = false,
-    },
-  },
+  }),
   experimental = {
     ghost_text = true,
   },
@@ -184,12 +191,7 @@ vim.cmd "let g:fzf_preview_window = ['right:70%', 'ctrl-/']"
 
 -- vim-lsp =====================================================================
 local config = {
-  -- disable virtual text
   virtual_text = false,
-  -- show signs
-  -- signs = {
-  --   active = signs,
-  -- },
   update_in_insert = true,
   underline = true,
   severity_sort = true,
@@ -200,7 +202,7 @@ local config = {
     source = "always",
     header = "",
     prefix = "",
-    separator = false,
+    separator = true,
   },
 }
 -- vim.diagnostic.config(config)
@@ -208,8 +210,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, config
 )
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, { separator = false }
+  vim.lsp.handlers.hover, { separator = true }
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, { separator = false }
+  vim.lsp.handlers.signature_help, { separator = true }
 )
