@@ -170,7 +170,8 @@ vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
 -- vim.cmd 'let g:airline_theme = "luna"'
-vim.cmd 'let g:airline_theme = "raven"'
+vim.cmd 'let g:airline_theme = "iceberg"'
+-- vim.cmd 'let g:airline_theme = "raven"'
 -- vim.cmd 'let g:airline_theme = "minimalist"'
 -- vim.cmd 'let g:airline_theme = "papercolor"'
 
