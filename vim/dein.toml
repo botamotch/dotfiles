@@ -64,7 +64,8 @@ hook_add = '''
 " let g:airline_theme = 'dark'
 " let g:airline_theme = 'molokai'
 " let g:airline_theme = 'papercolor'
-let g:airline_theme = "raven"
+" let g:airline_theme = "raven"
+let g:airline_theme = "iceberg"
 '''
 
 [[plugins]]

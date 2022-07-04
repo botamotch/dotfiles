@@ -2,7 +2,8 @@ set ambiwidth=double
 " set guifont=Migu\ 1M\ 11
 set guifont=M+\ 1M\ medium\ 12
 " set guifont=Noto\ Sans\ Mono\ CJK\ JP\ 12
-colorscheme desert
+" colorscheme desert
+colorscheme iceberg
 set lines=32
 set columns=120
 " set columns=180
