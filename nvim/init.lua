@@ -64,6 +64,7 @@ vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git log --oneline<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git commit<CR>', {noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git push<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>vert Gdiffsplit !~1<CR>', {noremap = true})
 
 -- packer ======================================================================
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration

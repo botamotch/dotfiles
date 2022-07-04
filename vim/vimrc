@@ -96,10 +96,19 @@ nmap <silent> <leader>rn <plug>(lsp-rename)
 " other function -------------------------------------------------------------
 nnoremap <silent> <leader>r :<C-u>call RepeatTerm()<CR>
 function! RepeatTerm()
-    " call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
-    :!tmux send-keys -t 0:0.0 C-p C-j
+  " call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
+  :!tmux send-keys -t 0:0.0 C-p C-j
 endfunction
 
+" augroup set_color
+"   autocmd ColorScheme * highlight Normal ctermbg=none
+"   autocmd ColorScheme * highlight NonText ctermbg=none
+"   autocmd ColorScheme * highlight LineNr ctermbg=none
+"   autocmd ColorScheme * highlight Folded ctermbg=none
+"   autocmd ColorScheme * highlight EndOfBuffer ctermbg=none
+"   colorscheme iceberg
+" augroup END
+" autocmd set_color
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight NonText ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
