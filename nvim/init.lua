@@ -1,41 +1,33 @@
 -- Common ======================================================================
-vim.o.clipboard = "unnamedplus"
-vim.o.whichwrap = "b,s,[,],<,>"
-vim.o.backspace = "indent,eol,start"
-vim.o.ambiwidth = "single"
-vim.o.wildmenu = true
-vim.o.cmdheight = 1
-vim.o.laststatus = 2
-vim.o.showcmd = true
-vim.o.hlsearch = true
-vim.o.hidden = true
-vim.o.backup = true
-vim.o.backupdir = os.getenv("HOME") .. '/.vim/backup'
--- vim.o.winblend = 20
--- vim.o.pumblend = 20
--- vim.o.termguicolors = true
-vim.o.shiftwidth = 4
-vim.o.tabstop = 4
-vim.o.expandtab = true
-vim.o.autoindent = true
-vim.o.smartindent = true
-vim.o.scroll = 2
-vim.o.number = true
-vim.o.wrap = false
-vim.o.nrformats = "bin,hex"
-vim.o.swapfile = false
--- vim.opt ---------------------------------------------------------------------
+vim.opt.clipboard = "unnamedplus"
+vim.opt.whichwrap = "b,s,[,],<,>"
+vim.opt.backspace = "indent,eol,start"
+vim.opt.ambiwidth = "single"
+vim.opt.wildmenu = true
+vim.opt.cmdheight = 1
+vim.opt.laststatus = 2
+vim.opt.showcmd = true
+vim.opt.hlsearch = true
+vim.opt.hidden = true
+vim.opt.backup = true
+vim.opt.backupdir = os.getenv("HOME") .. '/.vim/backup'
+-- vim.opt.winblend = 20
+-- vim.opt.pumblend = 20
+-- vim.opt.termguicolors = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+-- vim.opt.scroll = 2
+vim.opt.number = true
+vim.opt.wrap = false
+vim.opt.nrformats = "bin,hex"
+vim.opt.swapfile = false
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
--- vim.cmd ---------------------------------------------------------------------
+
 vim.cmd 'autocmd TermOpen * startinsert'
--- vim.cmd 'colorscheme default'
-vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none'
-vim.cmd 'autocmd ColorScheme * highlight NonText ctermbg=none'
-vim.cmd 'autocmd ColorScheme * highlight LineNr ctermbg=none'
-vim.cmd 'autocmd ColorScheme * highlight Folded ctermbg=none'
-vim.cmd 'autocmd ColorScheme * highlight EndOfBuffer ctermbg=none '
-vim.cmd 'colorscheme iceberg'
 
 -- Key map =====================================================================
 vim.g.mapleader = " "
@@ -60,11 +52,15 @@ vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
 -- 'tpope/vim-fugitive' --------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>G', ':<C-u>Git<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git log --oneline<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git commit<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>Git push<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>G', :<C-u>vert Gdiffsplit !~1<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>GG', ':<C-u>Git<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>GC', ':<C-u>Git commit<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>GP', ':<C-u>Git push<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>GL', ':<C-u>Git log --oneline<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1', {noremap = true})
+-- とりあえず下記３パターンのDIFFがほしい
+-- * 編集中のファイルの差分
+-- * N個前のコミット分との差分
+-- * ブランチ間の差分
 
 -- packer ======================================================================
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration
@@ -88,6 +84,15 @@ require("packer").startup(function()
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/vim-vsnip"
 end)
+
+-- colorscheme -----------------------------------------------------------------
+vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight NonText ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight LineNr ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight Folded ctermbg=none'
+vim.cmd 'autocmd ColorScheme * highlight EndOfBuffer ctermbg=none '
+-- vim.cmd 'colorscheme default'
+vim.cmd 'colorscheme iceberg'
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
 require("nvim-lsp-installer").on_server_ready(function(server)
