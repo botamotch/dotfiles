@@ -28,6 +28,15 @@ set hidden
 set backup
 set backupdir=~/.vim/backup
 set noswapfile
+if executable('fcitx5')
+  let g:fcitx_state = 1
+  augroup fcitx_savestate
+    autocmd!
+    autocmd InsertLeave * let g:fcitx_state = str2nr(system('fcitx5-remote'))
+    autocmd InsertLeave * call system('fcitx5-remote -c')
+    autocmd InsertEnter * call system(g:fcitx_state == 1 ? 'fcitx5-remote -c': 'fcitx5-remote -o')
+  augroup END
+endif
 
 " Dein =========================================================================
 if &compatible
@@ -100,15 +109,6 @@ function! RepeatTerm()
   :!tmux send-keys -t 0:0.0 C-p C-j
 endfunction
 
-" augroup set_color
-"   autocmd ColorScheme * highlight Normal ctermbg=none
-"   autocmd ColorScheme * highlight NonText ctermbg=none
-"   autocmd ColorScheme * highlight LineNr ctermbg=none
-"   autocmd ColorScheme * highlight Folded ctermbg=none
-"   autocmd ColorScheme * highlight EndOfBuffer ctermbg=none
-"   colorscheme iceberg
-" augroup END
-" autocmd set_color
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight NonText ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
