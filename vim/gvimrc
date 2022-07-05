@@ -1,11 +1,12 @@
 set ambiwidth=double
 " set guifont=Migu\ 1M\ 11
-set guifont=M+\ 1M\ medium\ 12
+" set guifont=M+\ 1M\ medium\ 12
+set guifont=M\ PLUS\ 1\ \Code\ Medium\ 12
 " set guifont=Noto\ Sans\ Mono\ CJK\ JP\ 12
 AirlineTheme papercolor
 colorscheme desert
 " colorscheme iceberg
-set lines=32
+set lines=40
 set columns=120
 " set columns=180
 " 左右・水平スクロールバーを非表示にする

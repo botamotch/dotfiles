@@ -3,14 +3,12 @@ local act = wezterm.action
 
 return {
   initial_cols = 100,
-  initial_rows = 36,
+  initial_rows = 40,
   font_size = 12.0,
-  -- color_scheme = "zenwritten_dark",
+  cell_width = 1.0,
+  line_height = 1.0,
   color_scheme = "iceberg-dark",
-  -- color_scheme = "Wryan",
-  -- font = wezterm.font("Noto Sans Mono CJK JP"),
-  font = wezterm.font("M+ 1m Medium"),
-  -- font = wezterm.font("Source Code Pro Medium"),
+  font = wezterm.font("M PLUS 1 Code Medium"),
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
   window_background_opacity = 0.95,
