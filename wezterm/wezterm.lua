@@ -16,8 +16,8 @@ return {
   }),
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
-  window_background_opacity = 0.91,
-  text_background_opacity = 0.91,
+  window_background_opacity = 0.85,
+  text_background_opacity = 0.85,
   -- window_background_image = "Pictures/IMG_2162.JPG",
   -- window_background_image_hsb = {
   --   brightness = 0.03,

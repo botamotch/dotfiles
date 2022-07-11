@@ -40,6 +40,32 @@ if executable('fcitx5')
 endif
 ]]
 
+-- packer ======================================================================
+-- You must run `:PackerSync` whenever you make changes to your plugin configuration
+require("packer").startup(function()
+  use 'wbthomason/packer.nvim'
+  use 'neovim/nvim-lspconfig'
+  use 'williamboman/nvim-lsp-installer'
+  use 'vim-airline/vim-airline'
+  use 'vim-airline/vim-airline-themes'
+  use 'junegunn/fzf.vim'
+  use 'tpope/vim-fugitive'
+  use 'airblade/vim-gitgutter'
+  use 'cocopon/iceberg.vim'
+  -- use 'Yggdroot/indentLine'
+  use 'obaland/vfiler.vim'
+  use 'obaland/vfiler-fzf'
+  use 'ibhagwan/fzf-lua'
+  -- use 'mfussenegger/nvim-dap'
+  -- nvim-cmp
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/vim-vsnip"
+end)
+
 -- Key map =====================================================================
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<leader><leader>', ':<C-u>cd %:h<CR>', {noremap = true})
@@ -57,11 +83,18 @@ vim.api.nvim_set_keymap('t', '<C-W>k', '<CMD>wincmd k<CR>', {silent=true})
 vim.api.nvim_set_keymap('t', '<C-W>h', '<CMD>wincmd h<CR>', {silent=true})
 vim.api.nvim_set_keymap('t', '<C-W>l', '<CMD>wincmd l<CR>', {silent=true})
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles?<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles?<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
+-- 'ibhagwan/fzf-lua' ----------------------------------------------------------
+opt = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>", opt)
+vim.api.nvim_set_keymap('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>", opt)
+vim.api.nvim_set_keymap('n', '<leader>p', "<cmd>lua require('fzf-lua').live_grep()<CR>", opt)
+vim.api.nvim_set_keymap('n', '<leader>h', "<cmd>lua require('fzf-lua').oldfiles()<CR>", opt)
+vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>", opt)
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.api.nvim_set_keymap('n', '<leader>GG', ':<C-u>Git<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>GC', ':<C-u>Git commit<CR>', {noremap = true})
@@ -72,29 +105,6 @@ vim.api.nvim_set_keymap('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1', {noremap
 -- * 編集中のファイルの差分
 -- * N個前のコミット分との差分
 -- * ブランチ間の差分
-
--- packer ======================================================================
--- You must run `:PackerSync` whenever you make changes to your plugin configuration
-require("packer").startup(function()
-  use 'wbthomason/packer.nvim'
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
-  use 'junegunn/fzf.vim'
-  use 'tpope/vim-fugitive'
-  use 'airblade/vim-gitgutter'
-  use 'cocopon/iceberg.vim'
-  use 'Yggdroot/indentLine'
-  -- use 'ibhagwan/fzf-lua'
-  -- nvim-cmp
-  use "hrsh7th/nvim-cmp"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-cmdline"
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/vim-vsnip"
-end)
 
 -- colorscheme -----------------------------------------------------------------
 vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none guibg=none'
