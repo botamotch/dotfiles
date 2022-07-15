@@ -27,8 +27,8 @@ vim.opt.swapfile = false
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 
-vim.cmd 'autocmd TermOpen * startinsert'
 vim.cmd [[
+autocmd TermOpen * startinsert
 if executable('fcitx5')
   let g:fcitx_state = 1
   augroup fcitx_savestate
@@ -38,6 +38,16 @@ if executable('fcitx5')
     autocmd InsertEnter * call system(g:fcitx_state == 1 ? 'fcitx5-remote -c': 'fcitx5-remote -o')
   augroup END
 endif
+
+function! s:init_fern() abort
+  set nonumber
+  nmap <buffer> <C-h> <Plug>(fern-action-hidden:toggle)
+endfunction
+
+augroup fern-custom
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
 ]]
 
 -- packer ======================================================================
@@ -48,15 +58,13 @@ require("packer").startup(function()
   use 'williamboman/nvim-lsp-installer'
   use 'vim-airline/vim-airline'
   use 'vim-airline/vim-airline-themes'
-  use 'junegunn/fzf.vim'
+  -- use 'junegunn/fzf.vim'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
   use 'cocopon/iceberg.vim'
   -- use 'Yggdroot/indentLine'
-  use 'obaland/vfiler.vim'
-  use 'obaland/vfiler-fzf'
   use 'ibhagwan/fzf-lua'
-  -- use 'mfussenegger/nvim-dap'
+  use 'lambdalisue/fern.vim'
   -- nvim-cmp
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-path"
@@ -105,6 +113,8 @@ vim.api.nvim_set_keymap('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1', {noremap
 -- * 編集中のファイルの差分
 -- * N個前のコミット分との差分
 -- * ブランチ間の差分
+-- 'lambdalisue/fern.vim' ------------------------------------------------------
+vim.api.nvim_set_keymap('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>', opt)
 
 -- colorscheme -----------------------------------------------------------------
 vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none guibg=none'
@@ -215,27 +225,30 @@ vim.cmd 'highlight GitGutterDeleteLine       ctermbg=1'
 -- vim.cmd 'highlight GitGutterChangeDeleteLine ctermbg='
 
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
-vim.cmd "let g:fzf_preview_window = ['right:70%', 'ctrl-/']"
+-- vim.cmd "let g:fzf_preview_window = ['right:70%', 'ctrl-/']"
+
+-- 'lambdalisue/fern.vim' ------------------------------------------------------
+-- vim.cmd 'let g:fern#default_hidden=1'
 
 -- vim-lsp =====================================================================
-local config = {
-  virtual_text = false,
-  update_in_insert = true,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = true,
-    style = "minimal",
-    border = "none",
-    source = "always",
-    header = "",
-    prefix = "",
-    separator = true,
-  },
-}
+-- local config = {
+--   virtual_text = false,
+--   update_in_insert = true,
+--   underline = true,
+--   severity_sort = true,
+--   float = {
+--     focusable = true,
+--     style = "minimal",
+--     border = "none",
+--     source = "always",
+--     header = "",
+--     prefix = "",
+--     separator = true,
+--   },
+-- }
 -- vim.diagnostic.config(config)
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, config
+    vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
 )
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover, { separator = true }
