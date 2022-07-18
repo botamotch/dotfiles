@@ -27,8 +27,12 @@ vim.opt.swapfile = false
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  pattern = '*',
+  command = 'startinsert',
+})
+-- vim.cmd 'autocmd TermOpen * startinsert'
 vim.cmd [[
-autocmd TermOpen * startinsert
 if executable('fcitx5')
   let g:fcitx_state = 1
   augroup fcitx_savestate
@@ -76,45 +80,39 @@ end)
 
 -- Key map =====================================================================
 vim.g.mapleader = " "
-vim.api.nvim_set_keymap('n', '<leader><leader>', ':<C-u>cd %:h<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>w', ':<C-u>w<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>q', ':<C-u>bd<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-l>', ':<C-u>bnext<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-h>', ':<C-u>bprevious<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true})
-vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true})
-vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {silent=true})
-vim.api.nvim_set_keymap('n', '<ESC><ESC>', ':nohlsearch<CR>', {silent=true})
-vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', {silent=true})
-vim.api.nvim_set_keymap('t', '<C-W>j', '<CMD>wincmd j<CR>', {silent=true})
-vim.api.nvim_set_keymap('t', '<C-W>k', '<CMD>wincmd k<CR>', {silent=true})
-vim.api.nvim_set_keymap('t', '<C-W>h', '<CMD>wincmd h<CR>', {silent=true})
-vim.api.nvim_set_keymap('t', '<C-W>l', '<CMD>wincmd l<CR>', {silent=true})
--- 'junegunn/fzf.vim' ----------------------------------------------------------
--- vim.api.nvim_set_keymap('n', '<leader>e', ':<C-u>Files<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>g', ':<C-u>GFiles?<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>p', ':<C-u>Rg<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>h', ':<C-u>History<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>Buffer<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader><leader>', ':<C-u>cd %:h<CR>', {noremap = true})
+vim.keymap.set('n', '<leader><leader>', ':<C-u>cd %:h<CR>')
+vim.keymap.set('n', '<leader>w', ':<C-u>w<CR>')
+vim.keymap.set('n', '<leader>q', ':<C-u>bd<CR>')
+vim.keymap.set('n', '<C-l>', ':<C-u>bnext<CR>')
+vim.keymap.set('n', '<C-h>', ':<C-u>bprevious<CR>')
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('i', 'jj', '<ESC>')
+vim.keymap.set('n', '<ESC><ESC>', ':nohlsearch<CR>')
+vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
+vim.keymap.set('t', '<C-W>j', '<CMD>wincmd j<CR>')
+vim.keymap.set('t', '<C-W>k', '<CMD>wincmd k<CR>')
+vim.keymap.set('t', '<C-W>h', '<CMD>wincmd h<CR>')
+vim.keymap.set('t', '<C-W>l', '<CMD>wincmd l<CR>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
-opt = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>", opt)
-vim.api.nvim_set_keymap('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>", opt)
-vim.api.nvim_set_keymap('n', '<leader>p', "<cmd>lua require('fzf-lua').live_grep()<CR>", opt)
-vim.api.nvim_set_keymap('n', '<leader>h', "<cmd>lua require('fzf-lua').oldfiles()<CR>", opt)
-vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>", opt)
+vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>")
+vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
+vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').live_grep()<CR>")
+vim.keymap.set('n', '<leader>h', "<cmd>lua require('fzf-lua').oldfiles()<CR>")
+vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
 -- 'tpope/vim-fugitive' --------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>GG', ':<C-u>Git<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>GC', ':<C-u>Git commit<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>GP', ':<C-u>Git push<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>GL', ':<C-u>Git log --oneline<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1', {noremap = true})
+vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
+vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
+vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
+vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
+vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1')
 -- とりあえず下記３パターンのDIFFがほしい
 -- * 編集中のファイルの差分
 -- * N個前のコミット分との差分
 -- * ブランチ間の差分
 -- 'lambdalisue/fern.vim' ------------------------------------------------------
-vim.api.nvim_set_keymap('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>', opt)
+vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
 
 -- colorscheme -----------------------------------------------------------------
 vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none guibg=none'
@@ -207,10 +205,11 @@ vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
 -- vim.cmd 'let g:airline_theme = "luna"'
-vim.cmd 'let g:airline_theme = "iceberg"'
+-- vim.cmd 'let g:airline_theme = "iceberg"'
 -- vim.cmd 'let g:airline_theme = "raven"'
 -- vim.cmd 'let g:airline_theme = "minimalist"'
 -- vim.cmd 'let g:airline_theme = "papercolor"'
+vim.g.airline_theme = 'iceberg'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
 vim.cmd 'let g:gitgutter_sign_added = "+"'
@@ -219,9 +218,9 @@ vim.cmd 'let g:gitgutter_sign_removed = "-"'
 vim.cmd 'highlight GitGutterAdd    guifg=#009900 ctermfg=2'
 vim.cmd 'highlight GitGutterChange guifg=#bbbb00 ctermfg=3'
 vim.cmd 'highlight GitGutterDelete guifg=#ff2222 ctermfg=1'
-vim.cmd 'highlight GitGutterAddLine          ctermbg=2'
-vim.cmd 'highlight GitGutterChangeLine       ctermbg=3'
-vim.cmd 'highlight GitGutterDeleteLine       ctermbg=1'
+vim.cmd 'highlight GitGutterAddLine    guifg=#009900 ctermbg=2'
+vim.cmd 'highlight GitGutterChangeLine guifg=#bbbb00 ctermbg=3'
+vim.cmd 'highlight GitGutterDeleteLine guifg=#ff2222 ctermbg=1'
 -- vim.cmd 'highlight GitGutterChangeDeleteLine ctermbg='
 
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
