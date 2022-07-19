@@ -11,8 +11,8 @@ vim.opt.hlsearch = true
 vim.opt.hidden = true
 vim.opt.backup = true
 vim.opt.backupdir = os.getenv("HOME") .. '/.vim/backup'
-vim.opt.winblend = 20
-vim.opt.pumblend = 20
+vim.opt.winblend = 5
+vim.opt.pumblend = 5
 vim.opt.termguicolors = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
@@ -42,17 +42,28 @@ if executable('fcitx5')
     autocmd InsertEnter * call system(g:fcitx_state == 1 ? 'fcitx5-remote -c': 'fcitx5-remote -o')
   augroup END
 endif
-
-function! s:init_fern() abort
-  set nonumber
-  nmap <buffer> <C-h> <Plug>(fern-action-hidden:toggle)
-endfunction
-
-augroup fern-custom
-  autocmd! *
-  autocmd FileType fern call s:init_fern()
-augroup END
 ]]
+-- function! s:init_fern() abort
+--   set nonumber
+--   nmap <buffer> <C-h> <Plug>(fern-action-hidden:toggle)
+-- endfunction
+
+-- augroup fern-custom
+--   autocmd! *
+--   autocmd FileType fern call s:init_fern()
+-- augroup END
+-- ]]
+
+local init_fern = function()
+  vim.opt.number = false
+  vim.api.nvim_buf_set_keymap(0, 'n', '<C-h>', '<Plug>(fern-action-hidden:toggle)', {})
+end
+local fern_id = vim.api.nvim_create_augroup('fern-custom', {})
+vim.api.nvim_create_autocmd({'FileType'}, {
+  pattern = 'fern',
+  callback = init_fern,
+  group = fern_id,
+})
 
 -- packer ======================================================================
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration
