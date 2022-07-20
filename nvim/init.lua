@@ -27,10 +27,19 @@ vim.opt.swapfile = false
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 
+-- vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+--   pattern = {"*.ts", "*.vue"},
+--   command = 'set shiftwidth=2',
+-- })
+vim.api.nvim_create_autocmd({'FileType'}, {
+  pattern = {"typescript", "vue"},
+  command = 'set shiftwidth=2',
+})
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = '*',
   command = 'startinsert',
 })
+vim.cmd 'autocmd FileType vue syntax sync fromstart'
 -- vim.cmd 'autocmd TermOpen * startinsert'
 vim.cmd [[
 if executable('fcitx5')
@@ -107,11 +116,18 @@ vim.keymap.set('t', '<C-W>k', '<CMD>wincmd k<CR>')
 vim.keymap.set('t', '<C-W>h', '<CMD>wincmd h<CR>')
 vim.keymap.set('t', '<C-W>l', '<CMD>wincmd l<CR>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
+-- TODO :help fzf-lua でめちゃめちゃ役に立ちそうなコマンドを見つけたので調べておくこと
 vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>")
 vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
+vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').git_branches()<CR>")
 vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').live_grep()<CR>")
-vim.keymap.set('n', '<leader>h', "<cmd>lua require('fzf-lua').oldfiles()<CR>")
-vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
+-- vim.keymap.set('n', '<leader>h', "<cmd>lua require('fzf-lua').oldfiles()<CR>")
+-- vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
+vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
+-- vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
+-- vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_decralations()<CR>")
+vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>")
+vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
 vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
