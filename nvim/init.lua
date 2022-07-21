@@ -89,6 +89,7 @@ require("packer").startup(function()
   -- use 'Yggdroot/indentLine'
   use 'ibhagwan/fzf-lua'
   use 'lambdalisue/fern.vim'
+  use 'rapan931/lasterisk.nvim'
   -- nvim-cmp
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-path"
@@ -140,6 +141,10 @@ vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1')
 -- * ブランチ間の差分
 -- 'lambdalisue/fern.vim' ------------------------------------------------------
 vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
+-- 'rapan931/lasterisk.nvim' ---------------------------------------------------
+vim.keymap.set('n', '*',  function() require("lasterisk").search() end)
+vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
+vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 
 -- colorscheme -----------------------------------------------------------------
 vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none guibg=none'
