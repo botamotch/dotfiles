@@ -103,7 +103,7 @@ return {
       { key = "K", mods = "LEADER", action = act.AdjustPaneSize{"Up", 5} },
       { key = "J", mods = "LEADER", action = act.AdjustPaneSize{"Down", 5} },
 
-      { key = "c", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+      -- { key = "c", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
       { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
   },
 }
