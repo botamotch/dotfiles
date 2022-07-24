@@ -11,6 +11,7 @@ return {
   -- font = wezterm.font("M PLUS 1 Code Medium"),
   font = wezterm.font_with_fallback({
     "M PLUS 1 Code Medium",
+    "M PLUS 1 Code Nerd Font",
     "M PLUS 1 Medium",
     "Noto Sans Mono CJK JP",
     "Noto Color Emoji",
