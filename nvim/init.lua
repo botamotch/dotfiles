@@ -155,6 +155,12 @@ vim.cmd 'autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none'
 -- vim.cmd 'colorscheme default'
 vim.cmd 'colorscheme iceberg'
 
+vim.cmd [[
+highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=1 gui=underline guifg=1 guibg=1
+highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=1 gui=underline guifg=1 guibg=1
+highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=1 gui=underline guifg=1 guibg=1
+]]
+
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
 require("nvim-lsp-installer").on_server_ready(function(server)
   local opt = {
@@ -171,6 +177,21 @@ require("nvim-lsp-installer").on_server_ready(function(server)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+
+      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+      vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+      vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+          callback = vim.lsp.buf.document_highlight,
+          buffer = bufnr,
+          group = "lsp_document_highlight",
+          desc = "Document Highlight",
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+          callback = vim.lsp.buf.clear_references,
+          buffer = bufnr,
+          group = "lsp_document_highlight",
+          desc = "Clear All the References",
+      })
     end,
     capabilities = require('cmp_nvim_lsp').update_capabilities(
       vim.lsp.protocol.make_client_capabilities()
