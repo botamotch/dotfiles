@@ -26,6 +26,7 @@ vim.opt.nrformats = "bin,hex"
 vim.opt.swapfile = false
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
+vim.opt.updatetime = 500
 
 -- vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
 --   pattern = {"*.ts", "*.vue"},
@@ -86,10 +87,12 @@ require("packer").startup(function()
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
   use 'cocopon/iceberg.vim'
+  -- use 'nanotech/jellybeans.vim'
   -- use 'Yggdroot/indentLine'
   use 'ibhagwan/fzf-lua'
   use 'lambdalisue/fern.vim'
   use 'rapan931/lasterisk.nvim'
+  use 'nvim-treesitter/nvim-treesitter'
   -- nvim-cmp
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-path"
@@ -147,16 +150,15 @@ vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = fa
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 
 -- colorscheme -----------------------------------------------------------------
-vim.cmd 'autocmd ColorScheme * highlight Normal ctermbg=none guibg=none'
-vim.cmd 'autocmd ColorScheme * highlight NonText ctermbg=none guibg=none'
-vim.cmd 'autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none'
-vim.cmd 'autocmd ColorScheme * highlight Folded ctermbg=none guibg=none'
-vim.cmd 'autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none'
--- vim.cmd 'colorscheme default'
-vim.cmd 'colorscheme iceberg'
-
-vim.opt.updatetime = 500
 vim.cmd [[
+autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
+autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
+autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
+autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
+" colorscheme default
+colorscheme iceberg
+
 highlight LspReferenceText  cterm=underline ctermbg=8 gui=underline guibg=#104040
 highlight LspReferenceRead  cterm=underline ctermbg=8 gui=underline guibg=#104040
 highlight LspReferenceWrite cterm=underline ctermbg=8 gui=underline guibg=#104040
@@ -256,6 +258,17 @@ cmp.setup.cmdline(":", {
 vim.cmd 'let g:airline_symbols_ascii = 1'
 vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
 vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
+
+-- 'nvim-treesitter/nvim-treesitter' -------------------------------------------
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = false,
+  },
+  ensure_installed = 'all',
+}
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
 -- vim.cmd 'let g:airline_theme = "luna"'
