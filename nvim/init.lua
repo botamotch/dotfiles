@@ -88,6 +88,7 @@ require("packer").startup(function()
   use 'airblade/vim-gitgutter'
   use 'cocopon/iceberg.vim'
   -- use 'nanotech/jellybeans.vim'
+  use 'sainnhe/everforest'
   -- use 'Yggdroot/indentLine'
   use 'ibhagwan/fzf-lua'
   use 'lambdalisue/fern.vim'
@@ -156,8 +157,11 @@ autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
 autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
 autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
+let g:everforest_enable_italic = 0
+let g:everforest_disable_italic_comment = 1
 " colorscheme default
-colorscheme iceberg
+" colorscheme iceberg
+colorscheme everforest
 
 highlight LspReferenceText  cterm=underline ctermbg=8 gui=underline guibg=#104040
 highlight LspReferenceRead  cterm=underline ctermbg=8 gui=underline guibg=#104040
@@ -276,7 +280,8 @@ require'nvim-treesitter.configs'.setup {
 -- vim.cmd 'let g:airline_theme = "raven"'
 -- vim.cmd 'let g:airline_theme = "minimalist"'
 -- vim.cmd 'let g:airline_theme = "papercolor"'
-vim.g.airline_theme = 'iceberg'
+-- vim.g.airline_theme = 'iceberg'
+vim.g.airline_theme = 'everforest'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
 vim.cmd 'let g:gitgutter_sign_added = "+"'
