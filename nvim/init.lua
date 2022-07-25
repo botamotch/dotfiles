@@ -155,10 +155,11 @@ vim.cmd 'autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none'
 -- vim.cmd 'colorscheme default'
 vim.cmd 'colorscheme iceberg'
 
+vim.opt.updatetime = 500
 vim.cmd [[
-highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=1 gui=underline guifg=1 guibg=1
-highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=1 gui=underline guifg=1 guibg=1
-highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=1 gui=underline guifg=1 guibg=1
+highlight LspReferenceText  cterm=underline ctermbg=8 gui=underline guibg=#104040
+highlight LspReferenceRead  cterm=underline ctermbg=8 gui=underline guibg=#104040
+highlight LspReferenceWrite cterm=underline ctermbg=8 gui=underline guibg=#104040
 ]]
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
