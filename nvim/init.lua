@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = '*',
   command = 'startinsert',
 })
-vim.cmd 'autocmd FileType vue syntax sync fromstart'
+-- vim.cmd 'autocmd FileType vue syntax sync fromstart'
 -- vim.cmd 'autocmd TermOpen * startinsert'
 vim.cmd [[
 if executable('fcitx5')
@@ -86,9 +86,19 @@ require("packer").startup(function()
   -- use 'junegunn/fzf.vim'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
-  use 'cocopon/iceberg.vim'
-  -- use 'nanotech/jellybeans.vim'
-  use 'sainnhe/everforest'
+
+  -- colorscheme
+  use {
+    'cocopon/iceberg.vim',
+    -- 'nanotech/jellybeans.vim',
+    'sainnhe/everforest',
+    'rebelot/kanagawa.nvim',
+    'ellisonleao/gruvbox.nvim',
+    'folke/tokyonight.nvim',
+    'tiagovla/tokyodark.nvim',
+    'sainnhe/sonokai',
+  }
+
   -- use 'Yggdroot/indentLine'
   use 'ibhagwan/fzf-lua'
   use 'lambdalisue/fern.vim'
@@ -139,6 +149,9 @@ vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
 vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
 vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
 vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1')
+-- git diff           -- git add する前に変更点を見る
+-- git diff --cached  -- git add した後に変更点を見る
+-- git diff HEAD^     -- 今回コミットした変更点を見る
 -- とりあえず下記３パターンのDIFFがほしい
 -- * 編集中のファイルの差分
 -- * N個前のコミット分との差分
@@ -151,21 +164,42 @@ vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = fa
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 
 -- colorscheme -----------------------------------------------------------------
+require('kanagawa').setup({
+    commentStyle = { italic = false },
+    keywordStyle = { italic = false },
+    variablebuiltinStyle = { italic = false },
+})
+require("gruvbox").setup({
+  italic = false,
+})
+vim.g.tokyonight_italic_comments = false
+vim.g.tokyonight_italic_keywords = false
+vim.g.tokyonight_italic_functions = false
+vim.g.tokyonight_italic_variables = false
+vim.g.tokyodark_enable_italic_comment = false
+vim.g.tokyodark_enable_italic = false
+vim.g.sonokai_enable_italic = 0
+vim.g.sonokai_disable_italic_comment = 1
+vim.g.everforest_enable_italic = 0
+vim.g.everforest_disable_italic_comment = 1
+
 vim.cmd [[
 autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
 autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
 autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
 autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
-let g:everforest_enable_italic = 0
-let g:everforest_disable_italic_comment = 1
-" colorscheme default
 " colorscheme iceberg
 colorscheme everforest
+" colorscheme kanagawa
+" colorscheme gruvbox
+" colorscheme tokyonight
+" colorscheme tokyodark
+" colorscheme sonokai
 
-highlight LspReferenceText  cterm=underline ctermbg=8 gui=underline guibg=#104040
-highlight LspReferenceRead  cterm=underline ctermbg=8 gui=underline guibg=#104040
-highlight LspReferenceWrite cterm=underline ctermbg=8 gui=underline guibg=#104040
+highlight LspReferenceText  ctermbg=8 guibg=#206050
+highlight LspReferenceRead  ctermbg=8 guibg=#206050
+highlight LspReferenceWrite ctermbg=8 guibg=#206050
 ]]
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
@@ -185,20 +219,13 @@ require("nvim-lsp-installer").on_server_ready(function(server)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
-      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-      vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
-      vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
-          callback = vim.lsp.buf.document_highlight,
-          buffer = bufnr,
-          group = "lsp_document_highlight",
-          desc = "Document Highlight",
-      })
-      vim.api.nvim_create_autocmd("CursorMoved", {
-          callback = vim.lsp.buf.clear_references,
-          buffer = bufnr,
-          group = "lsp_document_highlight",
-          desc = "Clear All the References",
-      })
+      vim.cmd [[
+        augroup lsp_document_highlight
+          autocmd! * <buffer>
+          autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+          autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+      ]]
     end,
     capabilities = require('cmp_nvim_lsp').update_capabilities(
       vim.lsp.protocol.make_client_capabilities()
