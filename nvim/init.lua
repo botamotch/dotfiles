@@ -28,14 +28,14 @@ vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 vim.opt.updatetime = 500
 
--- vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
---   pattern = {"*.ts", "*.vue"},
---   command = 'set shiftwidth=2',
--- })
-vim.api.nvim_create_autocmd({'FileType'}, {
-  pattern = {"typescript", "vue"},
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = {"*.ts", "*.vue", "*.lua"},
   command = 'set shiftwidth=2',
 })
+-- vim.api.nvim_create_autocmd({'FileType'}, {
+--   pattern = {"typescript", "vue"},
+--   command = 'set shiftwidth=2',
+-- })
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = '*',
   command = 'startinsert',
@@ -81,6 +81,7 @@ require("packer").startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
+  -- use 'williamboman/mason.nvim'
   use 'vim-airline/vim-airline'
   use 'vim-airline/vim-airline-themes'
   -- use 'junegunn/fzf.vim'
@@ -89,14 +90,14 @@ require("packer").startup(function()
 
   -- colorscheme
   use {
-    'cocopon/iceberg.vim',
+    -- 'cocopon/iceberg.vim',
     -- 'nanotech/jellybeans.vim',
     'sainnhe/everforest',
-    'rebelot/kanagawa.nvim',
-    'ellisonleao/gruvbox.nvim',
-    'folke/tokyonight.nvim',
-    'tiagovla/tokyodark.nvim',
-    'sainnhe/sonokai',
+    -- 'rebelot/kanagawa.nvim',
+    -- 'ellisonleao/gruvbox.nvim',
+    -- 'folke/tokyonight.nvim',
+    -- 'tiagovla/tokyodark.nvim',
+    -- 'sainnhe/sonokai',
   }
 
   -- use 'Yggdroot/indentLine'
@@ -105,11 +106,11 @@ require("packer").startup(function()
   use 'rapan931/lasterisk.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   -- nvim-cmp
-  use "hrsh7th/nvim-cmp"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/nvim-cmp"
   use "hrsh7th/vim-vsnip"
 end)
 
@@ -131,18 +132,17 @@ vim.keymap.set('t', '<C-W>k', '<CMD>wincmd k<CR>')
 vim.keymap.set('t', '<C-W>h', '<CMD>wincmd h<CR>')
 vim.keymap.set('t', '<C-W>l', '<CMD>wincmd l<CR>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
--- TODO :help fzf-lua でめちゃめちゃ役に立ちそうなコマンドを見つけたので調べておくこと
 vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>")
 vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
 vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').git_branches()<CR>")
-vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').live_grep()<CR>")
--- vim.keymap.set('n', '<leader>h', "<cmd>lua require('fzf-lua').oldfiles()<CR>")
--- vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
-vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
--- vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
--- vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_decralations()<CR>")
-vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>")
-vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
+vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').grep()<CR>")
+
+vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
+vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
+vim.keymap.set('n', '<leader>D', "<cmd>lua require('fzf-lua').lsp_decralations()<CR>")
+vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>")
+vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
+vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
 vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
@@ -164,22 +164,6 @@ vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = fa
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 
 -- colorscheme -----------------------------------------------------------------
-require('kanagawa').setup({
-    commentStyle = { italic = false },
-    keywordStyle = { italic = false },
-    variablebuiltinStyle = { italic = false },
-})
-require("gruvbox").setup({
-  italic = false,
-})
-vim.g.tokyonight_italic_comments = false
-vim.g.tokyonight_italic_keywords = false
-vim.g.tokyonight_italic_functions = false
-vim.g.tokyonight_italic_variables = false
-vim.g.tokyodark_enable_italic_comment = false
-vim.g.tokyodark_enable_italic = false
-vim.g.sonokai_enable_italic = 0
-vim.g.sonokai_disable_italic_comment = 1
 vim.g.everforest_enable_italic = 0
 vim.g.everforest_disable_italic_comment = 1
 
@@ -189,13 +173,8 @@ autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
 autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
 autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
-" colorscheme iceberg
+
 colorscheme everforest
-" colorscheme kanagawa
-" colorscheme gruvbox
-" colorscheme tokyonight
-" colorscheme tokyodark
-" colorscheme sonokai
 
 highlight LspReferenceText  ctermbg=8 guibg=#206050
 highlight LspReferenceRead  ctermbg=8 guibg=#206050
@@ -209,22 +188,25 @@ require("nvim-lsp-installer").on_server_ready(function(server)
       -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
       local opts = { noremap=true, silent=true }
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 
       vim.cmd [[
-        augroup lsp_document_highlight
-          autocmd! * <buffer>
-          autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-          autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
       ]]
     end,
     capabilities = require('cmp_nvim_lsp').update_capabilities(
@@ -242,40 +224,30 @@ cmp.setup({
       vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-  window = {
-    -- documentation = {
-    --   border = "none",
-    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    --   separator = false,
-    -- },
-    -- completion = {
-    --   border = "none",
-    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    --   separator = false,
-    -- },
-  },
   sources = {
     { name = "nvim_lsp" },
+    -- { name = "vsnip" },
     { name = "buffer" },
     { name = "path" },
-    { name = "cmdline" },
-    { name = "snippy" },
   },
   mapping = cmp.mapping.preset.insert({
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-l>"] = cmp.mapping.complete(),
-    -- ["<C-c>"] = cmp.mapping {
-    --   i = cmp.mapping.abort(),
-    --   c = cmp.mapping.close(),
-    -- },
-    ["<CR>"] = cmp.mapping.confirm { select = true },
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-l>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm { select = true },
   }),
   experimental = {
     ghost_text = true,
   },
+})
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
 })
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
@@ -302,12 +274,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
--- vim.cmd 'let g:airline_theme = "luna"'
--- vim.cmd 'let g:airline_theme = "iceberg"'
--- vim.cmd 'let g:airline_theme = "raven"'
--- vim.cmd 'let g:airline_theme = "minimalist"'
--- vim.cmd 'let g:airline_theme = "papercolor"'
--- vim.g.airline_theme = 'iceberg'
 vim.g.airline_theme = 'everforest'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
@@ -329,22 +295,6 @@ vim.cmd 'highlight GitGutterDeleteLine guifg=#ff2222 ctermbg=1'
 -- vim.cmd 'let g:fern#default_hidden=1'
 
 -- vim-lsp =====================================================================
--- local config = {
---   virtual_text = false,
---   update_in_insert = true,
---   underline = true,
---   severity_sort = true,
---   float = {
---     focusable = true,
---     style = "minimal",
---     border = "none",
---     source = "always",
---     header = "",
---     prefix = "",
---     separator = true,
---   },
--- }
--- vim.diagnostic.config(config)
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
 )

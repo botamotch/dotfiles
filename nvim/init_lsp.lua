@@ -5,11 +5,11 @@ require("packer").startup(function()
   use 'williamboman/mason.nvim'
 
   use "hrsh7th/nvim-cmp"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/vim-vsnip"
+  -- use "hrsh7th/cmp-path"
+  -- use "hrsh7th/cmp-buffer"
+  -- use "hrsh7th/cmp-cmdline"
 end)
 
 -- 1. LSP Sever management
@@ -19,6 +19,7 @@ require('mason-lspconfig').setup_handlers({ function(server)
     -- on_attach = function(client, bufnr)
     --   local opts = { noremap=true, silent=true }
     --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    --   vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
     -- end,
     capabilities = require('cmp_nvim_lsp').update_capabilities(
       vim.lsp.protocol.make_client_capabilities()
@@ -60,45 +61,37 @@ augroup END
 -- 3. completion (hrsh7th/nvim-cmp)
 local cmp = require("cmp")
 cmp.setup({
-  window = {
-    -- documentation = {
-    --   border = "none",
-    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    --   separator = false,
-    -- },
-    -- completion = {
-    --   border = "none",
-    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    --   separator = false,
-    -- },
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
   },
   sources = {
     { name = "nvim_lsp" },
-    { name = "buffer" },
-    { name = "path" },
-    { name = "cmdline" },
-    { name = "snippy" },
+    -- { name = "buffer" },
+    -- { name = "path" },
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-l>"] = cmp.mapping.complete(),
-    -- ["<C-c>"] = cmp.mapping {
-    --   i = cmp.mapping.abort(),
-    --   c = cmp.mapping.close(),
-    -- },
+    ['<C-l>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm { select = true },
   }),
   experimental = {
     ghost_text = true,
   },
 })
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "path" },
-    { name = "cmdline" },
-  },
-})
+-- cmp.setup.cmdline('/', {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = 'buffer' }
+--   }
+-- })
+-- cmp.setup.cmdline(":", {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = "path" },
+--     { name = "cmdline" },
+--   },
+-- })
