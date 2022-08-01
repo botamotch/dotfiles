@@ -29,6 +29,10 @@ vim.opt.formatoptions:append('mM')
 vim.opt.updatetime = 500
 
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = {"*.go"},
+  callback = function () vim.opt.expandtab = false end
+})
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   pattern = {"*.ts", "*.vue", "*.lua"},
   command = 'set shiftwidth=2',
 })
@@ -80,8 +84,8 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 require("packer").startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
-  -- use 'williamboman/mason.nvim'
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
   use 'vim-airline/vim-airline'
   use 'vim-airline/vim-airline-themes'
   -- use 'junegunn/fzf.vim'
@@ -182,7 +186,8 @@ highlight LspReferenceWrite ctermbg=8 guibg=#206050
 ]]
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
-require("nvim-lsp-installer").on_server_ready(function(server)
+require('mason').setup()
+require('mason-lspconfig').setup_handlers({ function(server)
   local opt = {
     on_attach = function(client, bufnr)
       -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -213,8 +218,8 @@ require("nvim-lsp-installer").on_server_ready(function(server)
       vim.lsp.protocol.make_client_capabilities()
     )
   }
-  server:setup(opt)
-end)
+  require('lspconfig')[server].setup(opt)
+end })
 
 -- 'hrsh7th/nvim-cmp' ----------------------------------------------------------
 local cmp = require("cmp")

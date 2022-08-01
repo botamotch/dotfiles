@@ -3,6 +3,7 @@ require("packer").startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
 
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"
@@ -13,9 +14,10 @@ require("packer").startup(function()
 end)
 
 -- 1. LSP Sever management
+require('mason').setup()
 require('mason-lspconfig').setup_handlers({ function(server)
-  local opts = {
-    -- Function executed when the LSP server startup
+  local opt = {
+    -- -- Function executed when the LSP server startup
     -- on_attach = function(client, bufnr)
     --   local opts = { noremap=true, silent=true }
     --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -25,7 +27,7 @@ require('mason-lspconfig').setup_handlers({ function(server)
       vim.lsp.protocol.make_client_capabilities()
     )
   }
-  require('lspconfig')[server].setup(opts)
+  require('lspconfig')[server].setup(opt)
 end })
 
 -- 2. build-in LSP function
@@ -48,6 +50,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 -- Reference highlight
 vim.cmd [[
+set updatetime=500
 highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
 highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
 highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#A00000 guibg=#104040
