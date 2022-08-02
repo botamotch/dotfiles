@@ -143,8 +143,9 @@ vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').grep()<CR>")
 
 vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
 vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
-vim.keymap.set('n', '<leader>D', "<cmd>lua require('fzf-lua').lsp_decralations()<CR>")
+vim.keymap.set('n', '<leader>D', "<cmd>lua require('fzf-lua').lsp_declarations()<CR>")
 vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>")
+vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
 -- 'tpope/vim-fugitive' --------------------------------------------------------
@@ -152,7 +153,7 @@ vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
 vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
 vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
 vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
-vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit !~1')
+vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
 -- git diff           -- git add する前に変更点を見る
 -- git diff --cached  -- git add した後に変更点を見る
 -- git diff HEAD^     -- 今回コミットした変更点を見る
@@ -199,8 +200,8 @@ require('mason-lspconfig').setup_handlers({ function(server)
       vim.api.nvim_buf_set_keymap(bufnr, "n", 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, "n", 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
