@@ -154,13 +154,13 @@ vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
 vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
 vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
 vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
--- git diff           -- git add する前に変更点を見る
--- git diff --cached  -- git add した後に変更点を見る
--- git diff HEAD^     -- 今回コミットした変更点を見る
--- とりあえず下記３パターンのDIFFがほしい
--- * 編集中のファイルの差分
--- * N個前のコミット分との差分
--- * ブランチ間の差分
+-- Gdiffsplit              -- git add する前に変更点を見る
+-- Gdiffsplit --cached     -- なんだっけ？？？
+-- Gdiffsplit HEAD         -- コミットする前に変更点を見る
+-- Gdiffsplit HEAD^        -- 前回コミットとの変更点を見る
+-- Gdiffsplit ORIG_HEAD    -- origin/HEADと同じ？？？
+-- Gdiffsplit origin/HEAD
+-- * ブランチ間の差分がほしい
 -- 'lambdalisue/fern.vim' ------------------------------------------------------
 vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
 -- 'rapan931/lasterisk.nvim' ---------------------------------------------------
