@@ -11,6 +11,7 @@ configuration {
 	show-icons: true;
 	kb-mode-next: "Control+o";
 	kb-mode-previous: "Control+i";
+    modi: "drun,window,combi";
 }
 @theme "/usr/share/rofi/themes/Arc-Dark.rasi"
 /* @theme "~/.config/rofi/themes/iceberg.rasi" */
