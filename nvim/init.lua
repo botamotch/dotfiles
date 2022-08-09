@@ -91,6 +91,9 @@ require("packer").startup(function()
   -- use 'junegunn/fzf.vim'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
+  use 'nvim-lualine/lualine.nvim'
+  use 'windwp/nvim-autopairs'
+  use 'glepnir/lspsaga.nvim'
 
   -- colorscheme
   use {
@@ -102,6 +105,8 @@ require("packer").startup(function()
     -- 'folke/tokyonight.nvim',
     -- 'tiagovla/tokyodark.nvim',
     -- 'sainnhe/sonokai',
+    use 'svrana/neosolarized.nvim',
+    use 'tjdevries/colorbuddy.nvim',
   }
 
   -- use 'Yggdroot/indentLine'
@@ -171,7 +176,9 @@ vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = fa
 -- colorscheme -----------------------------------------------------------------
 vim.g.everforest_enable_italic = 0
 vim.g.everforest_disable_italic_comment = 1
-
+require('neosolarized').setup({
+  comment_italics = false,
+})
 vim.cmd [[
 autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
 autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
@@ -179,7 +186,8 @@ autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
 autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
 autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
 
-colorscheme everforest
+colorscheme neosolarized
+" colorscheme everforest
 
 highlight LspReferenceText  ctermbg=8 guibg=#206050
 highlight LspReferenceRead  ctermbg=8 guibg=#206050
@@ -263,10 +271,16 @@ cmp.setup.cmdline(":", {
   },
 })
 
+-- 'windwp/nvim-autopairs'
+require("nvim-autopairs").setup()
+
 -- 'vim-airline/vim-airline' ---------------------------------------------------
 vim.cmd 'let g:airline_symbols_ascii = 1'
 vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
 vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
+
+-- 'nvim-lualine/lualine.nvim'
+-- require('lualine').setup()
 
 -- 'nvim-treesitter/nvim-treesitter' -------------------------------------------
 require'nvim-treesitter.configs'.setup {
@@ -280,7 +294,8 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
-vim.g.airline_theme = 'everforest'
+-- vim.g.airline_theme = 'everforest'
+vim.g.airline_theme = 'molokai'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
 vim.cmd 'let g:gitgutter_sign_added = "+"'
