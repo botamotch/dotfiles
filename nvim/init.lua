@@ -153,6 +153,10 @@ vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').lsp_implementation
 vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
+
+vim.keymap.set('n', 'g]', '<cmd>GitGutterNextHunk<CR>', opts)
+vim.keymap.set('n', 'g[', '<cmd>GitGutterPrevHunk<CR>', opts)
+vim.keymap.set('n', 'gp', '<cmd>GitGutterPreviewHunk<CR>', opts)
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
 vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
@@ -174,11 +178,9 @@ vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = fa
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 
 -- colorscheme -----------------------------------------------------------------
-vim.g.everforest_enable_italic = 0
-vim.g.everforest_disable_italic_comment = 1
-require('neosolarized').setup({
-  comment_italics = false,
-})
+-- vim.g.everforest_enable_italic = 0
+-- vim.g.everforest_disable_italic_comment = 1
+require('neosolarized').setup()
 vim.cmd [[
 autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
 autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
@@ -212,8 +214,16 @@ require('mason-lspconfig').setup_handlers({ function(server)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K",  "<cmd>Lspsaga hover_doc<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Lspsaga preview_definition<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "ga", "<cmd>Lspsaga code_action<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<Cmd>Lspsaga signature_help<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gn", "<cmd>Lspsaga rename<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 
       vim.cmd [[
       augroup lsp_document_highlight
@@ -295,7 +305,7 @@ require'nvim-treesitter.configs'.setup {
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
 -- vim.g.airline_theme = 'everforest'
-vim.g.airline_theme = 'molokai'
+vim.g.airline_theme = 'jellybeans'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
 vim.cmd 'let g:gitgutter_sign_added = "+"'
