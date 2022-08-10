@@ -27,6 +27,7 @@ vim.opt.swapfile = false
 vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 vim.opt.updatetime = 500
+vim.opt.signcolumn = 'yes'
 
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   pattern = {"*.go"},
@@ -86,8 +87,11 @@ require("packer").startup(function()
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
+  -- use 'vim-airline/vim-airline'
+  -- use 'vim-airline/vim-airline-themes'
+  -- using packer.nvim
+  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+  use 'crispgm/nvim-tabline'
   -- use 'junegunn/fzf.vim'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
@@ -131,6 +135,8 @@ vim.keymap.set('n', '<leader>w', ':<C-u>w<CR>')
 vim.keymap.set('n', '<leader>q', ':<C-u>bd<CR>')
 vim.keymap.set('n', '<C-l>', ':<C-u>bnext<CR>')
 vim.keymap.set('n', '<C-h>', ':<C-u>bprevious<CR>')
+vim.keymap.set('n', '<A-l>', ':<C-u>BufferLineMoveNext<CR>')
+vim.keymap.set('n', '<A-h>', ':<C-u>BufferLineMovePrev<CR>')
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('i', 'jj', '<ESC>')
@@ -285,12 +291,15 @@ cmp.setup.cmdline(":", {
 require("nvim-autopairs").setup()
 
 -- 'vim-airline/vim-airline' ---------------------------------------------------
-vim.cmd 'let g:airline_symbols_ascii = 1'
-vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
-vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
+-- vim.cmd 'let g:airline_symbols_ascii = 1'
+-- vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
+-- vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
 
--- 'nvim-lualine/lualine.nvim'
--- require('lualine').setup()
+require('lualine').setup({
+  options = { theme = 'iceberg_dark' }
+})
+-- require('tabline').setup({})
+require("bufferline").setup({})
 
 -- 'nvim-treesitter/nvim-treesitter' -------------------------------------------
 require'nvim-treesitter.configs'.setup {
