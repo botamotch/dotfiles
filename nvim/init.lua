@@ -93,8 +93,10 @@ require("packer").startup(function()
   use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
   use 'crispgm/nvim-tabline'
   -- use 'junegunn/fzf.vim'
-  use 'tpope/vim-fugitive'
-  use 'airblade/vim-gitgutter'
+  -- use 'tpope/vim-fugitive'
+  -- use 'airblade/vim-gitgutter'
+  use 'lewis6991/gitsigns.nvim'
+  use 'dinhhuy258/git.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'windwp/nvim-autopairs'
   use 'glepnir/lspsaga.nvim'
@@ -133,8 +135,8 @@ vim.g.mapleader = " "
 vim.keymap.set('n', '<leader><leader>', ':<C-u>cd %:h<CR>')
 vim.keymap.set('n', '<leader>w', ':<C-u>w<CR>')
 vim.keymap.set('n', '<leader>q', ':<C-u>bd<CR>')
-vim.keymap.set('n', '<C-l>', ':<C-u>bnext<CR>')
-vim.keymap.set('n', '<C-h>', ':<C-u>bprevious<CR>')
+vim.keymap.set('n', '<C-l>', ':<C-u>BufferLineCycleNext<CR>')
+vim.keymap.set('n', '<C-h>', ':<C-u>BufferLineCyclePrev<CR>')
 vim.keymap.set('n', '<A-l>', ':<C-u>BufferLineMoveNext<CR>')
 vim.keymap.set('n', '<A-h>', ':<C-u>BufferLineMovePrev<CR>')
 vim.keymap.set('n', 'j', 'gj')
@@ -164,11 +166,11 @@ vim.keymap.set('n', 'g]', '<cmd>GitGutterNextHunk<CR>', opts)
 vim.keymap.set('n', 'g[', '<cmd>GitGutterPrevHunk<CR>', opts)
 vim.keymap.set('n', 'gp', '<cmd>GitGutterPreviewHunk<CR>', opts)
 -- 'tpope/vim-fugitive' --------------------------------------------------------
-vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
-vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
-vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
-vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
-vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
+-- vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
+-- vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
+-- vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
+-- vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
+-- vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
 -- Gdiffsplit              -- git add する前に変更点を見る
 -- Gdiffsplit --cached     -- なんだっけ？？？
 -- Gdiffsplit HEAD         -- コミットする前に変更点を見る
@@ -194,6 +196,7 @@ autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
 autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
 autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
 
+" colorscheme iceberg
 colorscheme neosolarized
 " colorscheme everforest
 
@@ -296,10 +299,30 @@ require("nvim-autopairs").setup()
 -- vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
 
 require('lualine').setup({
-  options = { theme = 'iceberg_dark' }
+  options = {
+    -- theme = 'iceberg_dark',
+    theme = 'material',
+  }
 })
 -- require('tabline').setup({})
-require("bufferline").setup({})
+require("bufferline").setup({
+  options = {
+    diagnostics = 'nvim_lsp',
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    separator_style = { '|', ' ' },
+    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+      local icon = level:match("error") and " " or " "
+      return " " .. icon .. count
+    end,
+  },
+  highlights = {
+    buffer_selected = {
+      guifg = '#fdf6e3',
+      gui = "bold",
+    },
+  },
+})
 
 -- 'nvim-treesitter/nvim-treesitter' -------------------------------------------
 require'nvim-treesitter.configs'.setup {
@@ -314,19 +337,21 @@ require'nvim-treesitter.configs'.setup {
 
 -- 'vim-airline/vim-airline-themes' --------------------------------------------
 -- vim.g.airline_theme = 'everforest'
-vim.g.airline_theme = 'jellybeans'
+-- vim.g.airline_theme = 'jellybeans'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
-vim.cmd 'let g:gitgutter_sign_added = "+"'
-vim.cmd 'let g:gitgutter_sign_modified = "^"'
-vim.cmd 'let g:gitgutter_sign_removed = "-"'
-vim.cmd 'highlight GitGutterAdd    guifg=#009900 ctermfg=2'
-vim.cmd 'highlight GitGutterChange guifg=#bbbb00 ctermfg=3'
-vim.cmd 'highlight GitGutterDelete guifg=#ff2222 ctermfg=1'
-vim.cmd 'highlight GitGutterAddLine    guifg=#009900 ctermbg=2'
-vim.cmd 'highlight GitGutterChangeLine guifg=#bbbb00 ctermbg=3'
-vim.cmd 'highlight GitGutterDeleteLine guifg=#ff2222 ctermbg=1'
+-- vim.cmd 'let g:gitgutter_sign_added = "+"'
+-- vim.cmd 'let g:gitgutter_sign_modified = "^"'
+-- vim.cmd 'let g:gitgutter_sign_removed = "-"'
+-- vim.cmd 'highlight GitGutterAdd    guifg=#009900 ctermfg=2'
+-- vim.cmd 'highlight GitGutterChange guifg=#bbbb00 ctermfg=3'
+-- vim.cmd 'highlight GitGutterDelete guifg=#ff2222 ctermfg=1'
+-- vim.cmd 'highlight GitGutterAddLine    guifg=#009900 ctermbg=2'
+-- vim.cmd 'highlight GitGutterChangeLine guifg=#bbbb00 ctermbg=3'
+-- vim.cmd 'highlight GitGutterDeleteLine guifg=#ff2222 ctermbg=1'
 -- vim.cmd 'highlight GitGutterChangeDeleteLine ctermbg='
+require('gitsigns').setup()
+require('git').setup()
 
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
 -- vim.cmd "let g:fzf_preview_window = ['right:70%', 'ctrl-/']"
