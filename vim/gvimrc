@@ -1,11 +1,20 @@
 set ambiwidth=double
-" set guifont=Migu\ 1M\ 11
+" set guifont=Migu\ 1M\ Regular\ 12
+" set guifont=Migu\ 1M\ Bold\ 12
+set guifont=IPAGothic\ 12
+" set guifont=IPAMincho\ 12
+" set guifont=IPAMincho\ Bold\ 12
 " set guifont=M+\ 1M\ medium\ 12
-set guifont=M\ PLUS\ 1\ \Code\ Medium\ 12
+" set guifont=M\ PLUS\ 1\ Code\ Medium\ 12
+" set guifont=M\ PLUS\ 2\ Medium\ 12
 " set guifont=Noto\ Sans\ Mono\ CJK\ JP\ 12
-AirlineTheme papercolor
+" set guifont=PlemolJP\ Console\ NF\ Medium\ 12
+" set guifont=Source\ Han\ Mono\ M\ 12
+" AirlineTheme papercolor
+" AirlineTheme solarized
+AirlineTheme raven
+" AirlineTheme iceberg
 colorscheme desert
-" colorscheme iceberg
 set lines=40
 set columns=120
 " set columns=180
@@ -19,3 +28,23 @@ set guioptions-=b
 "   highlight Cursor guifg=NONE guibg=Green
 "   highlight CursorIM guifg=NONE guibg=Purple
 " endif
+nnoremap <leader><leader> :<C-u>call ToggleFontShape()<CR>
+function! ToggleFontShape()
+  if &guifont == "IPAGothic 12"
+    " set Writing mode
+    let &guifont="IPAMincho 12"
+    let &guioptions=substitute(&guioptions,"T","","g")
+    let &guioptions=substitute(&guioptions,"m","","g")
+  elseif &guifont == "IPAMincho 12"
+    " set Coding mode
+    let &guifont="IPAGothic 12"
+    if stridx(&guioptions, "T") == -1
+      let &guioptions=&guioptions . "T"
+    endif
+    if stridx(&guioptions, "m") == -1
+      let &guioptions=&guioptions . "m"
+    endif
+  else
+    echo "unknown font"
+  endif
+endfunction

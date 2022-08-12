@@ -93,10 +93,10 @@ require("packer").startup(function()
   use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
   use 'crispgm/nvim-tabline'
   -- use 'junegunn/fzf.vim'
-  -- use 'tpope/vim-fugitive'
-  -- use 'airblade/vim-gitgutter'
+  use 'tpope/vim-fugitive'
+  use 'airblade/vim-gitgutter'
   use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim'
+  -- use 'dinhhuy258/git.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'windwp/nvim-autopairs'
   use 'glepnir/lspsaga.nvim'
@@ -166,11 +166,11 @@ vim.keymap.set('n', 'g]', '<cmd>GitGutterNextHunk<CR>', opts)
 vim.keymap.set('n', 'g[', '<cmd>GitGutterPrevHunk<CR>', opts)
 vim.keymap.set('n', 'gp', '<cmd>GitGutterPreviewHunk<CR>', opts)
 -- 'tpope/vim-fugitive' --------------------------------------------------------
--- vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
--- vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
--- vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
--- vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
--- vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
+vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
+vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
+vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
+vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
+vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
 -- Gdiffsplit              -- git add する前に変更点を見る
 -- Gdiffsplit --cached     -- なんだっけ？？？
 -- Gdiffsplit HEAD         -- コミットする前に変更点を見る
@@ -340,9 +340,10 @@ require'nvim-treesitter.configs'.setup {
 -- vim.g.airline_theme = 'jellybeans'
 
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
--- vim.cmd 'let g:gitgutter_sign_added = "+"'
--- vim.cmd 'let g:gitgutter_sign_modified = "^"'
--- vim.cmd 'let g:gitgutter_sign_removed = "-"'
+vim.g.gitgutter_signs = 0
+-- vim.g.gitgutter_sign_added    = "|"
+-- vim.g.gitgutter_sign_modified = "|"
+-- vim.g.gitgutter_sign_removed  = "|"
 -- vim.cmd 'highlight GitGutterAdd    guifg=#009900 ctermfg=2'
 -- vim.cmd 'highlight GitGutterChange guifg=#bbbb00 ctermfg=3'
 -- vim.cmd 'highlight GitGutterDelete guifg=#ff2222 ctermfg=1'
@@ -351,7 +352,7 @@ require'nvim-treesitter.configs'.setup {
 -- vim.cmd 'highlight GitGutterDeleteLine guifg=#ff2222 ctermbg=1'
 -- vim.cmd 'highlight GitGutterChangeDeleteLine ctermbg='
 require('gitsigns').setup()
-require('git').setup()
+-- require('git').setup()
 
 -- 'junegunn/fzf.vim' ----------------------------------------------------------
 -- vim.cmd "let g:fzf_preview_window = ['right:70%', 'ctrl-/']"
@@ -364,7 +365,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
 )
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, { separator = true }
+  vim.lsp.handlers.hover,
+  {
+    -- :help nvim_open_win() , :help lsp-handlers
+    separator = true,
+    border = "none", -- "shadow" , "single", "rounded"
+    -- width = 100,  -- minimum width みたいなのないかな
+  }
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help, { separator = true }

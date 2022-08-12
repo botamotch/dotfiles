@@ -23,7 +23,7 @@ set cmdheight=1
 set laststatus=2
 set showcmd
 set hlsearch
-set nowrap
+set wrap
 set hidden
 set backup
 set backupdir=~/.vim/backup
