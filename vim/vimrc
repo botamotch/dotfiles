@@ -75,6 +75,8 @@ nnoremap <silent> <C-l> :<C-u>bnext<CR>
 nnoremap <silent> <C-h> :<C-u>bprevious<CR>
 nnoremap j gj
 nnoremap k gk
+nnoremap $ g$
+nnoremap 0 g0
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <esc> <C-\><C-n>

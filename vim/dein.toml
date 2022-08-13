@@ -16,9 +16,9 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 # [[plugins]]
 # repo = 'Shougo/neomru.vim'
 
-[[plugins]]
-repo     = 'rust-lang/rust.vim'
-hook_add = 'let g:rustfmt_autosave = 1'
+# [[plugins]]
+# repo     = 'rust-lang/rust.vim'
+# hook_add = 'let g:rustfmt_autosave = 1'
 
 # [[plugins]]
 # repo     = 'racer-rust/vim-racer'
