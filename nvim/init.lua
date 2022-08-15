@@ -165,6 +165,8 @@ vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_docume
 vim.keymap.set('n', 'g]', '<cmd>GitGutterNextHunk<CR>', opts)
 vim.keymap.set('n', 'g[', '<cmd>GitGutterPrevHunk<CR>', opts)
 vim.keymap.set('n', 'gp', '<cmd>GitGutterPreviewHunk<CR>', opts)
+vim.keymap.set('n', 'gh', '<cmd>GitGutterStageHunk<CR>', opts)
+vim.keymap.set('n', 'gu', '<cmd>GitGutterUndoHunk<CR>', opts)
 -- 'tpope/vim-fugitive' --------------------------------------------------------
 vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
 vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
@@ -318,8 +320,9 @@ require("bufferline").setup({
   },
   highlights = {
     buffer_selected = {
-      guifg = '#fdf6e3',
-      gui = "bold",
+      fg = '#fdf6e3',
+      bold = true,
+      italic = true,
     },
   },
 })
