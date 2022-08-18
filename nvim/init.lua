@@ -374,6 +374,8 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     separator = true,
     border = "none", -- "shadow" , "single", "rounded"
     -- width = 100,  -- minimum width みたいなのないかな
+    -- :echo winwidth('%') でウィンドウのサイズを取得できる。使えそう
+    -- :help winwidth()
   }
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
