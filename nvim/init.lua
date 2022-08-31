@@ -30,6 +30,10 @@ vim.opt.updatetime = 500
 vim.opt.signcolumn = 'yes'
 
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = {"*.sql"},
+  callback = function () vim.opt.expandtab = true end
+})
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   pattern = {"*.go"},
   callback = function () vim.opt.expandtab = false end
 })
@@ -217,7 +221,7 @@ require('mason-lspconfig').setup_handlers({ function(server)
       -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
       local opts = { noremap=true, silent=true }
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.format {async=true}<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, "n", 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -366,15 +370,20 @@ require('gitsigns').setup()
 -- vim.cmd 'let g:fern#default_hidden=1'
 
 -- vim-lsp =====================================================================
+local border = "double" -- "single", "rounded" , "none", "shadow", "double", "solid"
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    virtual_text = false,
+    border = border
+  }
 )
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
   {
     -- :help nvim_open_win() , :help lsp-handlers
     separator = true,
-    border = "single", -- "rounded" , "none", "shadow"
+    border = border
     -- width = 100,  -- minimum width みたいなのないかな
     -- :echo winwidth('%') でウィンドウのサイズを取得できる。使えそう
     -- :help winwidth()
