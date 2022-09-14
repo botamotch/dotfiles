@@ -107,7 +107,7 @@ require("packer").startup(function()
 
   -- colorscheme
   use {
-    -- 'cocopon/iceberg.vim',
+    'cocopon/iceberg.vim',
     -- 'nanotech/jellybeans.vim',
     'sainnhe/everforest',
     -- 'rebelot/kanagawa.nvim',
@@ -167,8 +167,8 @@ vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
 
-vim.keymap.set('n', 'g]', '<cmd>GitGutterNextHunk<CR>', opts)
-vim.keymap.set('n', 'g[', '<cmd>GitGutterPrevHunk<CR>', opts)
+vim.keymap.set('n', ']g', '<cmd>GitGutterNextHunk<CR>', opts)
+vim.keymap.set('n', '[g', '<cmd>GitGutterPrevHunk<CR>', opts)
 vim.keymap.set('n', 'gp', '<cmd>GitGutterPreviewHunk<CR>', opts)
 vim.keymap.set('n', 'gh', '<cmd>GitGutterStageHunk<CR>', opts)
 vim.keymap.set('n', 'gu', '<cmd>GitGutterUndoHunk<CR>', opts)
@@ -204,13 +204,15 @@ autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
 autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
 autocmd ColorScheme * highlight! link FloatBorder NormalFloat
 
-" colorscheme iceberg
-colorscheme neosolarized
+colorscheme iceberg
+" colorscheme neosolarized
 " colorscheme everforest
 
-highlight LspReferenceText  ctermbg=8 guibg=#206050
-highlight LspReferenceRead  ctermbg=8 guibg=#206050
-highlight LspReferenceWrite ctermbg=8 guibg=#206050
+highlight LspReferenceText  ctermbg=8 guibg=#5050B0
+highlight LspReferenceRead  ctermbg=8 guibg=#5050B0
+highlight LspReferenceWrite ctermbg=8 guibg=#5050B0
+
+highlight link LspSagaFinderSelection Search
 ]]
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
@@ -220,27 +222,29 @@ require('mason-lspconfig').setup_handlers({ function(server)
     on_attach = function(client, bufnr)
       -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
       local opts = { noremap=true, silent=true }
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.format {async=true}<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K",  "<cmd>Lspsaga hover_doc<CR>", opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Lspsaga preview_definition<CR>", opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "ga", "<cmd>Lspsaga code_action<CR>", opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<Cmd>Lspsaga signature_help<CR>", opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gn", "<cmd>Lspsaga rename<CR>", opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "K",  "<cmd>Lspsaga hover_doc<CR>", opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "ga", "<cmd>Lspsaga code_action<CR>", opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gn", "<cmd>Lspsaga rename<CR>", opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 
       vim.cmd [[
       augroup lsp_document_highlight
@@ -298,21 +302,9 @@ cmp.setup.cmdline(":", {
   },
 })
 
--- 'windwp/nvim-autopairs'
-require("nvim-autopairs").setup()
-
--- 'vim-airline/vim-airline' ---------------------------------------------------
--- vim.cmd 'let g:airline_symbols_ascii = 1'
--- vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
--- vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
-
-require('lualine').setup({
-  options = {
-    -- theme = 'iceberg_dark',
-    theme = 'material',
-  }
-})
--- require('tabline').setup({})
+require('gitsigns').setup()
+require("nvim-autopairs").setup({})
+require('lualine').setup({})
 require("bufferline").setup({
   options = {
     diagnostics = 'nvim_lsp',
@@ -333,6 +325,15 @@ require("bufferline").setup({
   },
 })
 
+require("lspsaga").init_lsp_saga({
+  border_style = "double",
+  saga_winblend = 20,
+  max_preview_lines = 30,
+  code_action_lightbulb = {
+    enable = false,
+  },
+})
+
 -- 'nvim-treesitter/nvim-treesitter' -------------------------------------------
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -344,30 +345,8 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = 'all',
 }
 
--- 'vim-airline/vim-airline-themes' --------------------------------------------
--- vim.g.airline_theme = 'everforest'
--- vim.g.airline_theme = 'jellybeans'
-
 -- 'airblade/vim-gitgutter' ----------------------------------------------------
 vim.g.gitgutter_signs = 0
--- vim.g.gitgutter_sign_added    = "|"
--- vim.g.gitgutter_sign_modified = "|"
--- vim.g.gitgutter_sign_removed  = "|"
--- vim.cmd 'highlight GitGutterAdd    guifg=#009900 ctermfg=2'
--- vim.cmd 'highlight GitGutterChange guifg=#bbbb00 ctermfg=3'
--- vim.cmd 'highlight GitGutterDelete guifg=#ff2222 ctermfg=1'
--- vim.cmd 'highlight GitGutterAddLine    guifg=#009900 ctermbg=2'
--- vim.cmd 'highlight GitGutterChangeLine guifg=#bbbb00 ctermbg=3'
--- vim.cmd 'highlight GitGutterDeleteLine guifg=#ff2222 ctermbg=1'
--- vim.cmd 'highlight GitGutterChangeDeleteLine ctermbg='
-require('gitsigns').setup()
--- require('git').setup()
-
--- 'junegunn/fzf.vim' ----------------------------------------------------------
--- vim.cmd "let g:fzf_preview_window = ['right:70%', 'ctrl-/']"
-
--- 'lambdalisue/fern.vim' ------------------------------------------------------
--- vim.cmd 'let g:fern#default_hidden=1'
 
 -- vim-lsp =====================================================================
 local border = "double" -- "single", "rounded" , "none", "shadow", "double", "solid"
