@@ -166,6 +166,7 @@ vim.keymap.set('n', '<leader>s', "<cmd>lua require('fzf-lua').lsp_document_symbo
 vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
+vim.keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>")
 
 vim.keymap.set('n', ']g', '<cmd>GitGutterNextHunk<CR>', opts)
 vim.keymap.set('n', '[g', '<cmd>GitGutterPrevHunk<CR>', opts)
@@ -191,6 +192,9 @@ vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
 vim.keymap.set('n', '*',  function() require("lasterisk").search() end)
 vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
+-- vim.keymap.set("n", "<A-d>", [[<cmd>Lspsaga open_floaterm<CR>]])
+vim.keymap.set("n", "<A-d>", [[<cmd>Lspsaga open_floaterm lazygit<CR>]])
+vim.keymap.set("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]])
 
 -- colorscheme -----------------------------------------------------------------
 -- vim.g.everforest_enable_italic = 0
@@ -331,6 +335,10 @@ require("lspsaga").init_lsp_saga({
   max_preview_lines = 30,
   code_action_lightbulb = {
     enable = false,
+  },
+  show_outline = {
+    win_width = 50,
+    auto_preview = false,
   },
 })
 
