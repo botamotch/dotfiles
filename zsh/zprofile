@@ -3,5 +3,5 @@ eval `opam config env`
 # export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$HOME/flutter/bin:$PATH"
 export PATH="$HOME/android-studio/bin:$PATH"
-export PATH="$HOME/Inkdrop:$PATH"
+export PATH="$HOME/VSCode-linux-x64:$PATH"
 
