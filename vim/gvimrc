@@ -1,14 +1,14 @@
 set ambiwidth=double
 " set guifont=Migu\ 1M\ Regular\ 12
 " set guifont=Migu\ 1M\ Bold\ 12
-set guifont=IPAGothic\ 12
+" set guifont=IPAGothic\ 12
 " set guifont=IPAMincho\ 12
 " set guifont=IPAMincho\ Bold\ 12
 " set guifont=M+\ 1M\ medium\ 12
 " set guifont=M\ PLUS\ 1\ Code\ Medium\ 12
 " set guifont=M\ PLUS\ 2\ Medium\ 12
 " set guifont=Noto\ Sans\ Mono\ CJK\ JP\ 12
-" set guifont=PlemolJP\ Console\ NF\ Medium\ 12
+set guifont=PlemolJP\ Console\ NF\ Medium\ 12
 " set guifont=Source\ Han\ Mono\ M\ 12
 " AirlineTheme papercolor
 " AirlineTheme solarized
@@ -28,7 +28,7 @@ set guioptions-=b
 "   highlight Cursor guifg=NONE guibg=Green
 "   highlight CursorIM guifg=NONE guibg=Purple
 " endif
-nnoremap <leader><leader> :<C-u>call ToggleFontShape()<CR>
+" nnoremap <leader><leader> :<C-u>call ToggleFontShape()<CR>
 function! ToggleFontShape()
   if &guifont == "IPAGothic 12"
     " set Writing mode
