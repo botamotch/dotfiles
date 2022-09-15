@@ -36,6 +36,13 @@ alias ls="exa"
 alias ll="exa -lh"
 alias la="exa -lha"
 alias lt="exa -Tl"
+alias find="fd"
+alias du="dust -i"
+alias ps="procs"
+alias df="duf"
+alias top="btm"
+alias cd="z"
+alias lazygit="LANG=en_US.UTF-8 lazygit"
 # alias less='/usr/share/vim/vim81/macros/less.sh'
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
@@ -67,3 +74,4 @@ eval "$(starship init zsh)"
 source /usr/share/nvm/init-nvm.sh
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/nvim-linux64/bin:$PATH"
+eval "$(zoxide init zsh)"

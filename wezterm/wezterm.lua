@@ -109,5 +109,7 @@ return {
 
       -- { key = "c", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
       { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
+
+      { key = "Enter", mods = "ALT", action = 'DisableDefaultAssignment' },
   },
 }

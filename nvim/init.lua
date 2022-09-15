@@ -145,6 +145,10 @@ vim.keymap.set('n', '<A-l>', ':<C-u>BufferLineMoveNext<CR>')
 vim.keymap.set('n', '<A-h>', ':<C-u>BufferLineMovePrev<CR>')
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('n', '<C-W>+', ':<C-u>resize +5<CR>', { silent = true })
+vim.keymap.set('n', '<C-W>-', ':<C-u>resize -5<CR>', { silent = true })
+vim.keymap.set('n', '<C-W>>', ':<C-u>vertical resize +10<CR>', { silent = true })
+vim.keymap.set('n', '<C-W><', ':<C-u>vertical resize -10<CR>', { silent = true })
 vim.keymap.set('i', 'jj', '<ESC>')
 vim.keymap.set('n', '<ESC><ESC>', ':nohlsearch<CR>')
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
@@ -152,6 +156,7 @@ vim.keymap.set('t', '<C-W>j', '<CMD>wincmd j<CR>')
 vim.keymap.set('t', '<C-W>k', '<CMD>wincmd k<CR>')
 vim.keymap.set('t', '<C-W>h', '<CMD>wincmd h<CR>')
 vim.keymap.set('t', '<C-W>l', '<CMD>wincmd l<CR>')
+vim.keymap.set('t', '<C-W>:', '<C-\\><C-n>:<C-u>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
 vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>")
 vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
@@ -193,7 +198,7 @@ vim.keymap.set('n', '*',  function() require("lasterisk").search() end)
 vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 -- vim.keymap.set("n", "<A-d>", [[<cmd>Lspsaga open_floaterm<CR>]])
-vim.keymap.set("n", "<A-d>", [[<cmd>Lspsaga open_floaterm lazygit<CR>]])
+vim.keymap.set("n", "<A-d>", [[<cmd>Lspsaga open_floaterm<CR>]])
 vim.keymap.set("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]])
 
 -- colorscheme -----------------------------------------------------------------
@@ -251,10 +256,11 @@ require('mason-lspconfig').setup_handlers({ function(server)
       vim.api.nvim_buf_set_keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 
       vim.cmd [[
+      let s:bl = ['json'] " set blacklist filetype
       augroup lsp_document_highlight
         autocmd! * <buffer>
-        autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+        autocmd CursorHold,CursorHoldI <buffer> if index(s:bl, &ft) < 0 | lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved,CursorMovedI <buffer> if index(s:bl, &ft) < 0 | lua vim.lsp.buf.clear_references()
       augroup END
       ]]
     end,
