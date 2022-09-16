@@ -104,6 +104,7 @@ require("packer").startup(function()
   use 'nvim-lualine/lualine.nvim'
   use 'windwp/nvim-autopairs'
   use 'glepnir/lspsaga.nvim'
+  use {"akinsho/toggleterm.nvim", tag = '*'}
 
   -- colorscheme
   use {
@@ -151,7 +152,7 @@ vim.keymap.set('n', '<C-W>>', ':<C-u>vertical resize +10<CR>', { silent = true }
 vim.keymap.set('n', '<C-W><', ':<C-u>vertical resize -10<CR>', { silent = true })
 vim.keymap.set('i', 'jj', '<ESC>')
 vim.keymap.set('n', '<ESC><ESC>', ':nohlsearch<CR>')
-vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
+-- vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-W>j', '<CMD>wincmd j<CR>')
 vim.keymap.set('t', '<C-W>k', '<CMD>wincmd k<CR>')
 vim.keymap.set('t', '<C-W>h', '<CMD>wincmd h<CR>')
@@ -197,31 +198,32 @@ vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
 vim.keymap.set('n', '*',  function() require("lasterisk").search() end)
 vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
--- vim.keymap.set("n", "<A-d>", [[<cmd>Lspsaga open_floaterm<CR>]])
-vim.keymap.set("n", "<A-d>", [[<cmd>Lspsaga open_floaterm<CR>]])
-vim.keymap.set("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]])
+vim.keymap.set("n", "<A-a>", [[<cmd>ToggleTerm dir='float'<CR>]])
+vim.keymap.set("t", "<A-a>", [[<C-\><C-n><cmd>ToggleTerm dir='float'<CR>]])
 
 -- colorscheme -----------------------------------------------------------------
 -- vim.g.everforest_enable_italic = 0
 -- vim.g.everforest_disable_italic_comment = 1
-require('neosolarized').setup()
+-- require('neosolarized').setup()
 vim.cmd [[
 autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
 autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
 autocmd ColorScheme * highlight Folded ctermbg=none guibg=none
 autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
-autocmd ColorScheme * highlight! link FloatBorder NormalFloat
+autocmd ColorScheme * highlight link FloatBorder NormalFloat
+autocmd ColorScheme * highlight Search guifg=#222240 guibg=#77A0E0
 
 colorscheme iceberg
 " colorscheme neosolarized
 " colorscheme everforest
 
-highlight LspReferenceText  ctermbg=8 guibg=#5050B0
-highlight LspReferenceRead  ctermbg=8 guibg=#5050B0
-highlight LspReferenceWrite ctermbg=8 guibg=#5050B0
+highlight LspReferenceText  ctermbg=8 guibg=#305090
+highlight LspReferenceRead  ctermbg=8 guibg=#305090
+highlight LspReferenceWrite ctermbg=8 guibg=#305090
 
-highlight link LspSagaFinderSelection Search
+highlight FzfLuaNormal guibg=#282838
+highlight FzfLuaBorder guibg=#282838 gui=bold
 ]]
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
@@ -312,6 +314,17 @@ cmp.setup.cmdline(":", {
   },
 })
 
+require("toggleterm").setup({
+  direction = 'float',
+})
+require'fzf-lua'.setup({
+  winopts = {
+    height = 0.90,
+    width  = 0.90,
+    border = 'double',
+  },
+})
+
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
 require('lualine').setup({})
@@ -337,16 +350,59 @@ require("bufferline").setup({
 
 require("lspsaga").init_lsp_saga({
   border_style = "double",
-  saga_winblend = 20,
-  max_preview_lines = 30,
+  -- symbol_in_winbar = {
+  --   enable = true,
+  -- },
   code_action_lightbulb = {
     enable = false,
   },
   show_outline = {
     win_width = 50,
     auto_preview = false,
+    jump_key = "<CR>",
   },
+  finder_action_keys = {
+      open = "<CR>",
+      vsplit = "s",
+      quit = "q",
+  },
+  code_action_keys = {
+      exec = "<CR>",
+      quit = "q",
+  },
+  definition_action_keys = {
+    edit = '<CR>',
+    vsplit = 's',
+    quit = 'q',
+  },
+  rename_action_quit = "<ESC>",
 })
+vim.cmd[[
+highlight link LspSagaLspFinderBorder FloatBorder
+highlight link LspSagaAutoPreview FloatBorder
+highlight link LspSagaHoverBorder FloatBorder
+highlight link DefinitionBorder FloatBorder
+highlight link LspSagaRenameBorder FloatBorder
+highlight link LspSagaCodeActionBorder FloatBorder
+
+highlight link LspSagaDiagnosticBorder FloatBorder
+highlight link LspSagaDiagnosticSource FloatBorder
+highlight link LspSagaDiagnosticError FloatBorder
+highlight link LspSagaDiagnosticWarn FloatBorder
+highlight link LspSagaDiagnosticInfo FloatBorder
+highlight link LspSagaDiagnosticHint FloatBorder
+highlight link LspSagaErrorTrunCateLine FloatBorder
+highlight link LspSagaWarnTrunCateLine FloatBorder
+highlight link LspSagaInfoTrunCateLine FloatBorder
+highlight link LspSagaHintTrunCateLine FloatBorder
+highlight link LspSagaDiagnosticBorder FloatBorder
+highlight link LspSagaDiagnosticHeader FloatBorder
+
+highlight link LspFloatWinNormal NormalFloat
+
+highlight link LspSagaCodeActionTitle NormalFloat
+highlight link LspSagaCodeActionContent NormalFloat
+]]
 
 -- 'nvim-treesitter/nvim-treesitter' -------------------------------------------
 require'nvim-treesitter.configs'.setup {
