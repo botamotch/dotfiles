@@ -222,8 +222,8 @@ highlight LspReferenceText  ctermbg=8 guibg=#305090
 highlight LspReferenceRead  ctermbg=8 guibg=#305090
 highlight LspReferenceWrite ctermbg=8 guibg=#305090
 
-highlight FzfLuaNormal guibg=#282838
-highlight FzfLuaBorder guibg=#282838 gui=bold
+highlight FzfLuaNormal guibg=#383850
+highlight FzfLuaBorder guibg=#383850 gui=bold
 ]]
 
 -- 'williamboman/nvim-lsp-installer' -------------------------------------------
@@ -319,9 +319,9 @@ require("toggleterm").setup({
 })
 require'fzf-lua'.setup({
   winopts = {
-    height = 0.90,
+    height = 0.95,
     width  = 0.90,
-    border = 'double',
+    border = 'single',
   },
 })
 
@@ -408,6 +408,7 @@ highlight link LspSagaCodeActionContent NormalFloat
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
+    disable = { "help" },
   },
   indent = {
     enable = false,
