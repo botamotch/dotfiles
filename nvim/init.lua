@@ -11,8 +11,8 @@ vim.opt.hlsearch = true
 vim.opt.hidden = true
 vim.opt.backup = true
 vim.opt.backupdir = os.getenv("HOME") .. '/.vim/backup'
-vim.opt.winblend = 5
-vim.opt.pumblend = 5
+vim.opt.winblend = 8
+vim.opt.pumblend = 8
 vim.opt.termguicolors = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
@@ -163,6 +163,7 @@ vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>")
 vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
 vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').git_branches()<CR>")
 vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').grep()<CR>")
+vim.keymap.set('n', '<leader>/', "<cmd>lua require('fzf-lua').blines()<CR>")
 
 vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
 vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
@@ -349,10 +350,10 @@ require("bufferline").setup({
 })
 
 require("lspsaga").init_lsp_saga({
-  border_style = "double",
-  -- symbol_in_winbar = {
-  --   enable = true,
-  -- },
+  border_style = "single",
+  symbol_in_winbar = {
+    enable = false,
+  },
   code_action_lightbulb = {
     enable = false,
   },
@@ -378,30 +379,30 @@ require("lspsaga").init_lsp_saga({
   rename_action_quit = "<ESC>",
 })
 vim.cmd[[
-highlight link LspSagaLspFinderBorder FloatBorder
-highlight link LspSagaAutoPreview FloatBorder
-highlight link LspSagaHoverBorder FloatBorder
-highlight link DefinitionBorder FloatBorder
-highlight link LspSagaRenameBorder FloatBorder
-highlight link LspSagaCodeActionBorder FloatBorder
+" highlight link LspSagaLspFinderBorder FloatBorder
+" highlight link LspSagaAutoPreview FloatBorder
+" highlight link LspSagaHoverBorder FloatBorder
+" highlight link DefinitionBorder FloatBorder
+" highlight link LspSagaRenameBorder FloatBorder
+" highlight link LspSagaCodeActionBorder FloatBorder
 
-highlight link LspSagaDiagnosticBorder FloatBorder
-highlight link LspSagaDiagnosticSource FloatBorder
-highlight link LspSagaDiagnosticError FloatBorder
-highlight link LspSagaDiagnosticWarn FloatBorder
-highlight link LspSagaDiagnosticInfo FloatBorder
-highlight link LspSagaDiagnosticHint FloatBorder
-highlight link LspSagaErrorTrunCateLine FloatBorder
-highlight link LspSagaWarnTrunCateLine FloatBorder
-highlight link LspSagaInfoTrunCateLine FloatBorder
-highlight link LspSagaHintTrunCateLine FloatBorder
-highlight link LspSagaDiagnosticBorder FloatBorder
-highlight link LspSagaDiagnosticHeader FloatBorder
+" highlight link LspSagaDiagnosticBorder FloatBorder
+" highlight link LspSagaDiagnosticSource FloatBorder
+" highlight link LspSagaDiagnosticError FloatBorder
+" highlight link LspSagaDiagnosticWarn FloatBorder
+" highlight link LspSagaDiagnosticInfo FloatBorder
+" highlight link LspSagaDiagnosticHint FloatBorder
+" highlight link LspSagaErrorTrunCateLine FloatBorder
+" highlight link LspSagaWarnTrunCateLine FloatBorder
+" highlight link LspSagaInfoTrunCateLine FloatBorder
+" highlight link LspSagaHintTrunCateLine FloatBorder
+" highlight link LspSagaDiagnosticBorder FloatBorder
+" highlight link LspSagaDiagnosticHeader FloatBorder
 
 highlight link LspFloatWinNormal NormalFloat
 
-highlight link LspSagaCodeActionTitle NormalFloat
-highlight link LspSagaCodeActionContent NormalFloat
+" highlight link LspSagaCodeActionTitle NormalFloat
+" highlight link LspSagaCodeActionContent NormalFloat
 ]]
 
 -- 'nvim-treesitter/nvim-treesitter' -------------------------------------------

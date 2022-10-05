@@ -74,5 +74,9 @@ export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
 source /usr/share/nvm/init-nvm.sh
 export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/nvim-linux64/bin:$PATH"
+# export PATH="$HOME/nvim-linux64/bin:$PATH"
 eval "$(zoxide init zsh)"
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+# conda init zsh
