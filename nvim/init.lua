@@ -4,7 +4,7 @@ vim.opt.whichwrap = "b,s,[,],<,>"
 vim.opt.backspace = "indent,eol,start"
 vim.opt.ambiwidth = "single"
 vim.opt.wildmenu = true
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
 vim.opt.showcmd = true
 vim.opt.hlsearch = true
@@ -267,7 +267,7 @@ require('mason-lspconfig').setup_handlers({ function(server)
       augroup END
       ]]
     end,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(
+    capabilities = require('cmp_nvim_lsp').default_capabilities(
       vim.lsp.protocol.make_client_capabilities()
     )
   }
