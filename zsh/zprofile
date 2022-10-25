@@ -5,3 +5,6 @@ export PATH="$HOME/flutter/bin:$PATH"
 export PATH="$HOME/android-studio/bin:$PATH"
 export PATH="$HOME/VSCode-linux-x64:$PATH"
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
