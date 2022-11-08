@@ -12,9 +12,10 @@ set guifont=PlemolJP\ Console\ NF\ Medium\ 12
 " set guifont=Source\ Han\ Mono\ M\ 12
 " AirlineTheme papercolor
 " AirlineTheme solarized
-AirlineTheme raven
-" AirlineTheme iceberg
-colorscheme desert
+" AirlineTheme raven
+AirlineTheme iceberg
+colorscheme iceberg
+" colorscheme desert
 set lines=40
 set columns=120
 " set columns=180
