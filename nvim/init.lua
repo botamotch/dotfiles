@@ -87,6 +87,7 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 -- packer ======================================================================
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration
 require("packer").startup(function()
+  use '~/Git/dotfiles/nvim/example-plugin'
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
