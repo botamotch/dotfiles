@@ -10,4 +10,8 @@ if exists('g:loaded_example_plugin')
 endif
 let g:loaded_example_plugin = 1
 
-command! -nargs=0 ExampleHello lua require("example-plugin").myfunc()
+lua require("example-plugin").ime_state_save_enable()
+
+command! -nargs=0 IMEStateSaveEnable  lua require("example-plugin").ime_state_save_enable()
+command! -nargs=0 IMEStateSaveDisable lua require("example-plugin").ime_state_save_disable()
+command! -nargs=0 IMEStateSaveToggle  lua require("example-plugin").ime_state_save_toggle()
