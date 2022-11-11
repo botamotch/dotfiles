@@ -1,6 +1,6 @@
-if !has('nvim-0.8')
+if !has('nvim-0.7')
     echohl Error
-    echomsg "Fzf-lua is only available for Neovim versions 0.8 and above"
+    echomsg "Fzf-lua is only available for Neovim versions 0.7 and above"
     echohl clear
     finish
 endif
@@ -16,8 +16,4 @@ command! IMEStateSaveEnable  call example#IMEStateSaveEnable()
 command! IMEStateSaveDisable call example#IMEStateSaveDisable()
 command! IMEStateSaveToggle  call example#IMEStateSaveToggle()
 
-" lua require("example-plugin").ime_state_save_enable()
-
-" command! -nargs=0 IMEStateSaveEnable  lua require("example-plugin").ime_state_save_enable()
-" command! -nargs=0 IMEStateSaveDisable lua require("example-plugin").ime_state_save_disable()
-" command! -nargs=0 IMEStateSaveToggle  lua require("example-plugin").ime_state_save_toggle()
+command! -nargs=0 ExampleOpenWin  lua require("example").nvim_open_win()

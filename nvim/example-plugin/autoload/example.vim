@@ -1,3 +1,9 @@
+" $ fcitx5-remote -h
+" Usage: fcitx5-remote [OPTION]
+"         -c              inactivate input method
+"         -o              activate input method
+"         [no option]     display fcitx state, 0 for close, 1 for inactive, 2 for active
+"         -h              display this help and exit
 function! example#IMEStateSaveEnable() abort
   if executable('fcitx5-remote')
     let g:fcitx_state = 1

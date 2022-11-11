@@ -26,6 +26,23 @@ end
 
 local M = {}
 
+function M.nvim_open_win()
+  h = vim.api.nvim_win_get_height(0)
+  w = vim.api.nvim_win_get_width(0)
+
+  buf = vim.api.nvim_create_buf(false, true)
+
+  vim.api.nvim_open_win(buf, true, {
+    relative='win',
+    anchor="NW",
+    col=10,       -- 右からの距離
+    row=3,        -- 上からの距離
+    width=w-20,   -- ウィンドウの幅
+    height=h-6,   -- ウィンドウの高さ
+    focusable=true,
+  })
+end
+
 function M.ime_state_save_enable()
   vim.api.nvim_set_var('ime_state', '1')
   vim.api.nvim_create_augroup(group_name, {
