@@ -402,7 +402,7 @@ require'nvim-treesitter.configs'.setup {
 vim.g.gitgutter_signs = 0
 
 -- vim-lsp =====================================================================
-local border = "double" -- "single", "rounded" , "none", "shadow", "double", "solid"
+local border = "single" -- single, rounded , none, shadow, double, solid
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
   {
