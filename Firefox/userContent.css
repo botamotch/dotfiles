@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+@-moz-document domain("bbc.com") {
+  * {
+    /* color: purple; */
+    /* background: yellow; */
+  }
+}
+
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  body {
+    /* background-size: cover !important; */
+    /* background-image: url("file:///home/bmkazuya/Pictures/IMG_2162.JPG") !important; */
+  }
+}
+
