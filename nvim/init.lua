@@ -95,6 +95,8 @@ require("packer").startup(function()
   use 'windwp/nvim-autopairs'
   -- use 'glepnir/lspsaga.nvim'
   use {"akinsho/toggleterm.nvim", tag = '*'}
+  use 'nvim-lua/plenary.nvim'
+  use 'akinsho/flutter-tools.nvim'
 
   -- colorscheme
   use {
@@ -254,6 +256,8 @@ require('mason-lspconfig').setup_handlers({ function(server)
   }
   require('lspconfig')[server].setup(opt)
 end })
+
+require("flutter-tools").setup({})
 
 -- 'hrsh7th/nvim-cmp' ----------------------------------------------------------
 local cmp = require("cmp")
