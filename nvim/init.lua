@@ -81,49 +81,43 @@ require("packer").startup(function()
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-  -- use 'vim-airline/vim-airline'
-  -- use 'vim-airline/vim-airline-themes'
-  -- using packer.nvim
   use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
   use 'crispgm/nvim-tabline'
-  -- use 'junegunn/fzf.vim'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
   use 'lewis6991/gitsigns.nvim'
-  -- use 'dinhhuy258/git.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'windwp/nvim-autopairs'
-  -- use 'glepnir/lspsaga.nvim'
-  use {"akinsho/toggleterm.nvim", tag = '*'}
   use 'nvim-lua/plenary.nvim'
   use 'akinsho/flutter-tools.nvim'
+  use 'ibhagwan/fzf-lua'
+  use 'lambdalisue/fern.vim'
+  use 'rapan931/lasterisk.nvim'
+  use 'nvim-treesitter/nvim-treesitter'
+
+  -- nvim-cmp
+  use {
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/vim-vsnip",
+  }
 
   -- colorscheme
   use {
     'cocopon/iceberg.vim',
     -- 'nanotech/jellybeans.vim',
-    'sainnhe/everforest',
+    -- 'sainnhe/everforest',
     -- 'rebelot/kanagawa.nvim',
     -- 'ellisonleao/gruvbox.nvim',
     -- 'folke/tokyonight.nvim',
     -- 'tiagovla/tokyodark.nvim',
     -- 'sainnhe/sonokai',
-    use 'svrana/neosolarized.nvim',
-    use 'tjdevries/colorbuddy.nvim',
+    -- 'svrana/neosolarized.nvim',
+    -- 'tjdevries/colorbuddy.nvim',
   }
-
-  -- use 'Yggdroot/indentLine'
-  use 'ibhagwan/fzf-lua'
-  use 'lambdalisue/fern.vim'
-  use 'rapan931/lasterisk.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
-  -- nvim-cmp
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-cmdline"
-  use "hrsh7th/nvim-cmp"
-  use "hrsh7th/vim-vsnip"
 end)
 
 -- Key map =====================================================================
@@ -215,6 +209,8 @@ highlight LspReferenceText  ctermbg=8 guibg=#305090
 highlight LspReferenceRead  ctermbg=8 guibg=#305090
 highlight LspReferenceWrite ctermbg=8 guibg=#305090
 
+highlight link LspFloatWinNormal NormalFloat
+
 highlight FzfLuaNormal guibg=#383850
 highlight FzfLuaBorder guibg=#383850 gui=bold
 ]]
@@ -265,7 +261,55 @@ require("flutter-tools").setup({
   }
 })
 
--- 'hrsh7th/nvim-cmp' ----------------------------------------------------------
+-- =============================================================================
+-- setup plugins
+-- =============================================================================
+require('gitsigns').setup()
+require("nvim-autopairs").setup({})
+require('lualine').setup({})
+
+require'fzf-lua'.setup({
+  winopts = {
+    height = 0.95,
+    width  = 0.90,
+    border = 'single',
+  },
+})
+
+require("bufferline").setup({
+  options = {
+    diagnostics = 'nvim_lsp',
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    separator_style = { '|', ' ' },
+    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+      local icon = level:match("error") and " " or " "
+      return " " .. icon .. count
+    end,
+  },
+  highlights = {
+    buffer_selected = {
+      fg = '#fdf6e3',
+      bold = true,
+      italic = true,
+    },
+  },
+})
+
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = { "help" },
+  },
+  indent = {
+    enable = false,
+  },
+  ensure_installed = 'all',
+}
+
+vim.g.gitgutter_signs = 0
+
+-- 'hrsh7th/nvim-cmp'
 local cmp = require("cmp")
 cmp.setup({
   snippet = {
@@ -306,112 +350,7 @@ cmp.setup.cmdline(":", {
   },
 })
 
-require("toggleterm").setup({
-  direction = 'float',
-})
-require'fzf-lua'.setup({
-  winopts = {
-    height = 0.95,
-    width  = 0.90,
-    border = 'single',
-  },
-})
-
-require('gitsigns').setup()
-require("nvim-autopairs").setup({})
-require('lualine').setup({})
-require("bufferline").setup({
-  options = {
-    diagnostics = 'nvim_lsp',
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    separator_style = { '|', ' ' },
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      local icon = level:match("error") and " " or " "
-      return " " .. icon .. count
-    end,
-  },
-  highlights = {
-    buffer_selected = {
-      fg = '#fdf6e3',
-      bold = true,
-      italic = true,
-    },
-  },
-})
-
--- require("lspsaga").init_lsp_saga({
---   border_style = "single",
---   symbol_in_winbar = {
---     enable = false,
---   },
---   code_action_lightbulb = {
---     enable = false,
---   },
---   show_outline = {
---     win_width = 50,
---     auto_preview = false,
---     jump_key = "<CR>",
---   },
---   finder_action_keys = {
---       open = "<CR>",
---       vsplit = "s",
---       quit = "q",
---   },
---   code_action_keys = {
---       exec = "<CR>",
---       quit = "q",
---   },
---   definition_action_keys = {
---     edit = '<CR>',
---     vsplit = 's',
---     quit = 'q',
---   },
---   rename_action_quit = "<ESC>",
--- })
-vim.cmd[[
-" highlight link LspSagaLspFinderBorder FloatBorder
-" highlight link LspSagaAutoPreview FloatBorder
-" highlight link LspSagaHoverBorder FloatBorder
-" highlight link DefinitionBorder FloatBorder
-" highlight link LspSagaRenameBorder FloatBorder
-" highlight link LspSagaCodeActionBorder FloatBorder
-
-" highlight link LspSagaDiagnosticBorder FloatBorder
-" highlight link LspSagaDiagnosticSource FloatBorder
-" highlight link LspSagaDiagnosticError FloatBorder
-" highlight link LspSagaDiagnosticWarn FloatBorder
-" highlight link LspSagaDiagnosticInfo FloatBorder
-" highlight link LspSagaDiagnosticHint FloatBorder
-" highlight link LspSagaErrorTrunCateLine FloatBorder
-" highlight link LspSagaWarnTrunCateLine FloatBorder
-" highlight link LspSagaInfoTrunCateLine FloatBorder
-" highlight link LspSagaHintTrunCateLine FloatBorder
-" highlight link LspSagaDiagnosticBorder FloatBorder
-" highlight link LspSagaDiagnosticHeader FloatBorder
-
-highlight link LspFloatWinNormal NormalFloat
-
-" highlight link LspSagaCodeActionTitle NormalFloat
-" highlight link LspSagaCodeActionContent NormalFloat
-]]
-
--- 'nvim-treesitter/nvim-treesitter' -------------------------------------------
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    disable = { "help" },
-  },
-  indent = {
-    enable = false,
-  },
-  ensure_installed = 'all',
-}
-
--- 'airblade/vim-gitgutter' ----------------------------------------------------
-vim.g.gitgutter_signs = 0
-
--- vim-lsp =====================================================================
+-- nvim-lsp
 local border = "single" -- single, rounded , none, shadow, double, solid
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
