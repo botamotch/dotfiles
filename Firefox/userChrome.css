@@ -3,3 +3,7 @@
 * {
   /* color: red; */
 }
+
+.tabbrowser-tab[selected] .tab-text {
+  color: #505050 !important;
+}
