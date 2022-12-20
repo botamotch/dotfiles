@@ -52,20 +52,24 @@ alias lazygit="LANG=en_US.UTF-8 lazygit"
 # alias R="R -q"
 # alias python="python -q"
 # alias luajitlatex='luajittex --fmt=luajitlatex.fmt'
-alias sml="rlwrap sml"
-alias ocaml="rlwrap ocaml"
+# alias sml="rlwrap sml"
+# alias ocaml="rlwrap ocaml"
 
 # export LD_LIBRARY_PATH=/usr/local/lib
 
 export PATH=~/.cargo/bin:$PATH
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
+# export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
 export CHROME_EXECUTABLE=/usr/bin/chromium
 export DART_SDK=$HOME/flutter
 
-export PATH="/usr/local/texlive/2021/bin/x86_64-linux:$PATH"
-export MANPATH="/usr/local/texlive/2021/texmf-dist/doc/:$MANPATH"
-export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:$IOPATH"
+export PATH="$HOME/flutter/bin:$PATH"
+export PATH="$HOME/android-studio/bin:$PATH"
+# export PATH="$HOME/VSCode-linux-x64:$PATH"
+
+# export PATH="/usr/local/texlive/2021/bin/x86_64-linux:$PATH"
+# export MANPATH="/usr/local/texlive/2021/texmf-dist/doc/:$MANPATH"
+# export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:$IOPATH"
 
 eval `opam config env`
 export PATH="$HOME/.rbenv/bin:$PATH"
