@@ -262,6 +262,38 @@ require("flutter-tools").setup({
   }
 })
 
+require('lspconfig')["denols"].setup({
+  on_attach = my_on_attach,
+  root_dir  = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
+})
+require('lspconfig')["tsserver"].setup({
+  on_attach = my_on_attach,
+  root_dir  = require('lspconfig').util.root_pattern("package.json"),
+})
+
+local border = "single" -- single, rounded , none, shadow, double, solid
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    virtual_text = false,
+    border = border
+  }
+)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  {
+    -- :help nvim_open_win() , :help lsp-handlers
+    separator = true,
+    border = border
+    -- width = 100,  -- minimum width みたいなのないかな
+    -- :echo winwidth('%') でウィンドウのサイズを取得できる。使えそう
+    -- :help winwidth()
+  }
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, { separator = true }
+)
+
 -- =============================================================================
 -- setup plugins
 -- =============================================================================
@@ -350,27 +382,3 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   },
 })
-
--- nvim-lsp
-local border = "single" -- single, rounded , none, shadow, double, solid
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    virtual_text = false,
-    border = border
-  }
-)
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  {
-    -- :help nvim_open_win() , :help lsp-handlers
-    separator = true,
-    border = border
-    -- width = 100,  -- minimum width みたいなのないかな
-    -- :echo winwidth('%') でウィンドウのサイズを取得できる。使えそう
-    -- :help winwidth()
-  }
-)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, { separator = true }
-)
