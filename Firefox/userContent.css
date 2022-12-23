@@ -1,10 +1,17 @@
 @charset "UTF-8";
 
-@-moz-document domain("bbc.com") {
-  * {
-    /* color: purple; */
-    /* background: yellow; */
+@-moz-document domain("www.bbc.com") {
+  li {
+    color: red;
   }
+}
+
+@-moz-document domain("twitter.com") {
+  div.css-1dbjc4n {
+    color: red;
+    background: black;
+  }
+
 }
 
 @-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
