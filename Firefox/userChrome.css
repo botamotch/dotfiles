@@ -5,5 +5,5 @@
 }
 
 .tabbrowser-tab[selected] .tab-text {
-  color: #505050 !important;
+  /* color: #505050 !important; */
 }
