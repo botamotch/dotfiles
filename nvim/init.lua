@@ -38,7 +38,6 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   callback = function () vim.opt.expandtab = false end
 })
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.ts", "*.vue", "*.lua"},
   command = 'set shiftwidth=2',
 })
 -- vim.api.nvim_create_autocmd({'FileType'}, {
