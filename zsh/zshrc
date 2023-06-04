@@ -66,14 +66,15 @@ export DART_SDK=$HOME/flutter
 export PATH="$HOME/flutter/bin:$PATH"
 export PATH="$HOME/android-studio/bin:$PATH"
 # export PATH="$HOME/VSCode-linux-x64:$PATH"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # export PATH="/usr/local/texlive/2021/bin/x86_64-linux:$PATH"
 # export MANPATH="/usr/local/texlive/2021/texmf-dist/doc/:$MANPATH"
 # export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:$IOPATH"
 
-eval `opam config env`
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+eval $(opam env)
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
 source /usr/share/nvm/init-nvm.sh
