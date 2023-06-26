@@ -118,6 +118,7 @@ require("packer").startup(function()
     -- 'sainnhe/sonokai',
     -- 'svrana/neosolarized.nvim',
     -- 'tjdevries/colorbuddy.nvim',
+    'nordtheme/vim',
   }
 end)
 
@@ -202,7 +203,8 @@ autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
 autocmd ColorScheme * highlight link FloatBorder NormalFloat
 autocmd ColorScheme * highlight Search guifg=#222240 guibg=#77A0E0
 
-colorscheme iceberg
+" colorscheme iceberg
+colorscheme nord
 " colorscheme neosolarized
 " colorscheme everforest
 
