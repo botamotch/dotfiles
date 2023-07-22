@@ -246,14 +246,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- (2) Highlight Reference
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
-    local buffer = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
     vim.cmd [[
-    " let s:bl = ['json'] " set blacklist filetype
     augroup lsp_document_highlight
-      " autocmd! * <buffer>
-      " autocmd CursorHold,CursorHoldI <buffer> if index(s:bl, &ft) < 0 | lua vim.lsp.buf.document_highlight()
-      " autocmd CursorMoved,CursorMovedI <buffer> if index(s:bl, &ft) < 0 | lua vim.lsp.buf.clear_references()
       autocmd! * <buffer>
       autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
       autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
@@ -282,9 +276,10 @@ require("flutter-tools").setup({
 require('lspconfig')["denols"].setup({
   root_dir  = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
 })
-require('lspconfig')["tsserver"].setup({
-  root_dir  = require('lspconfig').util.root_pattern("package.json"),
-})
+-- if tsserver is installed
+-- require('lspconfig')["tsserver"].setup({
+--   root_dir  = require('lspconfig').util.root_pattern("package.json"),
+-- })
 
 local border = "single" -- single, rounded , none, shadow, double, solid
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
