@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=local/bin/touchpad_toggle.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Touchpad Toggle
+Name=Touchpad Toggle
+Comment[en_US]=Touchpad Toggle
+Comment=Touchpad Toggle
