@@ -2,3 +2,4 @@ export GTK_THEME=Nordic
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
+# xrandr --output HDMI-A-1 --scale 1.1x1.1

@@ -13,6 +13,8 @@ set guifont=PlemolJP\ Console\ NF\ Medium\ 12
 " AirlineTheme papercolor
 " AirlineTheme solarized
 " AirlineTheme raven
+" AirlineTheme nord
+" colorscheme nord
 AirlineTheme iceberg
 colorscheme iceberg
 " colorscheme desert

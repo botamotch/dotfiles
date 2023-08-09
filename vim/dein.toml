@@ -91,3 +91,6 @@ repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'rbtnn/vim-ambiwidth'
+
+[[plugins]]
+repo = 'nordtheme/vim'

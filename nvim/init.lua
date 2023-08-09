@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   callback = function () vim.opt.expandtab = false end
 })
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.ts", "*.vue", "*.lua", "*.dart"},
+  pattern = {"*.ts", "*.tsx", "*.vue", "*.lua", "*.dart"},
   command = 'set shiftwidth=2',
 })
 -- vim.api.nvim_create_autocmd({'FileType'}, {
@@ -203,8 +203,8 @@ autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
 autocmd ColorScheme * highlight link FloatBorder NormalFloat
 autocmd ColorScheme * highlight Search guifg=#222240 guibg=#77A0E0
 
-" colorscheme iceberg
-colorscheme nord
+colorscheme iceberg
+" colorscheme nord
 " colorscheme neosolarized
 " colorscheme everforest
 
