@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=local/bin/fcitx_reload.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=fcitx5 reload
+Name=fcitx5 reload
+Comment[en_US]=fcitx5 reload
+Comment=fcitx5 reload
