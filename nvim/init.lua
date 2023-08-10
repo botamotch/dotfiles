@@ -273,6 +273,7 @@ require("flutter-tools").setup({
   }
 })
 
+require('lspconfig').ocamllsp.setup({})
 require('lspconfig')["denols"].setup({
   root_dir  = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
 })
