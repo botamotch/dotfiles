@@ -273,14 +273,10 @@ require("flutter-tools").setup({
   }
 })
 
+require('lspconfig').gopls.setup({})
+require('lspconfig').rust_analyzer.setup({})
 require('lspconfig').ocamllsp.setup({})
-require('lspconfig')["denols"].setup({
-  root_dir  = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
-})
--- if tsserver is installed
--- require('lspconfig')["tsserver"].setup({
---   root_dir  = require('lspconfig').util.root_pattern("package.json"),
--- })
+require('lspconfig').denols.setup({})
 
 local border = "single" -- single, rounded , none, shadow, double, solid
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
