@@ -95,6 +95,7 @@ require("packer").startup(function()
   use 'rapan931/lasterisk.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'APZelos/blamer.nvim'
+  use 'machakann/vim-sandwich'
 
   -- nvim-cmp
   use {
