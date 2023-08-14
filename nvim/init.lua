@@ -96,6 +96,8 @@ require("packer").startup(function()
   use 'nvim-treesitter/nvim-treesitter'
   use 'APZelos/blamer.nvim'
   use 'machakann/vim-sandwich'
+  use 'folke/zen-mode.nvim'
+  use 'brenoprata10/nvim-highlight-colors'
 
   -- nvim-cmp
   use {
@@ -308,6 +310,10 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
 require('lualine').setup({})
+require("zen-mode").setup({})
+require('nvim-highlight-colors').setup({
+  enable_tailwind = true
+})
 
 require'fzf-lua'.setup({
   winopts = {
