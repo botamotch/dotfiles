@@ -5,13 +5,18 @@
  * ['<Super>p', 'XF86Display']
  */
 
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+/* @theme "~/.config/rofi/themes/iceberg.rasi" */
+
 configuration {
 	columns: 2;
-	font: "PlemolJP Medium 12";
+	font: "PlemolJP Console NF Medium 12";
 	show-icons: true;
 	kb-mode-next: "Control+o";
 	kb-mode-previous: "Control+i";
     modi: "drun,window,combi";
 }
-@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
-/* @theme "~/.config/rofi/themes/iceberg.rasi" */
+
+element-icon {
+    size: 1.0em;
+}
