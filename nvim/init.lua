@@ -150,6 +150,9 @@ vim.keymap.set('t', '<C-W>k', '<CMD>wincmd k<CR>')
 vim.keymap.set('t', '<C-W>h', '<CMD>wincmd h<CR>')
 vim.keymap.set('t', '<C-W>l', '<CMD>wincmd l<CR>')
 vim.keymap.set('t', '<C-W>:', '<C-\\><C-n>:<C-u>')
+
+vim.keymap.set('n', '<leader>DD', ':<C-u>diffthis<CR>')
+vim.keymap.set('n', '<leader>DO', ':<C-u>bufdo diffoff<CR>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
 vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>")
 vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
