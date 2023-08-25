@@ -65,6 +65,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 local init_fern = function()
   vim.opt.number = false
   vim.api.nvim_buf_set_keymap(0, 'n', '<C-h>', '<Plug>(fern-action-hidden:toggle)', {})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<C-CR>', '<Plug>(fern-action-cd:cursor)', {})
 end
 local fern_id = vim.api.nvim_create_augroup('fern-custom', {})
 vim.api.nvim_create_autocmd({'FileType'}, {
