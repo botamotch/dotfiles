@@ -289,6 +289,7 @@ require('lspconfig').denols.setup({
 })
 require('lspconfig').tsserver.setup({
   root_dir = require('lspconfig').util.root_pattern("package.json"),
+  single_file_support = false,
 })
 require('lspconfig').tailwindcss.setup({
   on_attach = function(client, bufnr)
