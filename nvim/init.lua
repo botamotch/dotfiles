@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   callback = function () vim.opt.expandtab = false end
 })
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.ts", "*.tsx", "*.vue", "*.lua", "*.dart"},
+  pattern = {"*.ts", "*.tsx", "*.vue", "*.lua", "*.dart", "*rs"},
   command = 'set shiftwidth=2',
 })
 -- vim.api.nvim_create_autocmd({'FileType'}, {
@@ -292,6 +292,7 @@ require('lspconfig').tsserver.setup({
   single_file_support = false,
 })
 require('lspconfig').tailwindcss.setup({
+  filetypes = {"javascript","typescript"},
   on_attach = function(client, bufnr)
     -- rest of you config
     require('tailwind-highlight').setup(client, bufnr, {
