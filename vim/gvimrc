@@ -10,14 +10,16 @@ set ambiwidth=double
 " set guifont=Noto\ Sans\ Mono\ CJK\ JP\ 12
 set guifont=PlemolJP\ Console\ NF\ Medium\ 12
 " set guifont=Source\ Han\ Mono\ M\ 12
+" colorscheme iceberg
+" colorscheme desert
+colorscheme nord
 " AirlineTheme papercolor
 " AirlineTheme solarized
 " AirlineTheme raven
 " AirlineTheme nord
 " colorscheme nord
-AirlineTheme iceberg
-colorscheme iceberg
-" colorscheme desert
+" AirlineTheme iceberg
+AirlineTheme nord
 set lines=40
 set columns=120
 " set columns=180
