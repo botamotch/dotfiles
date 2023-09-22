@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=local/bin/fcitx_reload.sh
+Exec=.local/bin/fcitx_reload.sh
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
