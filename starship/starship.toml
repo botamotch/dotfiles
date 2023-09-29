@@ -7,3 +7,6 @@ add_newline = false
 success_symbol = "[>](bold green)"
 error_symbol   = "[X](bold red)"
 vicmd_symbol   = "[V](bold green)"
+
+[nodejs]
+detect_extensions = []
