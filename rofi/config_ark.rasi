@@ -1,0 +1,22 @@
+
+/*
+ * <Super>P のショートカットキーが他に割り当てられてる場合はDconf等で解除する
+ * $ gsettings get org.gnome.mutter.keybindings switch-monitor
+ * ['<Super>p', 'XF86Display']
+ */
+
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+/* @theme "~/.config/rofi/themes/iceberg.rasi" */
+
+configuration {
+	columns: 2;
+	font: "PlemolJP Console NF Medium 24";
+	show-icons: true;
+	kb-mode-next: "Control+o";
+	kb-mode-previous: "Control+i";
+    modi: "drun,window,combi";
+}
+
+element-icon {
+    size: 1.0em;
+}
