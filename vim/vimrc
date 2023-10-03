@@ -79,6 +79,7 @@ nnoremap 0 g0
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <esc> <C-\><C-n>
+nnoremap <silent><leader>l :<C-u>Goyo<CR>:Limelight!!<CR>
 
 " nnoremap <leader><leader> :<C-u>cd %:h<CR>
 nnoremap <silent> <leader><leader> :<C-u>call CalcMChar()<CR>

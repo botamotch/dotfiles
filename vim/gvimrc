@@ -20,8 +20,8 @@ colorscheme nord
 " colorscheme nord
 " AirlineTheme iceberg
 AirlineTheme nord
-set lines=40
-set columns=120
+set lines=42
+set columns=140
 " set columns=180
 " 左右・水平スクロールバーを非表示にする
 set guioptions-=r

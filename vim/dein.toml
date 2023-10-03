@@ -1,17 +1,17 @@
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = '''
-let g:lsp_document_code_action_signs_enabled = 0
-'''
+# [[plugins]]
+# repo = 'prabirshrestha/vim-lsp'
+# hook_add = '''
+# let g:lsp_document_code_action_signs_enabled = 0
+# '''
 
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
+# [[plugins]]
+# repo = 'mattn/vim-lsp-settings'
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete.vim'
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 # [[plugins]]
 # repo = 'Shougo/neomru.vim'
@@ -50,6 +50,9 @@ let g:goyo_width = 100
 '''
 
 [[plugins]]
+repo = 'junegunn/limelight.vim'
+
+[[plugins]]
 repo = 'cespare/vim-toml'
 
 [[plugins]]
@@ -73,12 +76,12 @@ hook_add = '''
 let g:airline_theme = "iceberg"
 '''
 
-[[plugins]]
-repo = 'dart-lang/dart-vim-plugin'
-hook_add = '''
-let g:dart_style_guide = 2
-let g:dart_format_on_save = 1
-'''
+# [[plugins]]
+# repo = 'dart-lang/dart-vim-plugin'
+# hook_add = '''
+# let g:dart_style_guide = 2
+# let g:dart_format_on_save = 1
+# '''
 
 # [[plugins]]
 # repo = 'thosakwe/vim-flutter'
@@ -94,3 +97,9 @@ repo = 'rbtnn/vim-ambiwidth'
 
 [[plugins]]
 repo = 'nordtheme/vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-bookmark.vim'
