@@ -98,7 +98,7 @@ require("packer").startup(function()
   use 'APZelos/blamer.nvim'
   use 'machakann/vim-sandwich'
   use 'folke/zen-mode.nvim'
-  use 'brenoprata10/nvim-highlight-colors'
+  -- use 'brenoprata10/nvim-highlight-colors'
   use "princejoogie/tailwind-highlight.nvim"
 
   -- nvim-cmp
@@ -333,9 +333,9 @@ require('gitsigns').setup()
 require("nvim-autopairs").setup({})
 require('lualine').setup({})
 require("zen-mode").setup({})
-require('nvim-highlight-colors').setup({
-  enable_tailwind = true
-})
+-- require('nvim-highlight-colors').setup({
+--   enable_tailwind = true
+-- })
 
 require'fzf-lua'.setup({
   winopts = {
