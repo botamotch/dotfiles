@@ -23,8 +23,8 @@
 # [[plugins]]
 # repo     = 'racer-rust/vim-racer'
 
-[[plugins]]
-repo     = 'tpope/vim-fugitive'
+# [[plugins]]
+# repo     = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo     = 'airblade/vim-gitgutter'
@@ -51,12 +51,16 @@ let g:goyo_width = 100
 
 [[plugins]]
 repo = 'junegunn/limelight.vim'
+hook_add = '''
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+'''
 
 [[plugins]]
 repo = 'cespare/vim-toml'
 
-[[plugins]]
-repo = 'junegunn/fzf.vim'
+# [[plugins]]
+# repo = 'junegunn/fzf.vim'
 
 [[plugins]]
 repo     = 'vim-airline/vim-airline'
