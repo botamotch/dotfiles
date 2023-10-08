@@ -170,7 +170,7 @@ vim.keymap.set('n', '<leader>s', "<cmd>lua require('fzf-lua').lsp_document_symbo
 vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
-vim.keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>")
+vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 
 vim.keymap.set('n', ']g', '<cmd>GitGutterNextHunk<CR>', opts)
 vim.keymap.set('n', '[g', '<cmd>GitGutterPrevHunk<CR>', opts)
