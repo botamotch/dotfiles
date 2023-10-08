@@ -98,6 +98,7 @@ require("packer").startup(function()
   use 'APZelos/blamer.nvim'
   use 'machakann/vim-sandwich'
   use 'folke/zen-mode.nvim'
+  use 'nvimdev/lspsaga.nvim'
   -- use 'brenoprata10/nvim-highlight-colors'
   use "princejoogie/tailwind-highlight.nvim"
 
@@ -329,6 +330,18 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 -- =============================================================================
 -- setup plugins
 -- =============================================================================
+require("lspsaga").setup({
+  lightbulb = {
+    enable = false,
+  },
+  symbol_in_winbar = {
+    enable = false,
+  },
+  outline = {
+    layout = 'float',
+    max_height = 0.85,
+  },
+})
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
 require('lualine').setup({})
