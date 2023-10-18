@@ -1,30 +1,5 @@
-# [[plugins]]
-# repo = 'prabirshrestha/vim-lsp'
-# hook_add = '''
-# let g:lsp_document_code_action_signs_enabled = 0
-# '''
-
-# [[plugins]]
-# repo = 'mattn/vim-lsp-settings'
-
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete.vim'
-
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-# [[plugins]]
-# repo = 'Shougo/neomru.vim'
-
-# [[plugins]]
-# repo     = 'rust-lang/rust.vim'
-# hook_add = 'let g:rustfmt_autosave = 1'
-
-# [[plugins]]
-# repo     = 'racer-rust/vim-racer'
-
-# [[plugins]]
-# repo     = 'tpope/vim-fugitive'
+[[plugins]]
+repo     = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo     = 'airblade/vim-gitgutter'
@@ -51,16 +26,12 @@ let g:goyo_width = 100
 
 [[plugins]]
 repo = 'junegunn/limelight.vim'
-hook_add = '''
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-'''
 
 [[plugins]]
 repo = 'cespare/vim-toml'
 
-# [[plugins]]
-# repo = 'junegunn/fzf.vim'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
 
 [[plugins]]
 repo     = 'vim-airline/vim-airline'
@@ -79,19 +50,6 @@ hook_add = '''
 " let g:airline_theme = "raven"
 let g:airline_theme = "iceberg"
 '''
-
-# [[plugins]]
-# repo = 'dart-lang/dart-vim-plugin'
-# hook_add = '''
-# let g:dart_style_guide = 2
-# let g:dart_format_on_save = 1
-# '''
-
-# [[plugins]]
-# repo = 'thosakwe/vim-flutter'
-
-# [[plugins]]
-# repo = 'posva/vim-vue'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'

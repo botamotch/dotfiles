@@ -81,12 +81,29 @@ nnoremap { {{j
 inoremap <silent> jj <ESC>
 nnoremap <silent> <ESC><ESC> :noh<CR>
 tnoremap <esc> <C-\><C-n>
-" nnoremap <leader>f :<C-u>split<CR>:<C-u>Fern .<CR>
-nnoremap <leader>f :<C-u>Fern .<CR>
-nnoremap <leader>d :<C-u>Fern bookmark:///<CR>
-nnoremap <leader>l :<C-u>Goyo<CR>
 nnoremap <leader><leader> :<C-u>cd %:h<CR>
 
+" 'junegunn/goyo.vim' ---------------------------------------------------------
+nnoremap <silent><leader>l :<C-u>Goyo<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+" 'junegunn/fzf.vim' ---------------------------------------------------------
+nnoremap <leader>e :<C-u>Files<CR>
+nnoremap <leader>g :<C-u>GFiles?<CR>
+nnoremap <leader>p :<C-u>Rg<CR>
+nnoremap <leader>h :<C-u>History<CR>
+nnoremap <leader>b :<C-u>Buffer<CR>
+" 'tpope/vim-fugitive' -------------------------------------------------------
+nnoremap <leader>G :<C-u>Git<CR>
+" 'lambdalisue/fern.vim' -----------------------------------------------------
+nnoremap <leader>f :<C-u>Fern .<CR>
+nnoremap <leader>d :<C-u>Fern bookmark:///<CR>
+" other function -------------------------------------------------------------
+" nnoremap <silent> <leader>r :<C-u>call RepeatTerm()<CR>
+" function! RepeatTerm()
+"   " call term_sendkeys(term_list()[0], "\<c-p> \<c-j>")
+"   :!tmux send-keys -t 0:0.0 C-p C-j
+" endfunction
 " nnoremap <silent> <leader><leader> :<C-u>call CalcMChar()<CR>
 " function! CalcMChar()
 "   let l:buffer_chars = join(getline(0, '$'), '')
