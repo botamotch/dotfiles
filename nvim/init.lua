@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   callback = function () vim.opt.expandtab = false end
 })
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.ts", "*.tsx", "*.vue", "*.lua", "*.dart", "*rs"},
+  pattern = {"*.ts", "*.tsx", "*.vue", "*.lua", "*.dart", "*.rs"},
   command = 'set shiftwidth=2',
 })
 -- vim.api.nvim_create_autocmd({'FileType'}, {
@@ -99,6 +99,7 @@ require("packer").startup(function()
   use 'machakann/vim-sandwich'
   use 'folke/zen-mode.nvim'
   -- use 'nvimdev/lspsaga.nvim'
+  use 'simrat39/symbols-outline.nvim'
   -- use 'brenoprata10/nvim-highlight-colors'
   use "princejoogie/tailwind-highlight.nvim"
 
@@ -171,6 +172,7 @@ vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
 -- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
 vim.keymap.set('n', ']g', '<cmd>GitGutterNextHunk<CR>', opts)
 vim.keymap.set('n', '[g', '<cmd>GitGutterPrevHunk<CR>', opts)
@@ -338,10 +340,13 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 --     enable = false,
 --   },
 --   outline = {
---     layout = 'float',
---     max_height = 0.85,
+--     -- layout = 'float',
+--     -- max_height = 0.85,
+--     win_width = 60,
+--     -- win_position = 'left',
 --   },
 -- })
+require("symbols-outline").setup()
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
 require('lualine').setup({})
