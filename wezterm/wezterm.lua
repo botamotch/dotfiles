@@ -19,6 +19,7 @@ return {
   --   "Noto Sans Mono CJK JP",
   --   "Noto Color Emoji",
   -- }),
+  warn_about_missing_glyphs = false,
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
   window_background_opacity = 0.95,

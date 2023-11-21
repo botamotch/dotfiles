@@ -98,10 +98,11 @@ require("packer").startup(function()
   use 'APZelos/blamer.nvim'
   use 'machakann/vim-sandwich'
   use 'folke/zen-mode.nvim'
-  -- use 'nvimdev/lspsaga.nvim'
+  use 'nvimdev/lspsaga.nvim'
   use 'simrat39/symbols-outline.nvim'
   -- use 'brenoprata10/nvim-highlight-colors'
   use "princejoogie/tailwind-highlight.nvim"
+  -- use "L3MON4D3/LuaSnip"
 
   -- nvim-cmp
   use {
@@ -171,7 +172,7 @@ vim.keymap.set('n', '<leader>s', "<cmd>lua require('fzf-lua').lsp_document_symbo
 vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
--- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
 vim.keymap.set('n', ']g', '<cmd>GitGutterNextHunk<CR>', opts)
@@ -332,20 +333,20 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 -- =============================================================================
 -- setup plugins
 -- =============================================================================
--- require("lspsaga").setup({
---   lightbulb = {
---     enable = false,
---   },
---   symbol_in_winbar = {
---     enable = false,
---   },
---   outline = {
---     -- layout = 'float',
---     -- max_height = 0.85,
---     win_width = 60,
---     -- win_position = 'left',
---   },
--- })
+require("lspsaga").setup({
+  lightbulb = {
+    enable = false,
+  },
+  symbol_in_winbar = {
+    enable = false,
+  },
+  outline = {
+    -- layout = 'float',
+    -- max_height = 0.85,
+    win_width = 60,
+    -- win_position = 'left',
+  },
+})
 require("symbols-outline").setup()
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
