@@ -1,0 +1,6 @@
+[Unit]
+Description=Random wallpaper switch
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'gsettings set org.gnome.desktop.background picture-uri file://"$(ls ~/Pictures/ARMORED_CORE/* | shuf | head -n 1)"'

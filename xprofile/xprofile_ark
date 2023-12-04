@@ -1,7 +1,7 @@
-#
+
 export GTK_THEME=Nordic
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-xrandr --output eDP-1 --scale 1.4x1.4
+# xrandr --output eDP-1 --scale 1.4x1.4
 # xinput set-prop "VEN_04F3:00 04F3:325F Touchpad" "libinput Tapping Enabled" "1"
