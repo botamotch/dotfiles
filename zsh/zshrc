@@ -77,7 +77,7 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 eval $(opam env)
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init -)"
-export PATH="$HOME/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
 source /usr/share/nvm/init-nvm.sh
 export PATH="$HOME/go/bin:$PATH"
