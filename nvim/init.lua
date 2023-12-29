@@ -29,16 +29,16 @@ vim.opt.formatoptions:append('mM')
 vim.opt.updatetime = 500
 vim.opt.signcolumn = 'yes'
 
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.sql"},
-  callback = function () vim.opt.expandtab = true end
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  pattern = { "*.sql" },
+  callback = function() vim.opt.expandtab = true end
 })
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.go"},
-  callback = function () vim.opt.expandtab = false end
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  pattern = { "*.go" },
+  callback = function() vim.opt.expandtab = false end
 })
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.ts", "*.tsx", "*.vue", "*.lua", "*.dart", "*.rs"},
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  pattern = { "*.ts", "*.tsx", "*.vue", "*.lua", "*.dart", "*.rs" },
   command = 'set shiftwidth=2',
 })
 -- vim.api.nvim_create_autocmd({'FileType'}, {
@@ -68,7 +68,7 @@ local init_fern = function()
   vim.api.nvim_buf_set_keymap(0, 'n', '<C-CR>', '<Plug>(fern-action-cd:cursor)', {})
 end
 local fern_id = vim.api.nvim_create_augroup('fern-custom', {})
-vim.api.nvim_create_autocmd({'FileType'}, {
+vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = 'fern',
   callback = init_fern,
   group = fern_id,
@@ -76,13 +76,13 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 
 -- packer ======================================================================
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration
-require("packer").startup(function()
+require("packer").startup(function(use)
   use '~/Git/dotfiles/nvim/example-plugin'
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
   use 'crispgm/nvim-tabline'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
@@ -171,7 +171,8 @@ vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').lsp_implementation
 vim.keymap.set('n', '<leader>s', "<cmd>lua require('fzf-lua').lsp_document_symbols()<CR>")
 vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
-vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').diagnostics_document()<CR>")
+vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').lsp_document_diagnostics()<CR>")
+vim.keymap.set('n', '<leader>L', "<cmd>lua require('fzf-lua').lsp_workspace_diagnostics()<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
@@ -196,7 +197,7 @@ vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
 -- 'lambdalisue/fern.vim' ------------------------------------------------------
 vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
 -- 'rapan931/lasterisk.nvim' ---------------------------------------------------
-vim.keymap.set('n', '*',  function() require("lasterisk").search() end)
+vim.keymap.set('n', '*', function() require("lasterisk").search() end)
 vim.keymap.set('n', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 vim.keymap.set('x', 'g*', function() require("lasterisk").search({ is_whole = false }) end)
 vim.keymap.set("n", "<A-a>", [[<cmd>ToggleTerm dir='float'<CR>]])
@@ -219,6 +220,9 @@ colorscheme iceberg
 " colorscheme nord
 " colorscheme neosolarized
 " colorscheme everforest
+" colorscheme kanagawa
+" colorscheme kanagawa-dragon
+" colorscheme tokyonight
 
 highlight LspReferenceText  ctermbg=8 guibg=#305090
 highlight LspReferenceRead  ctermbg=8 guibg=#305090
@@ -235,9 +239,9 @@ highlight FzfLuaBorder guibg=#383850 gui=bold
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    -- local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    local opts = { noremap=true, silent=true }
+    local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.format {async=true}<CR>', opts)
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -268,7 +272,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-my_capabilities = require('cmp_nvim_lsp').default_capabilities(
+local my_capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 -- 'williamboman/nvim-lsp-installer'
@@ -288,6 +292,15 @@ require("flutter-tools").setup({
 require('lspconfig').gopls.setup({})
 require('lspconfig').rust_analyzer.setup({})
 require('lspconfig').ocamllsp.setup({})
+require 'lspconfig'.lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+    },
+  },
+})
 require('lspconfig').denols.setup({
   root_dir = require('lspconfig').util.root_pattern("deno.json"),
 })
@@ -296,7 +309,7 @@ require('lspconfig').tsserver.setup({
   single_file_support = false,
 })
 require('lspconfig').tailwindcss.setup({
-  filetypes = {"javascript","typescript"},
+  filetypes = { "javascript", "typescript" },
   on_attach = function(client, bufnr)
     -- rest of you config
     require('tailwind-highlight').setup(client, bufnr, {
@@ -350,13 +363,15 @@ require("lspsaga").setup({
 require("symbols-outline").setup()
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
-require('lualine').setup({})
+require('lualine').setup({
+  options = { theme = 'iceberg_dark' },
+})
 require("zen-mode").setup({})
 -- require('nvim-highlight-colors').setup({
 --   enable_tailwind = true
 -- })
 
-require'fzf-lua'.setup({
+require 'fzf-lua'.setup({
   winopts = {
     height = 0.95,
     width  = 0.90,
@@ -384,7 +399,7 @@ require("bufferline").setup({
   },
 })
 
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     disable = { "help" },
