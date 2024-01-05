@@ -103,6 +103,7 @@ require("packer").startup(function(use)
   -- use 'brenoprata10/nvim-highlight-colors'
   use "princejoogie/tailwind-highlight.nvim"
   -- use "L3MON4D3/LuaSnip"
+  use 'vim-denops/denops.vim'
 
   -- nvim-cmp
   use {

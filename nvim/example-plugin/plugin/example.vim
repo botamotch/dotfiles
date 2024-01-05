@@ -10,6 +10,8 @@ if exists('g:loaded_example_plugin')
 endif
 let g:loaded_example_plugin = 1
 
+let g:denops#debug = 1
+
 call example#IMEStateSaveEnable()
 
 command! IMEStateSaveEnable  call example#IMEStateSaveEnable()
