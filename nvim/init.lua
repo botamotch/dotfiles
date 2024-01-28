@@ -78,6 +78,8 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 -- You must run `:PackerSync` whenever you make changes to your plugin configuration
 require("packer").startup(function(use)
   use '~/Git/dotfiles/nvim/example-plugin'
+  -- use '~/Git/dotfiles/nvim/hono'
+
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
@@ -98,12 +100,12 @@ require("packer").startup(function(use)
   use 'APZelos/blamer.nvim'
   use 'machakann/vim-sandwich'
   use 'folke/zen-mode.nvim'
-  use 'nvimdev/lspsaga.nvim'
-  use 'simrat39/symbols-outline.nvim'
+  -- use 'nvimdev/lspsaga.nvim'
+  -- use 'simrat39/symbols-outline.nvim'
   -- use 'brenoprata10/nvim-highlight-colors'
-  use "princejoogie/tailwind-highlight.nvim"
+  -- use "princejoogie/tailwind-highlight.nvim"
   -- use "L3MON4D3/LuaSnip"
-  use 'vim-denops/denops.vim'
+  -- use 'vim-denops/denops.vim'
 
   -- nvim-cmp
   use {
@@ -309,17 +311,17 @@ require('lspconfig').tsserver.setup({
   root_dir = require('lspconfig').util.root_pattern("package.json"),
   single_file_support = false,
 })
-require('lspconfig').tailwindcss.setup({
-  filetypes = { "javascript", "typescript" },
-  on_attach = function(client, bufnr)
-    -- rest of you config
-    require('tailwind-highlight').setup(client, bufnr, {
-      single_column = false,
-      mode = 'background',
-      debounce = 200,
-    })
-  end
-})
+-- require('lspconfig').tailwindcss.setup({
+--   filetypes = { "javascript", "typescript" },
+--   on_attach = function(client, bufnr)
+--     -- rest of you config
+--     require('tailwind-highlight').setup(client, bufnr, {
+--       single_column = false,
+--       mode = 'background',
+--       debounce = 200,
+--     })
+--   end
+-- })
 
 local border = "single" -- single, rounded , none, shadow, double, solid
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -347,21 +349,21 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 -- =============================================================================
 -- setup plugins
 -- =============================================================================
-require("lspsaga").setup({
-  lightbulb = {
-    enable = false,
-  },
-  symbol_in_winbar = {
-    enable = false,
-  },
-  outline = {
-    -- layout = 'float',
-    -- max_height = 0.85,
-    win_width = 60,
-    -- win_position = 'left',
-  },
-})
-require("symbols-outline").setup()
+-- require("lspsaga").setup({
+--   lightbulb = {
+--     enable = false,
+--   },
+--   symbol_in_winbar = {
+--     enable = false,
+--   },
+--   outline = {
+--     -- layout = 'float',
+--     -- max_height = 0.85,
+--     win_width = 60,
+--     -- win_position = 'left',
+--   },
+-- })
+-- require("symbols-outline").setup()
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
 require('lualine').setup({

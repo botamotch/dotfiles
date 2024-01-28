@@ -62,7 +62,7 @@ alias lazygit="LANG=en_US.UTF-8 lazygit"
 export PATH=~/.cargo/bin:$PATH
 # export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
-export CHROME_EXECUTABLE=/usr/bin/chromium
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 export DART_SDK=$HOME/flutter
 
 export PATH="$HOME/flutter/bin:$PATH"
@@ -88,9 +88,11 @@ eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 # conda init zsh
 
-# bun completions
-[ -s "/home/botamotch/.bun/_bun" ] && source "/home/botamotch/.bun/_bun"
-
-# bun
+# bun PATH and completions
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# fvm
+# export PATH=$PATH:$HOME/.pub-cache/bin
+export PATH=$HOME/fvm/default/bin:$PATH
