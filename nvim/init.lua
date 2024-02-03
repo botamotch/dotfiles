@@ -293,7 +293,16 @@ require("flutter-tools").setup({
 })
 
 require('lspconfig').gopls.setup({})
-require('lspconfig').rust_analyzer.setup({})
+require('lspconfig').rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        features = { "debug" },
+        -- features = "all",
+      },
+    },
+  },
+})
 require('lspconfig').ocamllsp.setup({})
 require 'lspconfig'.lua_ls.setup({
   settings = {
