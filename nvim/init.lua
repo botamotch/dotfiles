@@ -320,6 +320,7 @@ require('lspconfig').tsserver.setup({
   root_dir = require('lspconfig').util.root_pattern("package.json"),
   single_file_support = false,
 })
+require('lspconfig').eslint.setup({})
 -- require('lspconfig').tailwindcss.setup({
 --   filetypes = { "javascript", "typescript" },
 --   on_attach = function(client, bufnr)

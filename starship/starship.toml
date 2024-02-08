@@ -10,3 +10,5 @@ vicmd_symbol   = "[V](bold green)"
 
 [nodejs]
 detect_extensions = []
+detect_folders = []
+detect_files = ["package.json"]
