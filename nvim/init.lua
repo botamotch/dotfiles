@@ -297,8 +297,7 @@ require('lspconfig').rust_analyzer.setup({
   settings = {
     ["rust-analyzer"] = {
       cargo = {
-        features = { "debug" },
-        -- features = "all",
+        features = "all", -- features = { "debug" },
       },
     },
   },
