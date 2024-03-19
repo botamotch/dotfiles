@@ -163,7 +163,7 @@ vim.keymap.set('n', '<leader>DO', ':<C-u>bufdo diffoff<CR>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
 vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files()<CR>")
 vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
-vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').git_branches()<CR>")
+vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
 vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').grep()<CR>")
 vim.keymap.set('n', '<leader>/', "<cmd>lua require('fzf-lua').blines()<CR>")
 
