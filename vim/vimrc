@@ -96,7 +96,7 @@ nnoremap <leader>b :<C-u>Buffer<CR>
 " 'tpope/vim-fugitive' -------------------------------------------------------
 nnoremap <leader>G :<C-u>Git<CR>
 " 'lambdalisue/fern.vim' -----------------------------------------------------
-nnoremap <leader>f :<C-u>Fern .<CR>
+nnoremap <C-\> :<C-u>Fern . -drawer -toggle -width=50<CR>
 nnoremap <leader>d :<C-u>Fern bookmark:///<CR>
 " other function -------------------------------------------------------------
 " nnoremap <silent> <leader>r :<C-u>call RepeatTerm()<CR>
