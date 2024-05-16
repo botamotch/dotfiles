@@ -72,10 +72,10 @@ nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>q :<C-u>bd<CR>
 nnoremap <silent> <C-l> :<C-u>bnext<CR>
 nnoremap <silent> <C-h> :<C-u>bprevious<CR>
-nnoremap j gj
-nnoremap k gk
-nnoremap $ g$
-nnoremap 0 g0
+" nnoremap j gj
+" nnoremap k gk
+" nnoremap $ g$
+" nnoremap 0 g0
 nnoremap } }j
 nnoremap { {{j
 inoremap <silent> jj <ESC>
