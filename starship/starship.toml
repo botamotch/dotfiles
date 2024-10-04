@@ -12,3 +12,9 @@ vicmd_symbol   = "[V](bold green)"
 detect_extensions = []
 detect_folders = []
 detect_files = ["package.json"]
+
+[aws]
+format = ''
+# format = 'on [$symbol$profile]($style) '
+# style = 'bold blue'
+# symbol = '🅰 '

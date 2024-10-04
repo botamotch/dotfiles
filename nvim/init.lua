@@ -84,7 +84,7 @@ require("packer").startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
+  use { 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
   use 'crispgm/nvim-tabline'
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
@@ -143,8 +143,25 @@ vim.keymap.set('n', '<C-l>', ':<C-u>BufferLineCycleNext<CR>')
 vim.keymap.set('n', '<C-h>', ':<C-u>BufferLineCyclePrev<CR>')
 vim.keymap.set('n', '<A-l>', ':<C-u>BufferLineMoveNext<CR>')
 vim.keymap.set('n', '<A-h>', ':<C-u>BufferLineMovePrev<CR>')
+
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
+-- vim.keymap.set('n', '$', 'g$')
+-- vim.keymap.set('n', '0', 'g0')
+vim.keymap.set('n', 'Y', 'y$')
+vim.keymap.set('n', 'x', '"_x')
+vim.keymap.set('n', 'X', '"_X')
+vim.keymap.set('n', 'd', '"_d')
+vim.keymap.set('v', 'd', '"_d')
+vim.keymap.set('n', 'dd', '"_dd')
+vim.keymap.set('n', 'D', '"_D')
+vim.keymap.set('n', 'U', '<c-r>')
+vim.keymap.set('n', 'M', '%')
+vim.keymap.set('v', 'y', 'mzy`z')
+vim.keymap.set('n', 'p', ']p`]')
+vim.keymap.set('n', 'P', ']P`]')
+vim.keymap.set('n', 'd<cr>', ':<C-u>vert Gdiffsplit<cr>')
+
 vim.keymap.set('n', '<C-W>+', ':<C-u>resize +5<CR>', { silent = true })
 vim.keymap.set('n', '<C-W>-', ':<C-u>resize -5<CR>', { silent = true })
 vim.keymap.set('n', '<C-W>>', ':<C-u>vertical resize +10<CR>', { silent = true })
