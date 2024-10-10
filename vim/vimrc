@@ -79,15 +79,15 @@ nnoremap <silent> <C-h> :<C-u>bprevious<CR>
 nnoremap Y y$
 nnoremap x "_x
 nnoremap X "_X
-nnoremap d "_d
-vnoremap d "_d
-nnoremap dd "_dd
-nnoremap D "_D
+" nnoremap d "_d
+" vnoremap d "_d
+" nnoremap dd "_dd
+" nnoremap D "_D
 nnoremap U <c-r>
 nnoremap M %
-vnoremap y mzy`z
-nnoremap p ]p`]
-nnoremap P ]P`]
+" vnoremap y mzy`z
+" nnoremap p ]p`]
+" nnoremap P ]P`]
 
 nnoremap } }j
 nnoremap { {{j
