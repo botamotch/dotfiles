@@ -86,8 +86,6 @@ require("packer").startup(function(use)
   use 'williamboman/mason-lspconfig.nvim'
   use { 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
   use 'crispgm/nvim-tabline'
-  use 'tpope/vim-fugitive'
-  use 'airblade/vim-gitgutter'
   use 'lewis6991/gitsigns.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'windwp/nvim-autopairs'
@@ -106,6 +104,7 @@ require("packer").startup(function(use)
   -- use "princejoogie/tailwind-highlight.nvim"
   -- use "L3MON4D3/LuaSnip"
   -- use 'vim-denops/denops.vim'
+  use "sindrets/diffview.nvim"
 
   -- nvim-cmp
   use {
@@ -196,24 +195,13 @@ vim.keymap.set('n', '<leader>L', "<cmd>lua require('fzf-lua').lsp_workspace_diag
 vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
-vim.keymap.set('n', ']g', '<cmd>GitGutterNextHunk<CR>', opts)
-vim.keymap.set('n', '[g', '<cmd>GitGutterPrevHunk<CR>', opts)
-vim.keymap.set('n', 'gp', '<cmd>GitGutterPreviewHunk<CR>', opts)
-vim.keymap.set('n', 'gh', '<cmd>GitGutterStageHunk<CR>', opts)
-vim.keymap.set('n', 'gu', '<cmd>GitGutterUndoHunk<CR>', opts)
--- 'tpope/vim-fugitive' --------------------------------------------------------
-vim.keymap.set('n', '<leader>GG', ':<C-u>Git<CR>')
-vim.keymap.set('n', '<leader>GC', ':<C-u>Git commit<CR>')
-vim.keymap.set('n', '<leader>GP', ':<C-u>Git push<CR>')
-vim.keymap.set('n', '<leader>GL', ':<C-u>Git log --oneline<CR>')
-vim.keymap.set('n', '<leader>GD', ':<C-u>vert Gdiffsplit')
--- Gdiffsplit              -- git add する前に変更点を見る
--- Gdiffsplit --cached     -- なんだっけ？？？
--- Gdiffsplit HEAD         -- コミットする前に変更点を見る
--- Gdiffsplit HEAD^        -- 前回コミットとの変更点を見る
--- Gdiffsplit ORIG_HEAD    -- origin/HEADと同じ？？？
--- Gdiffsplit origin/HEAD
--- * ブランチ間の差分がほしい
+vim.keymap.set('n', 'g]', function() require("gitsigns").next_hunk() end)
+vim.keymap.set('n', 'g[', function() require("gitsigns").prev_hunk() end)
+vim.keymap.set('n', 'gp', function() require("gitsigns").preview_hunk() end)
+vim.keymap.set('n', 'gh', function() require("gitsigns").stage_hunk() end)
+vim.keymap.set('n', 'gu', function() require("gitsigns").undo_stage_hunk() end)
+-- vim.keymap.set('n', 'gd', function() require("gitsigns").diffthis() end)
+
 -- 'lambdalisue/fern.vim' ------------------------------------------------------
 vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
 -- 'rapan931/lasterisk.nvim' ---------------------------------------------------
@@ -332,7 +320,7 @@ require 'lspconfig'.lua_ls.setup({
 require('lspconfig').denols.setup({
   root_dir = require('lspconfig').util.root_pattern("deno.json"),
 })
-require('lspconfig').tsserver.setup({
+require('lspconfig').ts_ls.setup({
   root_dir = require('lspconfig').util.root_pattern("package.json"),
   single_file_support = false,
 })
@@ -438,8 +426,6 @@ require 'nvim-treesitter.configs'.setup {
   },
   ensure_installed = 'all',
 }
-
-vim.g.gitgutter_signs = 0
 
 -- 'hrsh7th/nvim-cmp'
 local cmp = require("cmp")
