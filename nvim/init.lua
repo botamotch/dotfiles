@@ -195,8 +195,8 @@ vim.keymap.set('n', '<leader>L', "<cmd>lua require('fzf-lua').lsp_workspace_diag
 vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
-vim.keymap.set('n', 'g]', function() require("gitsigns").next_hunk() end)
-vim.keymap.set('n', 'g[', function() require("gitsigns").prev_hunk() end)
+vim.keymap.set('n', ']g', function() require("gitsigns").next_hunk() end)
+vim.keymap.set('n', '[g', function() require("gitsigns").prev_hunk() end)
 vim.keymap.set('n', 'gp', function() require("gitsigns").preview_hunk() end)
 vim.keymap.set('n', 'gh', function() require("gitsigns").stage_hunk() end)
 vim.keymap.set('n', 'gu', function() require("gitsigns").undo_stage_hunk() end)
