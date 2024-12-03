@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=killall conky
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=false
+Name[en_US]=Conky stop
+Name=Conky stop
+Comment[en_US]=Conky top
+Comment=Conky top
