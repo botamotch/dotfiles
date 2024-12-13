@@ -202,7 +202,7 @@ vim.keymap.set('n', '[g', function() require("gitsigns").prev_hunk() end)
 vim.keymap.set('n', 'gp', function() require("gitsigns").preview_hunk() end)
 vim.keymap.set('n', 'gh', function() require("gitsigns").stage_hunk() end)
 vim.keymap.set('n', 'gu', function() require("gitsigns").undo_stage_hunk() end)
--- vim.keymap.set('n', 'gd', function() require("gitsigns").diffthis() end)
+vim.keymap.set('n', 'gb', '<C-u>:Gitsigns toggle_current_line_blame<CR>')
 
 -- 'lambdalisue/fern.vim' ------------------------------------------------------
 vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
