@@ -180,29 +180,29 @@ vim.keymap.set('n', '<leader>DD', ':<C-u>diffthis<CR>')
 vim.keymap.set('n', '<leader>DO', ':<C-u>bufdo diffoff<CR>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
 vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files({ cmd = 'fd --no-ignore' })<CR>")
-vim.keymap.set('n', '<leader>g', "<cmd>lua require('fzf-lua').git_status()<CR>")
-vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>")
-vim.keymap.set('n', '<leader>p', "<cmd>lua require('fzf-lua').grep()<CR>")
-vim.keymap.set('n', '<leader>/', "<cmd>lua require('fzf-lua').blines()<CR>")
+vim.keymap.set('n', '<leader>g', "<cmd>FzfLua git_status<CR>")
+vim.keymap.set('n', '<leader>b', "<cmd>FzfLua buffers<CR>")
+vim.keymap.set('n', '<leader>p', "<cmd>FzfLua grep<CR>")
+vim.keymap.set('n', '<leader>/', "<cmd>FzfLua blines<CR>")
 
-vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').lsp_references()<CR>")
-vim.keymap.set('n', '<leader>d', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>")
-vim.keymap.set('n', '<leader>D', "<cmd>lua require('fzf-lua').lsp_declarations()<CR>")
-vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>")
-vim.keymap.set('n', '<leader>s', "<cmd>lua require('fzf-lua').lsp_document_symbols()<CR>")
-vim.keymap.set('n', '<leader>t', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>")
-vim.keymap.set('n', '<leader>a', "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>")
-vim.keymap.set('n', '<leader>l', "<cmd>lua require('fzf-lua').lsp_document_diagnostics()<CR>")
-vim.keymap.set('n', '<leader>L', "<cmd>lua require('fzf-lua').lsp_workspace_diagnostics()<CR>")
-vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
-vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
+vim.keymap.set('n', '<leader>r', "<cmd>FzfLua lsp_references<CR>")
+vim.keymap.set('n', '<leader>d', "<cmd>FzfLua lsp_definitions<CR>")
+vim.keymap.set('n', '<leader>D', "<cmd>FzfLua lsp_declarations<CR>")
+vim.keymap.set('n', '<leader>i', "<cmd>FzfLua lsp_implementations<CR>")
+vim.keymap.set('n', '<leader>s', "<cmd>FzfLua lsp_document_symbols<CR>")
+vim.keymap.set('n', '<leader>t', "<cmd>FzfLua lsp_typedefs<CR>")
+vim.keymap.set('n', '<leader>a', "<cmd>FzfLua lsp_code_actions<CR>")
+vim.keymap.set('n', '<leader>l', "<cmd>FzfLua lsp_document_diagnostics<CR>")
+vim.keymap.set('n', '<leader>L', "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
+-- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+-- vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
-vim.keymap.set('n', ']g', function() require("gitsigns").next_hunk() end)
-vim.keymap.set('n', '[g', function() require("gitsigns").prev_hunk() end)
-vim.keymap.set('n', 'gp', function() require("gitsigns").preview_hunk() end)
-vim.keymap.set('n', 'gh', function() require("gitsigns").stage_hunk() end)
-vim.keymap.set('n', 'gu', function() require("gitsigns").undo_stage_hunk() end)
-vim.keymap.set('n', 'gb', '<C-u>:Gitsigns toggle_current_line_blame<CR>')
+vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<CR>')
+vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<CR>')
+vim.keymap.set('n', 'gp', '<cmd>Gitsigns preview_hunk<CR>')
+vim.keymap.set('n', 'gh', '<cmd>Gitsigns stage_hunk<CR>')
+vim.keymap.set('n', 'gu', '<cmd>Gitsigns undo_stage_hunk<CR>')
+vim.keymap.set('n', 'gb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
 
 -- 'lambdalisue/fern.vim' ------------------------------------------------------
 vim.keymap.set('n', '<C-\\>', ':<C-u>Fern . -drawer -toggle -width=50<CR>')
@@ -217,6 +217,10 @@ vim.keymap.set("t", "<A-a>", [[<C-\><C-n><cmd>ToggleTerm dir='float'<CR>]])
 -- vim.g.everforest_enable_italic = 0
 -- vim.g.everforest_disable_italic_comment = 1
 -- require('neosolarized').setup()
+require("tokyonight").setup({
+  transparent = true,
+  style = "storm",
+})
 vim.cmd [[
 autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
 autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
@@ -242,6 +246,8 @@ highlight link LspFloatWinNormal NormalFloat
 
 highlight FzfLuaNormal guibg=#383850
 highlight FzfLuaBorder guibg=#383850 gui=bold
+
+highlight GitsignsCurrentLineBlame guifg=#BBBBBB guibg=none
 ]]
 
 -- LspAttach
