@@ -1,0 +1,16 @@
+[
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "space e": "file_finder::Toggle",
+      "space b": "branches::OpenRecent",
+      "space w": "workspace::Save",
+
+      "ctrl-w s": "pane::SplitRight",
+      "ctrl-w v": "pane::SplitVertical",
+      "ctrl-w l": "workspace::ActivateNextPane",
+      "ctrl-w h": "workspace::ActivatePreviousPane",
+      "ctrl-w q": "pane::CloseActiveItem"
+    }
+  }
+]
