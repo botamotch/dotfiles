@@ -105,6 +105,7 @@ require("packer").startup(function(use)
   -- use "L3MON4D3/LuaSnip"
   -- use 'vim-denops/denops.vim'
   use "sindrets/diffview.nvim"
+  use "github/copilot.vim"
 
   -- nvim-cmp
   use {
@@ -123,7 +124,7 @@ require("packer").startup(function(use)
     -- 'sainnhe/everforest',
     -- 'rebelot/kanagawa.nvim',
     -- 'ellisonleao/gruvbox.nvim',
-    -- 'folke/tokyonight.nvim',
+    'folke/tokyonight.nvim',
     -- 'tiagovla/tokyodark.nvim',
     -- 'sainnhe/sonokai',
     -- 'svrana/neosolarized.nvim',
@@ -225,13 +226,13 @@ autocmd ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
 autocmd ColorScheme * highlight link FloatBorder NormalFloat
 autocmd ColorScheme * highlight Search guifg=#222240 guibg=#77A0E0
 
-colorscheme iceberg
+" colorscheme iceberg
 " colorscheme nord
 " colorscheme neosolarized
 " colorscheme everforest
 " colorscheme kanagawa
 " colorscheme kanagawa-dragon
-" colorscheme tokyonight
+colorscheme tokyonight
 
 highlight LspReferenceText  ctermbg=8 guibg=#305090
 highlight LspReferenceRead  ctermbg=8 guibg=#305090
@@ -388,6 +389,7 @@ require("zen-mode").setup({})
 -- require('nvim-highlight-colors').setup({
 --   enable_tailwind = true
 -- })
+-- require("copilot").setup()
 
 require 'fzf-lua'.setup({
   winopts = {

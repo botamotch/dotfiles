@@ -7,10 +7,13 @@ return {
   font_size = 12.0,
   cell_width = 1.0,
   line_height = 1.0,
-  color_scheme = "iceberg-dark",
+  -- color_scheme = "iceberg-dark",
+  color_scheme = "Tokyo Night",
   -- font = wezterm.font("M PLUS 1 Code Medium"),
   font = wezterm.font_with_fallback({
-    {family="PlemolJP Console NF", weight="Medium"},
+    -- {family="PlemolJP Console NF", weight="Medium"},
+    {family="HackGen Console NF"},
+    -- {family="Bizin Gothic"},
   }),
   -- font = wezterm.font_with_fallback({
   --   "M PLUS 1 Code Medium",
@@ -22,8 +25,8 @@ return {
   warn_about_missing_glyphs = false,
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
-  window_background_opacity = 0.95,
-  text_background_opacity = 0.95,
+  window_background_opacity = 0.90,
+  text_background_opacity = 0.90,
   -- window_background_image = "Pictures/IMG_2162.JPG",
   -- window_background_image_hsb = {
   --   brightness = 0.03,
@@ -92,6 +95,8 @@ return {
       { key = "q", mods = "LEADER", action = act.CloseCurrentTab{ confirm = true } },
       { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
       { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+      { key = "N", mods = "LEADER", action = act.MoveTabRelative(1) },
+      { key = "P", mods = "LEADER", action = act.MoveTabRelative(-1) },
       { key = "w", mods = "LEADER", action = act.ShowTabNavigator },
 
       { key = "v", mods = "LEADER", action = act.SplitHorizontal{ domain = "CurrentPaneDomain" } },
