@@ -238,6 +238,8 @@ autocmd ColorScheme * highlight Search guifg=#222240 guibg=#77A0E0
 " colorscheme kanagawa-dragon
 colorscheme tokyonight
 
+highlight Comment guifg=#868fB9
+
 highlight LspReferenceText  ctermbg=8 guibg=#305090
 highlight LspReferenceRead  ctermbg=8 guibg=#305090
 highlight LspReferenceWrite ctermbg=8 guibg=#305090
