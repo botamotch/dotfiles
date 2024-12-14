@@ -280,6 +280,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- (2) Highlight Reference
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client.supports_method('textDocument/documentHighlight') then
+      return
+    end
     vim.cmd [[
     augroup lsp_document_highlight
       autocmd! * <buffer>
