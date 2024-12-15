@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   callback = function() vim.opt.expandtab = true end
 })
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  pattern = { "*.go" },
+  pattern = { "*.go", "*.gd" },
   callback = function() vim.opt.expandtab = false end
 })
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
