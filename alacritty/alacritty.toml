@@ -1,0 +1,39 @@
+[window]
+opacity = 0.9
+dimensions = { columns = 100, lines = 40 }
+
+[font]
+size = 12
+
+[font.normal]
+family = "HackGen Console NF"
+style = "Regular"
+
+[font.bold]
+family = "HackGen Console NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "HackGen Console NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "HackGen Console NF"
+style = "Italic"
+
+[keyboard]
+bindings = [
+{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+{ key = "Q", mods = "Control|Shift", action = "Quit" },
+# { key = "L", mods = "Control|Shift", chars = "l" },
+]
+
+[colors.primary]
+background = "#181824"
+
+[general]
+# mkdir -p ~/.config/alacritty/themes
+# git clone https://github.com/alacritty/alacritty-theme /home/botamotch/.config/alacritty/themes
+import = [
+    "~/.config/alacritty/themes/themes/tokyo_night_storm.toml"
+]
