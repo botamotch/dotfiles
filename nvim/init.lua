@@ -74,51 +74,74 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = fern_id,
 })
 
--- packer ======================================================================
--- You must run `:PackerSync` whenever you make changes to your plugin configuration
-require("packer").startup(function(use)
-  use '~/Git/dotfiles/nvim/example-plugin'
-  -- use '~/Git/dotfiles/nvim/hono'
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
-  use 'wbthomason/packer.nvim'
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use { 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
-  use 'crispgm/nvim-tabline'
-  use 'lewis6991/gitsigns.nvim'
-  use 'nvim-lualine/lualine.nvim'
-  use 'windwp/nvim-autopairs'
-  use 'nvim-lua/plenary.nvim'
-  use 'akinsho/flutter-tools.nvim'
-  use 'ibhagwan/fzf-lua'
-  use 'lambdalisue/fern.vim'
-  use 'rapan931/lasterisk.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
-  use 'APZelos/blamer.nvim'
-  use 'machakann/vim-sandwich'
-  use 'folke/zen-mode.nvim'
-  -- use 'nvimdev/lspsaga.nvim'
-  -- use 'simrat39/symbols-outline.nvim'
-  -- use 'brenoprata10/nvim-highlight-colors'
-  -- use "princejoogie/tailwind-highlight.nvim"
-  -- use "L3MON4D3/LuaSnip"
-  -- use 'vim-denops/denops.vim'
-  use "sindrets/diffview.nvim"
-  use "github/copilot.vim"
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
-  -- nvim-cmp
-  use {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/vim-vsnip",
-  }
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {
+    { dir = '~/Git/dotfiles/nvim/example-plugin' },
+    -- '~/Git/dotfiles/nvim/hono',
 
-  -- colorscheme
-  use {
+    'neovim/nvim-lspconfig',
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+    'akinsho/bufferline.nvim',
+    'crispgm/nvim-tabline',
+    'lewis6991/gitsigns.nvim',
+    'nvim-lualine/lualine.nvim',
+    'windwp/nvim-autopairs',
+    'nvim-lua/plenary.nvim',
+    'akinsho/flutter-tools.nvim',
+    'ibhagwan/fzf-lua',
+    'lambdalisue/fern.vim',
+    'rapan931/lasterisk.nvim',
+    'nvim-treesitter/nvim-treesitter',
+    'APZelos/blamer.nvim',
+    'machakann/vim-sandwich',
+    'folke/zen-mode.nvim',
+    -- 'nvimdev/lspsaga.nvim',
+    -- 'simrat39/symbols-outline.nvim',
+    -- 'brenoprata10/nvim-highlight-colors',
+    -- "princejoogie/tailwind-highlight.nvim",
+    -- "L3MON4D3/LuaSnip",
+    -- 'vim-denops/denops.vim',
+    "sindrets/diffview.nvim",
+    "github/copilot.vim",
+
+    {
+      "hrsh7th/nvim-cmp",
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/vim-vsnip",
+      },
+    },
+
+    -- colorscheme
     'cocopon/iceberg.vim',
     -- 'nanotech/jellybeans.vim',
     -- 'sainnhe/everforest',
@@ -130,8 +153,10 @@ require("packer").startup(function(use)
     -- 'svrana/neosolarized.nvim',
     -- 'tjdevries/colorbuddy.nvim',
     'nordtheme/vim',
-  }
-end)
+  },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})
 
 -- Key map =====================================================================
 vim.g.mapleader = " "
