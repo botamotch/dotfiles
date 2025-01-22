@@ -113,7 +113,7 @@ require("lazy").setup({
     'nvim-lualine/lualine.nvim',
     'windwp/nvim-autopairs',
     'nvim-lua/plenary.nvim',
-    'akinsho/flutter-tools.nvim',
+    -- 'akinsho/flutter-tools.nvim',
     'ibhagwan/fzf-lua',
     'lambdalisue/fern.vim',
     'rapan931/lasterisk.nvim',
@@ -127,11 +127,12 @@ require("lazy").setup({
     -- "princejoogie/tailwind-highlight.nvim",
     -- "L3MON4D3/LuaSnip",
     -- 'vim-denops/denops.vim',
-    "sindrets/diffview.nvim",
-    "github/copilot.vim",
+    { "sindrets/diffview.nvim", lazy = true },
+    -- "github/copilot.vim",
 
     {
       "hrsh7th/nvim-cmp",
+      lazy = true,
       dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -155,13 +156,14 @@ require("lazy").setup({
     'nordtheme/vim',
   },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
 })
 
 -- Key map =====================================================================
 vim.g.mapleader = " "
 -- vim.api.nvim_set_keymap('n', '<leader><leader>', ':<C-u>cd %:h<CR>', {noremap = true})
-vim.keymap.set('n', '<leader><leader>', ':<C-u>cd %:h<CR>')
+-- vim.keymap.set('n', '<leader><leader>', ':<C-u>cd %:h<CR>')
+vim.keymap.set('n', '<leader><leader>', '<cmd>ZenMode<CR>')
 vim.keymap.set('n', '<leader>w', ':<C-u>w<CR>')
 vim.keymap.set('n', '<leader>q', ':<C-u>bd<CR>')
 vim.keymap.set('n', '<C-l>', ':<C-u>BufferLineCycleNext<CR>')
@@ -331,11 +333,11 @@ require('mason-lspconfig').setup_handlers({ function(server)
   })
 end })
 -- akinsho/flutter-tools.nvim#full-configuration
-require("flutter-tools").setup({
-  lsp = {
-    capabilities = my_capabilities,
-  }
-})
+-- require("flutter-tools").setup({
+--   lsp = {
+--     capabilities = my_capabilities,
+--   }
+-- })
 
 require('lspconfig').gopls.setup({})
 require('lspconfig').rust_analyzer.setup({
@@ -424,7 +426,13 @@ require("nvim-autopairs").setup({})
 require('lualine').setup({
   options = { theme = 'iceberg_dark' },
 })
-require("zen-mode").setup({})
+require("zen-mode").setup({
+  window = {
+    options = {
+      number = false,
+    },
+  }
+})
 -- require('nvim-highlight-colors').setup({
 --   enable_tailwind = true
 -- })
