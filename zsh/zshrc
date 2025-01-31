@@ -56,6 +56,8 @@ alias lazygit="LANG=en_US.UTF-8 lazygit"
 # alias luajitlatex='luajittex --fmt=luajitlatex.fmt'
 # alias sml="rlwrap sml"
 # alias ocaml="rlwrap ocaml"
+alias xh="xh --session-read-only=./local/session.json"
+alias xhs="xhs --session-read-only=./local/session.json"
 
 # export LD_LIBRARY_PATH=/usr/local/lib
 
