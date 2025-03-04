@@ -1,0 +1,38 @@
+theme = "tokyonight_storm"
+# theme = "tokyonight"
+# ui.background = {}
+
+[editor]
+true-color = true
+cursorline = true
+color-modes = true
+auto-completion = true
+# rulers = [80]
+
+[editor.statusline]
+left = ["mode", "spinner"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+# center = ["file-name"]
+
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+K = "hover"
+C-y = "scroll_up"
+C-e = "scroll_down"
+
+[keys.normal.space]
+w = ":write"
+
+[keys.insert]
+j = { j = "normal_mode" }
