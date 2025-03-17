@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   callback = function() vim.opt.expandtab = false end
 })
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  pattern = { "*.ts", "*.tsx", "*.vue", "*.lua", "*.dart", "*.rs" },
+  pattern = { "*.ts", "*.tsx", "*.vue", "*.lua", "*.dart" },
   command = 'set shiftwidth=2',
 })
 -- vim.api.nvim_create_autocmd({'FileType'}, {
@@ -443,6 +443,9 @@ require 'fzf-lua'.setup({
     height = 0.95,
     width  = 0.90,
     border = 'single',
+  },
+  lsp = {
+    jump1 = false,
   },
 })
 
