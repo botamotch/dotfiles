@@ -369,7 +369,7 @@ require('lspconfig').eslint.setup({})
 --     })
 --   end
 -- })
-require('lspconfig').gdscript.setup({})
+-- require('lspconfig').gdscript.setup({})
 
 local border = "single" -- single, rounded , none, shadow, double, solid
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
