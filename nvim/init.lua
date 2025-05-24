@@ -258,12 +258,12 @@ autocmd ColorScheme * highlight link FloatBorder NormalFloat
 autocmd ColorScheme * highlight Search guifg=#222240 guibg=#77A0E0
 
 " colorscheme iceberg
-" colorscheme nord
+colorscheme nord
 " colorscheme neosolarized
 " colorscheme everforest
 " colorscheme kanagawa
 " colorscheme kanagawa-dragon
-colorscheme tokyonight
+" colorscheme tokyonight
 
 highlight Comment guifg=#868fB9
 
@@ -415,7 +415,10 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 require('gitsigns').setup()
 require("nvim-autopairs").setup({})
 require('lualine').setup({
-  options = { theme = 'iceberg_dark' },
+  options = {
+    theme = 'iceberg_dark',
+    -- theme = 'jellybeans',
+  },
 })
 require("zen-mode").setup({
   window = {
