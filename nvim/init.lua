@@ -449,22 +449,66 @@ require 'fzf-lua'.setup({
   },
 })
 
+local selected_color = '#000011'
+local unselected_color = '#223344'
+local background_color = '#102030'
 require("bufferline").setup({
   options = {
     diagnostics = 'nvim_lsp',
     show_buffer_close_icons = false,
     show_close_icon = false,
-    separator_style = { '|', ' ' },
+    separator_style = 'slant',
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
       local icon = level:match("error") and " " or " "
       return " " .. icon .. count
     end,
   },
   highlights = {
+    separator = {
+      fg = background_color,
+      bg = unselected_color,
+    },
+    separator_visible = {
+      fg = background_color,
+      bg = selected_color,
+    },
+    separator_selected = {
+      fg = background_color,
+      bg = selected_color,
+    },
+    fill = {
+      bg = background_color,
+    },
+
+    -- unselected tab
+    background = {
+      bg = unselected_color,
+    },
+    error = {
+      bg = unselected_color,
+    },
+    error_diagnostic = {
+      bg = unselected_color,
+    },
+
+    -- selected tab
     buffer_selected = {
-      fg = '#fdf6e3',
-      bold = true,
-      italic = true,
+      bg = selected_color,
+    },
+    buffer_visible = {
+      bg = selected_color,
+    },
+    error_visible = {
+      bg = selected_color,
+    },
+    error_selected = {
+      bg = selected_color,
+    },
+    error_diagnostic_visible = {
+      bg = selected_color,
+    },
+    error_diagnostic_selected = {
+      bg = selected_color,
     },
   },
 })
