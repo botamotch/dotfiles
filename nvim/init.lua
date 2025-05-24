@@ -105,7 +105,6 @@ require("lazy").setup({
 
     'neovim/nvim-lspconfig',
     'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
     { "nvim-tree/nvim-web-devicons", lazy = true },
     'akinsho/bufferline.nvim',
     'crispgm/nvim-tabline',
@@ -322,16 +321,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-local my_capabilities = require('cmp_nvim_lsp').default_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
 -- 'williamboman/nvim-lsp-installer'
 require('mason').setup()
-require('mason-lspconfig').setup_handlers({ function(server)
-  require('lspconfig')[server].setup({
-    capabilities = my_capabilities,
-  })
-end })
 -- akinsho/flutter-tools.nvim#full-configuration
 -- require("flutter-tools").setup({
 --   lsp = {
