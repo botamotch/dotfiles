@@ -322,7 +322,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- 'williamboman/nvim-lsp-installer'
-require('mason').setup()
+-- require('mason').setup()
 -- akinsho/flutter-tools.nvim#full-configuration
 -- require("flutter-tools").setup({
 --   lsp = {
