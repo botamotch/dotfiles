@@ -1,11 +1,11 @@
 gui:
   showIcons: true
-
 git:
-  allBranchesLogCmd: git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0)%h%Creset %C(cyan)%ad%Creset %C(#dd6844)%ae <%an>%Creset %C(yellow)%D%Creset %n%C(white bold)%s%Creset%n' --
   branchLogCmd: git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0)%h%Creset %C(cyan)%ad%Creset %C(#dd6844)%ae <%an>%Creset %C(yellow)%D%Creset %n%C(white bold)%s%Creset%n' {{branchName}} --
   # branchLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' {{branchName}} --"
   # allBranchesLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all"
   paging:
     colorArg: always
     pager: delta --dark --paging=never
+  allBranchesLogCmds:
+    - git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0)%h%Creset %C(cyan)%ad%Creset %C(#dd6844)%ae <%an>%Creset %C(yellow)%D%Creset %n%C(white bold)%s%Creset%n' --
