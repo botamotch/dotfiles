@@ -89,7 +89,7 @@ return {
       },
     }
   },
-  leader = { key="q", mods="CTRL", timeout_milliseconds=1000 },
+  leader = { key="b", mods="CTRL", timeout_milliseconds=1000 },
   keys = {
       { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
       { key = "q", mods = "LEADER", action = act.CloseCurrentTab{ confirm = true } },
