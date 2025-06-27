@@ -104,7 +104,7 @@ require("lazy").setup({
     -- '~/Git/dotfiles/nvim/hono',
 
     'neovim/nvim-lspconfig',
-    'williamboman/mason.nvim',
+    -- 'williamboman/mason.nvim',
     { "nvim-tree/nvim-web-devicons", lazy = true },
     'akinsho/bufferline.nvim',
     'crispgm/nvim-tabline',
