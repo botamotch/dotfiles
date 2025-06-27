@@ -81,7 +81,7 @@ eval $(opam env)
 # eval "$(rbenv init -)"
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 export PATH="$HOME/go/bin:$PATH"
 # export PATH="$HOME/nvim-linux64/bin:$PATH"
 eval "$(zoxide init zsh)"
@@ -98,3 +98,12 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # fvm
 # export PATH=$PATH:$HOME/.pub-cache/bin
 export PATH=$HOME/fvm/default/bin:$PATH
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PATH=/opt/homebrew/bin:$PATH
+  export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+  source /opt/homebrew/opt/rustup/share/zsh/site-functions/_rustup
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+fi
+
