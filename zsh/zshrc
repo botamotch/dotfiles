@@ -85,7 +85,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
-eval $(opam env)
+# eval $(opam env)
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init -)"
 export PATH="$HOME/.local/bin:$PATH"
