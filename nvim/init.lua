@@ -321,55 +321,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- 'williamboman/nvim-lsp-installer'
--- require('mason').setup()
--- akinsho/flutter-tools.nvim#full-configuration
--- require("flutter-tools").setup({
---   lsp = {
---     capabilities = my_capabilities,
---   }
--- })
-
-require('lspconfig').gopls.setup({})
-require('lspconfig').rust_analyzer.setup({
-  settings = {
-    ["rust-analyzer"] = {
-      cargo = {
-        features = "all", -- features = { "debug" },
-      },
-    },
-  },
-})
-require('lspconfig').ocamllsp.setup({})
-require 'lspconfig'.lua_ls.setup({
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' },
-      },
-    },
-  },
-})
-require('lspconfig').denols.setup({
-  root_dir = require('lspconfig').util.root_pattern("deno.json"),
-})
-require('lspconfig').ts_ls.setup({
-  root_dir = require('lspconfig').util.root_pattern("package.json"),
-  single_file_support = false,
-})
-require('lspconfig').eslint.setup({})
--- require('lspconfig').tailwindcss.setup({
---   filetypes = { "javascript", "typescript" },
---   on_attach = function(client, bufnr)
---     -- rest of you config
---     require('tailwind-highlight').setup(client, bufnr, {
---       single_column = false,
---       mode = 'background',
---       debounce = 200,
---     })
---   end
--- })
--- require('lspconfig').gdscript.setup({})
+vim.lsp.enable('gopls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('denols')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('eslint')
 
 local border = "single" -- single, rounded , none, shadow, double, solid
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
