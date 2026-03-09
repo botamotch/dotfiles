@@ -103,8 +103,6 @@ require("lazy").setup({
     { dir = '~/Git/dotfiles/nvim/example-plugin' },
     -- '~/Git/dotfiles/nvim/hono',
 
-    'neovim/nvim-lspconfig',
-    -- 'williamboman/mason.nvim',
     { "nvim-tree/nvim-web-devicons", lazy = true },
     'akinsho/bufferline.nvim',
     'crispgm/nvim-tabline',
