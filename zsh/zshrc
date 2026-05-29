@@ -108,3 +108,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # export PATH=$PATH:$HOME/.pub-cache/bin
 export PATH=$HOME/fvm/default/bin:$PATH
 
+# nb + fzf
+function nbf() {
+  bash "$HOME/.nb-fzf.sh" "${@}"
+}
