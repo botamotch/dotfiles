@@ -220,6 +220,43 @@ vim.keymap.set('n', '<leader>t', "<cmd>FzfLua lsp_typedefs<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>FzfLua lsp_code_actions<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>FzfLua lsp_document_diagnostics<CR>")
 vim.keymap.set('n', '<leader>L', "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
+-- nb: fzf-lua picker --------------------------------------------------------
+local function nb_picker()
+  local fzf = require('fzf-lua')
+  fzf.fzf_exec('nb list --no-color --no-indicator 2>/dev/null', {
+    prompt  = 'nb> ',
+    preview =
+    "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print --no-color 2>/dev/null",
+    winopts = { preview = { layout = 'vertical', vertical = 'up:60%', wrap = 'wrap' } },
+    actions = {
+      -- Enter: ノートのファイルをバッファで開く
+      ['default'] = function(selected)
+        if not selected or not selected[1] then return end
+        local id = selected[1]:match('^%[([^%]]+)%]')
+        if not id then return end
+        local path = vim.fn.system('nb show ' .. vim.fn.shellescape(id) .. ' --path'):gsub('\n', '')
+        if path and path ~= '' then
+          vim.cmd('edit ' .. vim.fn.fnameescape(path))
+        end
+      end,
+      -- Ctrl-V: 垂直分割で開く
+      ['ctrl-v'] = function(selected)
+        if not selected or not selected[1] then return end
+        local id = selected[1]:match('^%[([^%]]+)%]')
+        if not id then return end
+        local path = vim.fn.system('nb show ' .. vim.fn.shellescape(id) .. ' --path'):gsub('\n', '')
+        if path and path ~= '' then
+          vim.cmd('vsplit ' .. vim.fn.fnameescape(path))
+        end
+      end,
+      -- Ctrl-N: 新規ノートを作成
+      ['ctrl-n'] = function()
+        vim.cmd('terminal nb add')
+      end,
+    },
+  })
+end
+vim.keymap.set('n', '<leader>n', nb_picker, { desc = 'nb: open note' })
 -- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 -- vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
