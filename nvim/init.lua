@@ -115,7 +115,7 @@ require("lazy").setup({
     'ibhagwan/fzf-lua',
     'lambdalisue/fern.vim',
     'rapan931/lasterisk.nvim',
-    'nvim-treesitter/nvim-treesitter',
+    { 'nvim-treesitter/nvim-treesitter', lazy = false, build = ':TSUpdate' },
     'APZelos/blamer.nvim',
     'machakann/vim-sandwich',
     'folke/zen-mode.nvim',
@@ -332,21 +332,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local bufnr = args.buf
     -- local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.format {async=true}<CR>', opts)
+    local opts = { noremap = true, silent = true, buffer = bufnr }
+    vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format {async=true}<CR>', opts)
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    vim.keymap.set('n', 'K', function()
+      vim.lsp.buf.hover({ border = 'single', separator = true, max_height = 25, max_width = 120 })
+    end, opts)
+    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    vim.keymap.set('n', 'ge', '<cmd>lua vim.diagnostic.open_float({border = "single"})<CR>', opts)
+    vim.keymap.set('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    vim.keymap.set('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   end,
 })
 
@@ -367,7 +369,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if not client.supports_method('textDocument/documentHighlight') then
+    if not client:supports_method('textDocument/documentHighlight') then
       return
     end
     vim.cmd [[
@@ -387,25 +389,6 @@ vim.lsp.enable('denols')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('eslint')
 
-local border = "single" -- single, rounded , none, shadow, double, solid
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    virtual_text = false,
-    border = border
-  }
-)
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  {
-    -- :help nvim_open_win() , :help lsp-handlers
-    separator = true,
-    border = border
-    -- width = 100,  -- minimum width みたいなのないかな
-    -- :echo winwidth('%') でウィンドウのサイズを取得できる。使えそう
-    -- :help winwidth()
-  }
-)
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help, { separator = true }
 )
@@ -475,16 +458,17 @@ require("bufferline").setup({
   },
 })
 
-require 'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    disable = { "help" },
-  },
-  indent = {
-    enable = false,
-  },
-  ensure_installed = 'all',
-}
+-- nvim-treesitter (main branch, Neovim 0.12+)
+-- Parser install: :TSInstall all
+require('nvim-treesitter').setup()
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    local ft = vim.bo.filetype
+    if ft == '' or ft == 'help' then return end
+    pcall(vim.treesitter.start)
+  end,
+})
 
 -- 'hrsh7th/nvim-cmp'
 local cmp = require("cmp")
