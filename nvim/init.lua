@@ -152,6 +152,7 @@ require("lazy").setup({
     -- 'svrana/neosolarized.nvim',
     -- 'tjdevries/colorbuddy.nvim',
     'nordtheme/vim',
+    'catppuccin/nvim',
   },
   -- automatically check for plugin updates
   checker = { enabled = false },
@@ -281,6 +282,13 @@ vim.keymap.set("t", "<A-a>", [[<C-\><C-n><cmd>ToggleTerm dir='float'<CR>]])
 -- vim.g.everforest_enable_italic = 0
 -- vim.g.everforest_disable_italic_comment = 1
 -- require('neosolarized').setup()
+require('catppuccin').setup({
+  flavour = "mocha",
+  transparent_background = true,
+  no_italic = true,
+  no_bold = true,
+  no_underline = true,
+})
 require("tokyonight").setup({
   transparent = true,
   style = "storm",
@@ -295,12 +303,13 @@ autocmd ColorScheme * highlight link FloatBorder NormalFloat
 autocmd ColorScheme * highlight Search guifg=#222240 guibg=#77A0E0
 
 " colorscheme iceberg
-colorscheme nord
+" colorscheme nord
 " colorscheme neosolarized
 " colorscheme everforest
 " colorscheme kanagawa
 " colorscheme kanagawa-dragon
 " colorscheme tokyonight
+colorscheme catppuccin-nvim
 
 highlight Comment guifg=#868fB9
 
@@ -439,8 +448,8 @@ require("zen-mode").setup({
 -- })
 -- require("copilot").setup()
 
-require 'fzf-lua'.setup({
-  fzf_opts = { ["--tmux"] = "center,90%,85%" },
+require 'fzf-lua'.setup({'border-fused',
+  fzf_opts = { ["--tmux"] = "center,90%,85%", ["--border"] = "sharp" },
   winopts = {
     height  = 0.95,
     width   = 0.90,
