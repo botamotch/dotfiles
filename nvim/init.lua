@@ -318,6 +318,7 @@ highlight LspReferenceRead  ctermbg=8 guibg=#305090
 highlight LspReferenceWrite ctermbg=8 guibg=#305090
 
 highlight link LspFloatWinNormal NormalFloat
+highlight link FloatBorder NormalFloat
 
 highlight FzfLuaNormal guibg=#383850
 highlight FzfLuaBorder guibg=#383850 gui=bold
@@ -388,10 +389,6 @@ vim.lsp.enable('lua_ls')
 vim.lsp.enable('denols')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('eslint')
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, { separator = true }
-)
 
 -- =============================================================================
 -- setup plugins
@@ -473,6 +470,10 @@ vim.api.nvim_create_autocmd('FileType', {
 -- 'hrsh7th/nvim-cmp'
 local cmp = require("cmp")
 cmp.setup({
+  window = {
+    completion = cmp.config.window.bordered({ border = 'single' }),
+    documentation = cmp.config.window.bordered({ border = 'single' }),
+  },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
@@ -499,12 +500,18 @@ cmp.setup({
 })
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
+  window = {
+    completion = cmp.config.window.bordered({ border = 'none' }),
+  },
   sources = {
     { name = 'buffer' }
   }
 })
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
+  window = {
+    completion = cmp.config.window.bordered({ border = 'none' }),
+  },
   sources = {
     { name = "path" },
     { name = "cmdline" },
