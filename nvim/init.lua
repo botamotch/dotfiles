@@ -220,6 +220,7 @@ vim.keymap.set('n', '<leader>t', "<cmd>FzfLua lsp_typedefs<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>FzfLua lsp_code_actions<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>FzfLua lsp_document_diagnostics<CR>")
 vim.keymap.set('n', '<leader>L', "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
+
 -- nb: fzf-lua picker --------------------------------------------------------
 local function nb_picker()
   local fzf = require('fzf-lua')
@@ -439,10 +440,14 @@ require("zen-mode").setup({
 -- require("copilot").setup()
 
 require 'fzf-lua'.setup({
+  fzf_opts = { ["--tmux"] = "center,90%,85%" },
   winopts = {
-    height = 0.95,
-    width  = 0.90,
-    border = 'single',
+    height  = 0.95,
+    width   = 0.90,
+    border  = 'single',
+    preview = {
+      default = 'bat',
+    },
   },
   lsp = {
     jump1 = false,
