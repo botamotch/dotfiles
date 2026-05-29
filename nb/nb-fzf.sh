@@ -32,6 +32,14 @@ if ! command -v fzf &>/dev/null; then
   exit 1
 fi
 
+# tmux セッション内かつ fzf-tmux が使えるなら fzf-tmux を使用
+# fzf-tmux のオプション: -p でポップアップウィンドウ、サイズ指定可能
+if [[ -n "${TMUX:-}" ]] && command -v fzf-tmux &>/dev/null; then
+  FZF_CMD=(fzf-tmux -p 90%,85%)
+else
+  FZF_CMD=(fzf)
+fi
+
 MODE="${1:-}"
 
 # 新規メモ作成モード
@@ -66,7 +74,7 @@ DELETE_CMD='
 # メイン: nb list でノート一覧を取得し fzf に渡す
 selected=$(
   nb list --no-color --no-indicator 2>/dev/null \
-    | fzf \
+    | "${FZF_CMD[@]}" \
         --ansi \
         --no-sort \
         --prompt="nb> " \
