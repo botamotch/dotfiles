@@ -228,8 +228,8 @@ local function nb_picker()
   fzf.fzf_exec('nb list --no-color --no-indicator 2>/dev/null', {
     prompt  = 'nb> ',
     preview =
-    "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print --no-color 2>/dev/null",
-    winopts = { preview = { layout = 'vertical', vertical = 'up:60%', wrap = 'wrap' } },
+    "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print 2>/dev/null",
+    winopts = { preview = { layout = 'horizontal', vertical = 'flex' } },
     actions = {
       -- Enter: ノートのファイルをバッファで開く
       ['default'] = function(selected)

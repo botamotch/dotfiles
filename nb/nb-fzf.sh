@@ -59,7 +59,7 @@ fi
 PREVIEW_CMD='
   id=$(echo {} | grep -oE "^\[([^]]+)\]" | tr -d "[]")
   if [[ -n "$id" ]]; then
-    nb show "$id" --print --no-color 2>/dev/null || echo "(プレビューを表示できません)"
+    nb show "$id" --print  2>/dev/null || echo "(プレビューを表示できません)"
   fi
 '
 
@@ -75,12 +75,13 @@ DELETE_CMD='
 selected=$(
   nb list --no-color --no-indicator 2>/dev/null \
     | "${FZF_CMD[@]}" \
+        --layout reverse \
         --ansi \
         --no-sort \
         --prompt="nb> " \
         --header="Enter:${ACTION}  Ctrl-A:add  Ctrl-D:delete  Ctrl-R:reload" \
         --preview="$PREVIEW_CMD" \
-        --preview-window="right:60%:wrap" \
+        --preview-window="right:60%" \
         --bind="ctrl-p:preview-up" \
         --bind="ctrl-n:preview-down" \
         --bind="ctrl-r:reload(nb list --no-color --no-indicator 2>/dev/null)" \
