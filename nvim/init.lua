@@ -231,7 +231,7 @@ local function nb_picker()
     "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print 2>/dev/null",
     winopts = { preview = { layout = 'horizontal', vertical = 'flex' } },
     fzf_opts = {
-      ["--header"] = "Enter:open  Ctrl-V:open v-split  Ctrl-N:add",
+      ["--header"] = "Enter:open  Ctrl-V:open v-split  Ctrl-N:add  Ctrl-D:delete  Ctrl-P:pin",
     },
     actions = {
       -- Enter: ノートのファイルをバッファで開く
@@ -257,6 +257,16 @@ local function nb_picker()
       -- Ctrl-N: 新規ノートを作成
       ['ctrl-n'] = function()
         vim.cmd('terminal nb add')
+      end,
+      -- Ctrl-D: 選択したノートを削除
+      ['ctrl-d'] = function(selected)
+        if not selected or not selected[1] then return end
+        local id = selected[1]:match('^%[([^%]]+)%]')
+        if not id then return end
+        vim.cmd('terminal nb delete ' .. id)
+      end,
+      ['ctrl-p'] = function()
+        vim.cmd("echo 'TODO pin note'")
       end,
     },
   })
