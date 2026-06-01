@@ -271,6 +271,21 @@ local function nb_picker()
     },
   })
 end
+
+local nb_title_cache = {}
+local function nb_get_title(filepath)
+  if not filepath:match("^" .. vim.fn.expand("~/.nb")) then
+    return nil
+  end
+  if nb_title_cache[filepath] ~= nil then
+    return nb_title_cache[filepath]
+  end
+  local result = vim.system({"nb", "show", filepath, "--title"}, { text = true }):wait()
+  local title = (result.code == 0) and vim.split(result.stdout, "\n")[1] or false
+  nb_title_cache[filepath] = title
+  return title or nil
+end
+
 vim.keymap.set('n', '<leader>n', nb_picker, { desc = 'nb: open note' })
 -- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 -- vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
@@ -465,6 +480,10 @@ require("bufferline").setup({
       local icon = level:match("error") and " " or " "
       return " " .. icon .. count
     end,
+    name_formatter = function(buf)
+      local nb_title = nb_get_title(buf.path)
+      return nb_title or buf.name
+    end
   },
 })
 
