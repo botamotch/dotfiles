@@ -230,6 +230,9 @@ local function nb_picker()
     preview =
     "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print 2>/dev/null",
     winopts = { preview = { layout = 'horizontal', vertical = 'flex' } },
+    fzf_opts = {
+      ["--header"] = "Enter:open  Ctrl-V:open v-split  Ctrl-N:add",
+    },
     actions = {
       -- Enter: ノートのファイルをバッファで開く
       ['default'] = function(selected)
