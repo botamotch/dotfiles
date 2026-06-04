@@ -100,13 +100,12 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { dir = '~/Git/dotfiles/nvim/example-plugin' },
+    -- { dir = '~/Git/dotfiles/nvim/example-plugin' },
     -- '~/Git/dotfiles/nvim/hono',
 
     'neovim/nvim-lspconfig',
     { "nvim-tree/nvim-web-devicons", lazy = true },
     'akinsho/bufferline.nvim',
-    'crispgm/nvim-tabline',
     'lewis6991/gitsigns.nvim',
     'nvim-lualine/lualine.nvim',
     'windwp/nvim-autopairs',
@@ -116,7 +115,6 @@ require("lazy").setup({
     'lambdalisue/fern.vim',
     'rapan931/lasterisk.nvim',
     { 'nvim-treesitter/nvim-treesitter', lazy = false, build = ':TSUpdate' },
-    'APZelos/blamer.nvim',
     'machakann/vim-sandwich',
     'folke/zen-mode.nvim',
     -- 'nvimdev/lspsaga.nvim',
@@ -125,7 +123,6 @@ require("lazy").setup({
     -- "princejoogie/tailwind-highlight.nvim",
     -- "L3MON4D3/LuaSnip",
     -- 'vim-denops/denops.vim',
-    { "sindrets/diffview.nvim", lazy = true },
     -- "github/copilot.vim",
 
     {
@@ -136,22 +133,22 @@ require("lazy").setup({
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
-        "hrsh7th/vim-vsnip",
+        -- "hrsh7th/vim-vsnip",
       },
     },
 
     -- colorscheme
-    'cocopon/iceberg.vim',
+    -- 'cocopon/iceberg.vim',
     -- 'nanotech/jellybeans.vim',
     -- 'sainnhe/everforest',
     -- 'rebelot/kanagawa.nvim',
     -- 'ellisonleao/gruvbox.nvim',
-    'folke/tokyonight.nvim',
+    -- 'folke/tokyonight.nvim',
     -- 'tiagovla/tokyodark.nvim',
     -- 'sainnhe/sonokai',
     -- 'svrana/neosolarized.nvim',
     -- 'tjdevries/colorbuddy.nvim',
-    'nordtheme/vim',
+    -- 'nordtheme/vim',
     'catppuccin/nvim',
   },
   -- automatically check for plugin updates
@@ -225,7 +222,7 @@ vim.keymap.set('n', '<leader>L', "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
 -- nb: fzf-lua picker --------------------------------------------------------
 local function nb_picker()
   local fzf = require('fzf-lua')
-  fzf.fzf_exec('nb list --no-color --no-indicator 2>/dev/null', {
+  fzf.fzf_exec('nb ls --no-header --no-footer 2>/dev/null', {
     prompt  = 'nb> ',
     preview =
     "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print 2>/dev/null",
@@ -256,7 +253,8 @@ local function nb_picker()
       end,
       -- Ctrl-N: 新規ノートを作成
       ['ctrl-n'] = function()
-        vim.cmd('terminal nb add')
+        vim.cmd('new')
+        vim.fn.termopen({ 'nb', 'add', '# <untitled>' })
       end,
       -- Ctrl-D: 選択したノートを削除
       ['ctrl-d'] = function(selected)
@@ -317,10 +315,10 @@ require('catppuccin').setup({
   no_bold = true,
   no_underline = true,
 })
-require("tokyonight").setup({
-  transparent = true,
-  style = "storm",
-})
+-- require("tokyonight").setup({
+--   transparent = true,
+--   style = "storm",
+-- })
 vim.cmd [[
 " autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
 autocmd ColorScheme * highlight NonText ctermbg=none guibg=none
@@ -358,10 +356,7 @@ highlight GitsignsCurrentLineBlame guifg=#BBBBBB guibg=none
 -- (1) Keymap
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
-    local bufnr = args.buf
-    -- local client = vim.lsp.get_client_by_id(args.data.client_id)
-    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    local opts = { noremap = true, silent = true, buffer = bufnr }
+    local opts = { noremap = true, silent = true, buffer = args.buf }
     vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format {async=true}<CR>', opts)
 
     vim.keymap.set('n', 'K', function()
@@ -506,11 +501,11 @@ cmp.setup({
     completion = cmp.config.window.bordered({ border = 'single' }),
     documentation = cmp.config.window.bordered({ border = 'single' }),
   },
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
+  -- snippet = {
+  --   expand = function(args)
+  --     vim.fn["vsnip#anonymous"](args.body)
+  --   end,
+  -- },
   sources = {
     { name = "nvim_lsp" },
     -- { name = "vsnip" },
