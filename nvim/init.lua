@@ -28,6 +28,8 @@ vim.opt.formatoptions:remove('t')
 vim.opt.formatoptions:append('mM')
 vim.opt.updatetime = 500
 vim.opt.signcolumn = 'yes'
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = { "*.sql" },
@@ -311,9 +313,9 @@ vim.keymap.set("t", "<A-a>", [[<C-\><C-n><cmd>ToggleTerm dir='float'<CR>]])
 require('catppuccin').setup({
   flavour = "mocha",
   transparent_background = true,
-  no_italic = true,
-  no_bold = true,
-  no_underline = true,
+  -- no_italic = true,
+  -- no_bold = true,
+  -- no_underline = true,
 })
 -- require("tokyonight").setup({
 --   transparent = true,
