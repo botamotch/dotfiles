@@ -161,7 +161,11 @@ require("lazy").setup({
 vim.g.mapleader = " "
 -- vim.api.nvim_set_keymap('n', '<leader><leader>', ':<C-u>cd %:h<CR>', {noremap = true})
 -- vim.keymap.set('n', '<leader><leader>', ':<C-u>cd %:h<CR>')
-vim.keymap.set('n', '<leader><leader>', '<cmd>ZenMode<CR>')
+-- local zenn_mode_wrap = ""
+-- zenn_mode_wrap = vim.opt.wrap:get()
+vim.keymap.set('n', '<leader><leader>', function()
+  require('zen-mode').toggle({ window = { width = 160 }})
+end)
 vim.keymap.set('n', '<leader>w', ':<C-u>w<CR>')
 vim.keymap.set('n', '<leader>q', ':<C-u>bd<CR>')
 vim.keymap.set('n', '<C-l>', ':<C-u>BufferLineCycleNext<CR>')
@@ -186,7 +190,7 @@ vim.keymap.set('n', 'M', '%')
 -- vim.keymap.set('v', 'y', 'mzy`z')
 -- vim.keymap.set('n', 'p', ']p`]')
 -- vim.keymap.set('n', 'P', ']P`]')
-vim.keymap.set('n', 'd<cr>', ':<C-u>vert Gdiffsplit<cr>')
+-- vim.keymap.set('n', 'd<cr>', ':<C-u>vert Gdiffsplit<cr>')
 
 vim.keymap.set('n', '<C-W>+', ':<C-u>resize +5<CR>', { silent = true })
 vim.keymap.set('n', '<C-W>-', ':<C-u>resize -5<CR>', { silent = true })
@@ -202,14 +206,15 @@ vim.keymap.set('t', '<C-W>l', '<CMD>wincmd l<CR>')
 vim.keymap.set('t', '<C-W>:', '<C-\\><C-n>:<C-u>')
 
 vim.keymap.set('n', '<leader>DD', ':<C-u>diffthis<CR>')
-vim.keymap.set('n', '<leader>DO', ':<C-u>bufdo diffoff<CR>')
+-- vim.keymap.set('n', '<leader>DO', ':<C-u>bufdo diffoff<CR>')
 -- 'ibhagwan/fzf-lua' ----------------------------------------------------------
--- vim.keymap.set('n', '<leader>e', "<cmd>lua require('fzf-lua').files({ cmd = 'fd --no-ignore' })<CR>")
-vim.keymap.set('n', '<leader>e', "<cmd>FzfLua files<CR>")
-vim.keymap.set('n', '<leader>g', "<cmd>FzfLua git_status<CR>")
-vim.keymap.set('n', '<leader>b', "<cmd>FzfLua buffers<CR>")
-vim.keymap.set('n', '<leader>p', "<cmd>FzfLua grep<CR>")
-vim.keymap.set('n', '<leader>/', "<cmd>FzfLua blines<CR>")
+local fzf = require('fzf')
+vim.keymap.set('n', '<leader>e', fzf.files)
+vim.keymap.set('n', '<leader>g', fzf.git_status)
+vim.keymap.set('n', '<leader>b', fzf.buffers)
+vim.keymap.set('n', '<leader>p', fzf.grep)
+vim.keymap.set('n', '<leader>/', fzf.blines)
+vim.keymap.set('n', '<leader>n', fzf.nb_picker)
 
 vim.keymap.set('n', '<leader>r', "<cmd>FzfLua lsp_references<CR>")
 vim.keymap.set('n', '<leader>d', "<cmd>FzfLua lsp_definitions<CR>")
@@ -220,73 +225,6 @@ vim.keymap.set('n', '<leader>t', "<cmd>FzfLua lsp_typedefs<CR>")
 vim.keymap.set('n', '<leader>a', "<cmd>FzfLua lsp_code_actions<CR>")
 vim.keymap.set('n', '<leader>l', "<cmd>FzfLua lsp_document_diagnostics<CR>")
 vim.keymap.set('n', '<leader>L', "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
-
--- nb: fzf-lua picker --------------------------------------------------------
-local function nb_picker()
-  local fzf = require('fzf-lua')
-  fzf.fzf_exec('nb ls --no-header --no-footer 2>/dev/null', {
-    prompt  = 'nb> ',
-    preview =
-    "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print 2>/dev/null",
-    winopts = { preview = { layout = 'horizontal', vertical = 'flex' } },
-    fzf_opts = {
-      ["--header"] = "Enter:open  Ctrl-V:open v-split  Ctrl-N:add  Ctrl-D:delete  Ctrl-P:pin",
-    },
-    actions = {
-      -- Enter: ノートのファイルをバッファで開く
-      ['default'] = function(selected)
-        if not selected or not selected[1] then return end
-        local id = selected[1]:match('^%[([^%]]+)%]')
-        if not id then return end
-        local path = vim.fn.system('nb show ' .. vim.fn.shellescape(id) .. ' --path'):gsub('\n', '')
-        if path and path ~= '' then
-          vim.cmd('edit ' .. vim.fn.fnameescape(path))
-        end
-      end,
-      -- Ctrl-V: 垂直分割で開く
-      ['ctrl-v'] = function(selected)
-        if not selected or not selected[1] then return end
-        local id = selected[1]:match('^%[([^%]]+)%]')
-        if not id then return end
-        local path = vim.fn.system('nb show ' .. vim.fn.shellescape(id) .. ' --path'):gsub('\n', '')
-        if path and path ~= '' then
-          vim.cmd('vsplit ' .. vim.fn.fnameescape(path))
-        end
-      end,
-      -- Ctrl-N: 新規ノートを作成
-      ['ctrl-n'] = function()
-        vim.cmd('new')
-        vim.fn.termopen({ 'nb', 'add', '# <untitled>' })
-      end,
-      -- Ctrl-D: 選択したノートを削除
-      ['ctrl-d'] = function(selected)
-        if not selected or not selected[1] then return end
-        local id = selected[1]:match('^%[([^%]]+)%]')
-        if not id then return end
-        vim.cmd('terminal nb delete ' .. id)
-      end,
-      ['ctrl-p'] = function()
-        vim.cmd("echo 'TODO pin note'")
-      end,
-    },
-  })
-end
-
-local nb_title_cache = {}
-local function nb_get_title(filepath)
-  if not filepath:match("^" .. vim.fn.expand("~/.nb")) then
-    return nil
-  end
-  if nb_title_cache[filepath] ~= nil then
-    return nb_title_cache[filepath]
-  end
-  local result = vim.system({"nb", "show", filepath, "--title"}, { text = true }):wait()
-  local title = (result.code == 0) and vim.split(result.stdout, "\n")[1] or false
-  nb_title_cache[filepath] = title
-  return title or nil
-end
-
-vim.keymap.set('n', '<leader>n', nb_picker, { desc = 'nb: open note' })
 -- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 -- vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
 
@@ -441,13 +379,7 @@ require('lualine').setup({
     -- theme = 'jellybeans',
   },
 })
-require("zen-mode").setup({
-  window = {
-    options = {
-      number = false,
-    },
-  }
-})
+require("zen-mode").setup()
 -- require('nvim-highlight-colors').setup({
 --   enable_tailwind = true
 -- })
@@ -478,7 +410,7 @@ require("bufferline").setup({
       return " " .. icon .. count
     end,
     name_formatter = function(buf)
-      local nb_title = nb_get_title(buf.path)
+      local nb_title = fzf.nb_get_title(buf.path)
       return nb_title or buf.name
     end
   },
