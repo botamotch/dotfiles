@@ -16,3 +16,5 @@ export EDITOR=nvim
 
 export NB_MARKDOWN_TOOL='bat'
 export NB_SYNTAX_THEME="${NB_SYNTAX_THEME:-Catppuccin Mocha}"
+
+export NB_AUTO_SYNC="${NB_AUTO_SYNC:-0}" # Set by `nb` • 2026年  7月  4日 土曜日 09:47:44 JST
