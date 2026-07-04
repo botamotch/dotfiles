@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="usb", KERNEL=="usb[123]", ATTR{power/wakeup}="enabled"
