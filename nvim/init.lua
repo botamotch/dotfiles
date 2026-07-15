@@ -398,6 +398,12 @@ require 'fzf-lua'.setup({'border-fused',
   lsp = {
     jump1 = false,
   },
+  actions = {
+    files = {
+      -- 複数選択時もquickfixではなく全部バッファで開く
+      ["default"] = require('fzf-lua').actions.file_edit,
+    },
+  },
 })
 
 require("bufferline").setup({
