@@ -7,7 +7,7 @@ if [ ! -f "$LID_STATE_FILE" ]; then
 fi
 
 if grep -q "closed" "$LID_STATE_FILE"; then
-    hyprctl keyword monitor "eDP-1, disable"
+    hyprctl eval "hl.monitor({ output = 'eDP-1', disabled = true })"
 else
-    hyprctl keyword monitor "eDP-1, 1920x1200,0x0,1"
+    hyprctl eval "hl.monitor({ output = 'eDP-1', mode = '1920x1200', position='auto', scale = '1' })"
 fi
