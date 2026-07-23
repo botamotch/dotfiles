@@ -13,8 +13,9 @@ end)
 hl.config({
 	input = {
 		-- empty inherits XKB_DEFAULT_LAYOUT (libxkbcommon), falls back to "us"
-		kb_layout = "",
+		kb_layout = "us",
 		numlock_by_default = true,
+        kb_options = "ctrl:nocaps",
 		follow_mouse = 1,
 		touchpad = {
 			tap_to_click = true,
