@@ -156,8 +156,8 @@ hl.bind("SUPER + code:21", hl.dsp.window.resize({ x = 100, y = 0, relative = tru
 -- === Manual Sizing ===
 hl.bind("SUPER + minus", hl.dsp.window.resize({ x = -30, y = 0, relative = true }), { repeating = true })
 hl.bind("SUPER + equal", hl.dsp.window.resize({ x = 30, y = 0, relative = true }), { repeating = true })
-hl.bind("SUPER + SHIFT + minus", hl.dsp.window.resize({ x = 0, y = -20, relative = true }), { repeating = true })
-hl.bind("SUPER + SHIFT + equal", hl.dsp.window.resize({ x = 0, y = 20, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + minus", hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + equal", hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
 
 -- === Screenshots ===
 hl.bind("Print", hl.dsp.exec_cmd("dms screenshot"))
