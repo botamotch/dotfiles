@@ -2,6 +2,7 @@
 opacity = 0.95
 # decorations = "None"
 padding = { x = 6, y = 6 }
+dimensions = { columns = 100, lines = 40 }
 
 [font]
 size = 12
@@ -24,8 +25,13 @@ style = "Italic"
 
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/tokyo_night_storm.toml"
+    # "~/.config/alacritty/themes/themes/tokyo_night_storm.toml"
     # "~/.config/alacritty/dank-theme.toml"
+    "~/.config/alacritty/themes/themes/catppuccin.toml"
+    # "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
+    # "~/.config/alacritty/themes/themes/catppuccin_latte.toml"
+    # "~/.config/alacritty/themes/themes/catppuccin_frappe.toml"
+    # "~/.config/alacritty/themes/themes/catppuccin_macchiato.toml"
 ]
 
 [scrolling]
@@ -49,6 +55,7 @@ duration = 0
 bindings = [
   { key = "C",       mods = "Control|Shift", action = "Copy"  },
   { key = "V",       mods = "Control|Shift", action = "Paste" },
+  { key = "Q",       mods = "Control|Shift", action = "Quit" },
   { key = "N",       mods = "Control|Shift", action = "SpawnNewInstance" },
   { key = "Equals",  mods = "Control|Shift", action = "IncreaseFontSize" },
   { key = "Minus",   mods = "Control",       action = "DecreaseFontSize" },
