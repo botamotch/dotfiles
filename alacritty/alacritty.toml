@@ -55,7 +55,6 @@ duration = 0
 bindings = [
   { key = "C",       mods = "Control|Shift", action = "Copy"  },
   { key = "V",       mods = "Control|Shift", action = "Paste" },
-  { key = "Q",       mods = "Control|Shift", action = "Quit" },
   { key = "N",       mods = "Control|Shift", action = "SpawnNewInstance" },
   { key = "Equals",  mods = "Control|Shift", action = "IncreaseFontSize" },
   { key = "Minus",   mods = "Control",       action = "DecreaseFontSize" },
