@@ -83,6 +83,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   source /opt/homebrew/opt/rustup/share/zsh/site-functions/_rustup
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+else
+  source /usr/share/nvm/init-nvm.sh
 fi
 
 # eval $(opam env)
@@ -90,7 +92,6 @@ fi
 # eval "$(rbenv init -)"
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
-source /usr/share/nvm/init-nvm.sh
 export PATH="$HOME/go/bin:$PATH"
 # export PATH="$HOME/nvim-linux64/bin:$PATH"
 eval "$(zoxide init zsh)"

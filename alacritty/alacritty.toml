@@ -36,6 +36,7 @@ import = [
 
 [scrolling]
 history = 3023
+multiplier = 1
 
 [cursor]
 style = { shape = "Block", blinking = "On" }
@@ -43,7 +44,7 @@ blink_interval = 500
 unfocused_hollow = true
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [selection]
 save_to_clipboard = false
