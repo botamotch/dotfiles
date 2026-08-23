@@ -26,7 +26,7 @@ end
 
 function M.nb_picker()
   local fzf = require('fzf-lua')
-  fzf.fzf_exec('nb ls --no-header --no-footer 2>/dev/null', {
+  fzf.fzf_exec('nb ls --type note --no-header --no-footer 2>/dev/null', {
     prompt  = 'nb> ',
     preview =
     "id=$(echo {} | grep -oE '^\\[([^]]+)\\]' | tr -d '[]'); nb show \"$id\" --print 2>/dev/null",
