@@ -6,7 +6,7 @@
 Neovim, zsh, tmux, alacritty, nb。それ以外(vim, helix, wezterm, ghostty, zed, hyprland, rofi, wofi, conky, Firefox, texlive など)はメンテナンスされていないものもあるため、頼まれない限り積極的に触らない。
 
 ## マシン
-- マシン1: Linux (Arch) / GNOME Wayland / Dell XPS 14
+- マシン1: Linux (Arch) / KDE Wayland / Dell XPS 14
 - マシン2: MacBook Pro (macOS)
 
 編集時は両OSで動くかを意識する(パス、`pbcopy`/`wl-copy`、`sed -i` や `date` など BSD/GNU 差異、Homebrew のパス等)。OS依存の設定は分岐させるか、その旨を明記する。
