@@ -249,7 +249,9 @@ vim.keymap.set("t", "<A-a>", [[<C-\><C-n><cmd>ToggleTerm dir='float'<CR>]])
 -- vim.g.everforest_disable_italic_comment = 1
 -- require('neosolarized').setup()
 require('catppuccin').setup({
-  flavour = "mocha",
+  flavour = "frappe",
+  -- flavour = "macchiato",
+  -- flavour = "mocha",
   transparent_background = true,
   -- no_italic = true,
   -- no_bold = true,
